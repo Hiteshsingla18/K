@@ -1,0 +1,6 @@
+{
+  "name": "KhananRakshak AI",
+  "description": "AI-Powered Smart Governance & Satellite Surveillance System for Coal Mines (SIH26024)",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
