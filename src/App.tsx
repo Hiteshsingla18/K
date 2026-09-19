@@ -756,7 +756,7 @@ export default function App() {
             }`}
           >
             <Radio className={`w-4 h-4 ${officerNav === 'telemetry' ? 'text-white' : 'text-cyan-400'}`} />
-            <span className="truncate">Virtual Telemetry Center</span>
+            <span className="truncate">{t('nav.telemetry')}</span>
           </button>
 
           {/* 3. Mine Explorer */}
@@ -770,7 +770,7 @@ export default function App() {
             }`}
           >
             <MapPin className={`w-4 h-4 ${officerNav === 'explorer' ? 'text-white' : 'text-slate-400'}`} />
-            <span className="truncate">Mine Explorer</span>
+            <span className="truncate">{t('nav.explorer')}</span>
           </button>
 
           {/* 4. Evidence Center */}
@@ -785,7 +785,7 @@ export default function App() {
           >
             <div className="flex items-center gap-3 min-w-0">
               <AlertTriangle className={`w-4 h-4 ${officerNav === 'evidence' ? 'text-white' : 'text-red-400'}`} />
-              <span className="truncate">Evidence Center</span>
+              <span className="truncate">{t('nav.evidence')}</span>
             </div>
             <span className="text-[10px] font-bold bg-red-600 text-white px-1.5 py-0.5 rounded font-mono animate-pulse shrink-0">
               1 Active
@@ -804,7 +804,7 @@ export default function App() {
           >
             <div className="flex items-center gap-3 min-w-0">
               <Users className={`w-4 h-4 ${officerNav === 'citizen' ? 'text-white' : 'text-slate-400'}`} />
-              <span className="truncate">Citizen Reports</span>
+              <span className="truncate">{t('nav.citizen')}</span>
             </div>
             <span className="text-[10px] font-bold bg-blue-900/90 text-blue-200 px-1.5 py-0.5 rounded font-mono border border-blue-700/50 shrink-0">
               43
@@ -823,7 +823,7 @@ export default function App() {
           >
             <div className="flex items-center gap-3 min-w-0">
               <Activity className={`w-4 h-4 ${officerNav === 'risk' ? 'text-white' : 'text-purple-400'}`} />
-              <span className="truncate">Risk &amp; Prediction</span>
+              <span className="truncate">{t('nav.risk')}</span>
             </div>
             <span className="text-[10px] font-bold bg-purple-900/60 text-purple-200 px-1.5 py-0.5 rounded font-mono border border-purple-600/40 shrink-0">
               AI Q4
@@ -999,13 +999,13 @@ export default function App() {
               {/* KPI Telemetry Header - Dynamically Computed Across 25 Nationwide Mines */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="bg-white border border-slate-200 rounded-lg p-4 shadow-2xs">
-                  <div className="text-[10px] uppercase font-bold text-slate-500">Total Mines Monitored</div>
-                  <div className="text-2xl font-bold text-slate-900 mt-1">{totalMinesCount} Facilities</div>
+                  <div className="text-[10px] uppercase font-bold text-slate-500">{t('dashboard.totalMines')}</div>
+                  <div className="text-2xl font-bold text-slate-900 mt-1">{totalMinesCount} {t('dashboard.facilities')}</div>
                   <div className="text-xs text-slate-500 mt-0.5">7 Coal States &bull; 8 CIL/SCCL Subsidiaries</div>
                 </div>
 
                 <div className="bg-white border border-slate-200 rounded-lg p-4 shadow-2xs">
-                  <div className="text-[10px] uppercase font-bold text-slate-500">Active Workforce</div>
+                  <div className="text-[10px] uppercase font-bold text-slate-500">{t('dashboard.activeWorkforce')}</div>
                   <div className="text-2xl font-bold text-slate-900 mt-1">{totalActiveWorkforce.toLocaleString()}</div>
                   <div className="text-xs text-slate-500 mt-0.5">
                     {totalPermanentWorkforce.toLocaleString()} Regular &bull; {totalContractualWorkforce.toLocaleString()} Contractual
@@ -1013,11 +1013,11 @@ export default function App() {
                 </div>
 
                 <div className="bg-white border border-slate-200 rounded-lg p-4 shadow-2xs">
-                  <div className="text-[10px] uppercase font-bold text-slate-500">Critical Breaches</div>
+                  <div className="text-[10px] uppercase font-bold text-slate-500">{t('dashboard.criticalBreaches')}</div>
                   <div className="text-2xl font-bold text-red-600 mt-1 flex items-center gap-2">
-                    <span>{criticalBreachesCount} Active</span>
+                    <span>{criticalBreachesCount} {t('dashboard.active')}</span>
                     <span className="text-[10px] font-bold bg-red-100 text-red-700 px-1.5 py-0.5 rounded uppercase">
-                      SCN Triggered
+                      {t('dashboard.scnTriggered')}
                     </span>
                   </div>
                   <div className="text-xs text-slate-500 mt-0.5 truncate" title={criticalBreaches.map(m => m.name.split(' ')[0]).join(', ')}>
@@ -1026,7 +1026,7 @@ export default function App() {
                 </div>
 
                 <div className="bg-white border border-slate-200 rounded-lg p-4 shadow-2xs">
-                  <div className="text-[10px] uppercase font-bold text-slate-500">Average Compliance Rating</div>
+                  <div className="text-[10px] uppercase font-bold text-slate-500">{t('dashboard.avgCompliance')}</div>
                   <div className="text-2xl font-bold text-emerald-700 mt-1">{avgComplianceRating}%</div>
                   <div className="text-xs text-emerald-600 mt-0.5">Nationwide Sentinel-2 Real-Time</div>
                 </div>
@@ -1037,7 +1037,7 @@ export default function App() {
                 <div className="flex items-center gap-2 flex-wrap text-xs">
                   <div className="flex items-center gap-1.5 font-bold text-slate-700 mr-2">
                     <Filter className="w-3.5 h-3.5 text-slate-500" />
-                    <span>Surveillance Filter:</span>
+                    <span>{t('dashboard.surveillanceFilter')}:</span>
                   </div>
 
                   {/* State Filter - 7 Indian States */}
@@ -1087,7 +1087,7 @@ export default function App() {
                 </div>
 
                 <div className="flex items-center gap-3 text-xs">
-                  <span className="text-slate-500 hidden sm:inline">Active Telemetry Target:</span>
+                  <span className="text-slate-500 hidden sm:inline">{t('dashboard.activeTarget')}:</span>
                   <span className="font-bold text-slate-800 bg-slate-100 px-2.5 py-1 rounded border border-slate-200">
                     {selectedMine ? selectedMine.name : 'No Mine Selected'}
                   </span>
@@ -1123,7 +1123,7 @@ export default function App() {
                       <div className="flex items-center gap-2">
                         <Shield className="w-4 h-4 text-blue-400" />
                         <span className="font-bold text-xs uppercase tracking-wider text-slate-200">
-                          Mine Surveillance Inspection
+                          {t('dashboard.inspection')}
                         </span>
                       </div>
                       <button
@@ -1152,7 +1152,7 @@ export default function App() {
 
                       <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
                         <div className="flex justify-between items-center text-xs mb-1.5">
-                          <span className="font-semibold text-slate-700">DGMS Compliance Score</span>
+                          <span className="text-slate-500 font-semibold">{t('dashboard.complianceScore')}</span>
                           <span className={`font-mono font-bold ${
                             (selectedMine?.complianceScore ?? 0) < 80 ? 'text-red-600' :
                             (selectedMine?.complianceScore ?? 0) < 90 ? 'text-amber-600' : 'text-emerald-600'
@@ -1172,9 +1172,9 @@ export default function App() {
                       </div>
 
                       <div>
-                        <div className="text-[10px] uppercase font-bold text-slate-500 mb-2">
-                          Surveillance Flags &amp; InSAR Telemetry
-                        </div>
+                        <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2">
+                          {t('dashboard.flags')}
+                        </h4>
                         {(selectedMine?.flags?.length || 0) > 0 ? (
                           <div className="space-y-2">
                             {selectedMine?.flags?.map((flag, idx) => (
@@ -1192,27 +1192,27 @@ export default function App() {
                           </div>
                         ) : (
                           <div className="p-2.5 bg-emerald-50 text-emerald-800 rounded border border-emerald-200 text-xs">
-                            No active perimeter or slope violations detected.
+                            <span className="text-emerald-700 font-semibold">{t('dashboard.noViolations')}</span>
                           </div>
                         )}
                       </div>
 
                       <div className="grid grid-cols-2 gap-2 text-xs">
                         <div className="p-2 bg-slate-50 rounded border border-slate-200">
-                          <div className="text-[10px] uppercase text-slate-500 font-semibold">Operator</div>
+                          <div className="text-[10px] uppercase text-slate-500 font-semibold">{t('dashboard.operator')}</div>
                           <div className="font-semibold text-slate-800 truncate">{selectedMine?.operator}</div>
                         </div>
                         <div className="p-2 bg-slate-50 rounded border border-slate-200">
-                          <div className="text-[10px] uppercase text-slate-500 font-semibold">Last Inspection</div>
+                          <div className="text-[10px] uppercase text-slate-500 font-semibold">{t('dashboard.lastInspection')}</div>
                           <div className="font-semibold text-slate-800">{selectedMine?.lastInspection}</div>
                         </div>
                         <div className="p-2 bg-slate-50 rounded border border-slate-200">
-                          <div className="text-[10px] uppercase text-slate-500 font-semibold">Permit Expiry</div>
+                          <div className="text-[10px] uppercase text-slate-500 font-semibold">{t('dashboard.permitExpiry')}</div>
                           <div className="font-semibold text-slate-800">{selectedMine?.permitExp}</div>
                         </div>
                         <div className="p-2 bg-slate-50 rounded border border-slate-200">
-                          <div className="text-[10px] uppercase text-slate-500 font-semibold">Citizen Reports</div>
-                          <div className="font-semibold text-slate-800">{selectedMine.activeReports} Active</div>
+                          <span className="block text-[10px] uppercase font-bold text-slate-500 mb-0.5">{t('dashboard.citizenReports')}</span>
+                          <span className="block font-semibold text-slate-800">{selectedMine.activeReports} {t('dashboard.active')}</span>
                         </div>
                       </div>
 
@@ -1225,14 +1225,14 @@ export default function App() {
                         className="mb-2 w-full border border-cyan-700 bg-cyan-50 hover:bg-cyan-100 text-cyan-900 font-semibold py-2.5 px-4 rounded-md transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-wider cursor-pointer"
                       >
                         <Radio className="w-4 h-4" />
-                        <span>Virtual View</span>
+                        <span>{t('dashboard.virtualView')}</span>
                       </button>
                       <button
                         id="btn-investigate-evidence-drawer"
                         onClick={() => handleInvestigateEvidence(selectedMine)}
                         className="w-full bg-[#1E40AF] hover:bg-blue-800 text-white font-semibold py-2.5 px-4 rounded-md transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-wider shadow-sm cursor-pointer"
                       >
-                        <span>Investigate Evidence Chain</span>
+                        <span>{t('dashboard.investigate')} &rarr;</span>
                         <ArrowRight className="w-4 h-4" />
                       </button>
                     </div>

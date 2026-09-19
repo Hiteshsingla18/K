@@ -24,6 +24,10 @@
     "compliance": "अनुपालन ऑडिट",
     "workforce": "कार्यबल लॉजिस्टिक्स",
     "citizen": "नागरिक रिपोर्ट",
+    "telemetry": "वर्चुअल टेलीमेट्री केंद्र",
+    "explorer": "माइन एक्सप्लोरर",
+    "evidence": "साक्ष्य केंद्र",
+    "risk": "जोखिम और भविष्यवाणी",
     "copilot": "एआई रेगुलेटरी कोपायलट",
     "help": "सहायता और दस्तावेज़ीकरण"
   },
@@ -36,5 +40,26 @@
     "compliant": "अनुपालन (स्कोर >=80)",
     "approvedLease": "अनुमोदित पट्टा परिधि",
     "encroachmentZone": "अतिक्रमण क्षेत्र (28 हेक्टेयर)"
+  },
+  "dashboard": {
+    "totalMines": "कुल खदानें निगरानी में",
+    "facilities": "सुविधाएँ",
+    "activeWorkforce": "सक्रिय कार्यबल",
+    "criticalBreaches": "गंभीर उल्लंघन",
+    "active": "सक्रिय",
+    "scnTriggered": "SCN ट्रिगर हुआ",
+    "avgCompliance": "औसत अनुपालन रेटिंग",
+    "inspection": "खदान निगरानी निरीक्षण",
+    "complianceScore": "DGMS अनुपालन स्कोर",
+    "flags": "निगरानी झंडे और INSAR टेलीमेट्री",
+    "noViolations": "कोई सक्रिय परिधि या ढलान उल्लंघन नहीं पाया गया।",
+    "operator": "ऑपरेटर",
+    "lastInspection": "अंतिम निरीक्षण",
+    "permitExpiry": "परमिट समाप्ति",
+    "citizenReports": "नागरिक रिपोर्ट",
+    "virtualView": "आभासी दृश्य",
+    "investigate": "साक्ष्य श्रृंखला की जांच करें",
+    "surveillanceFilter": "निगरानी फ़िल्टर",
+    "activeTarget": "सक्रिय टेलीमेट्री लक्ष्य"
   }
 }

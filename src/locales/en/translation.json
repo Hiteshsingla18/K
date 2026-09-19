@@ -24,6 +24,10 @@
     "compliance": "Compliance Audits",
     "workforce": "Workforce Logistics",
     "citizen": "Citizen Reports",
+    "telemetry": "Virtual Telemetry Center",
+    "explorer": "Mine Explorer",
+    "evidence": "Evidence Center",
+    "risk": "Risk & Prediction",
     "copilot": "AI Regulatory Copilot",
     "help": "Help & Documentation"
   },
@@ -36,5 +40,26 @@
     "compliant": "Compliant (Score >=80)",
     "approvedLease": "Approved Lease Perimeter",
     "encroachmentZone": "Encroachment Zone (28 Ha)"
+  },
+  "dashboard": {
+    "totalMines": "Total Mines Monitored",
+    "facilities": "Facilities",
+    "activeWorkforce": "Active Workforce",
+    "criticalBreaches": "Critical Breaches",
+    "active": "Active",
+    "scnTriggered": "SCN Triggered",
+    "avgCompliance": "Average Compliance Rating",
+    "inspection": "Mine Surveillance Inspection",
+    "complianceScore": "DGMS Compliance Score",
+    "flags": "Surveillance Flags & INSAR Telemetry",
+    "noViolations": "No active perimeter or slope violations detected.",
+    "operator": "Operator",
+    "lastInspection": "Last Inspection",
+    "permitExpiry": "Permit Expiry",
+    "citizenReports": "Citizen Reports",
+    "virtualView": "Virtual View",
+    "investigate": "Investigate Evidence Chain",
+    "surveillanceFilter": "Surveillance Filter",
+    "activeTarget": "Active Telemetry Target"
   }
 }
