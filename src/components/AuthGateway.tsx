@@ -256,10 +256,10 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
   const portals = [
     {
       id: 'gov' as ModalType,
-      title: 'Government & Regulator',
+      title: t('auth.govRegulator'),
       badge: 'DGMS / MoC Command',
       icon: Satellite,
-      desc: 'Real-time radar satellite surveillance, boundary AI audits & statutory show-cause notices.',
+      desc: t('auth.govDesc'),
       persona: 'Dr. A. Sharma · Deputy Director (Surveillance)',
       accentBorder: 'border-cyan-500/30 hover:border-cyan-400 group-hover:shadow-[0_0_24px_rgba(6,182,212,0.22)]',
       iconBg: 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30',
@@ -268,10 +268,10 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
     },
     {
       id: 'officer' as ModalType,
-      title: 'Mine Officer Portal',
+      title: t('auth.mineOfficer'),
       badge: 'Safety, CV & Inspections',
       icon: HardHat,
-      desc: 'Live pit CCTV PPE computer vision, environmental gas telemetry & instant CAPA dispatch.',
+      desc: t('auth.mineOfficerDesc'),
       persona: 'Er. V. Sengupta · Senior Safety Officer (First Class)',
       accentBorder: 'border-amber-500/30 hover:border-amber-400 group-hover:shadow-[0_0_24px_rgba(245,158,11,0.22)]',
       iconBg: 'bg-amber-500/10 text-amber-400 border border-amber-500/30',
@@ -280,10 +280,10 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
     },
     {
       id: 'labour' as ModalType,
-      title: 'Labour Mobile Portal',
+      title: t('auth.labourMobile'),
       badge: 'Shift Attendance & Near-Miss',
       icon: Smartphone,
-      desc: 'Offline subterranean shift check-in, bilingual voice memos & near-miss hazard reports.',
+      desc: t('auth.labourMobileDesc'),
       persona: 'Ramesh Soren · Excavator Operator (WKR-8812)',
       accentBorder: 'border-emerald-500/30 hover:border-emerald-400 group-hover:shadow-[0_0_24px_rgba(16,185,129,0.22)]',
       iconBg: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30',
@@ -292,10 +292,10 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
     },
     {
       id: 'operator' as ModalType,
-      title: 'Colliery Operator Desk',
+      title: t('auth.operatorDesk'),
       badge: 'ECL / Compliance & SCN',
       icon: Building2,
-      desc: 'Statutory SCN clarification replies, DGPS lease boundary overlays & compliance filings.',
+      desc: t('auth.operatorDeskDesc'),
       persona: 'Rajmahal Colliery Office · Eastern Coalfields Ltd',
       accentBorder: 'border-blue-500/30 hover:border-blue-400 group-hover:shadow-[0_0_24px_rgba(59,130,246,0.22)]',
       iconBg: 'bg-blue-500/10 text-blue-400 border border-blue-500/30',
@@ -304,15 +304,15 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
     },
     {
       id: 'citizen' as ModalType,
-      title: 'Citizen Vigilance',
-      badge: 'Khanan Prahari Complaints',
+      title: t('auth.citizenVigilance'),
+      badge: 'Khanan Prahari Connect',
       icon: Eye,
-      desc: 'Geotagged community reporting of unauthorized mining, dust pollution & blasting tremors.',
-      persona: 'Citizen Environmental Desk · Aadhaar / Mobile OTP',
-      accentBorder: 'border-teal-500/30 hover:border-teal-400 group-hover:shadow-[0_0_24px_rgba(20,184,166,0.22)]',
-      iconBg: 'bg-teal-500/10 text-teal-400 border border-teal-500/30',
-      badgeBg: 'bg-teal-500/10 text-teal-300 border border-teal-500/30',
-      btnBg: 'bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500'
+      desc: t('auth.citizenDesc'),
+      persona: 'Citizen Environmental Desk · Aadhaar / Mobile',
+      accentBorder: 'border-green-500/30 hover:border-green-400 group-hover:shadow-[0_0_24px_rgba(34,197,94,0.22)]',
+      iconBg: 'bg-green-500/10 text-green-400 border border-green-500/30',
+      badgeBg: 'bg-green-500/10 text-green-300 border border-green-500/30',
+      btnBg: 'bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500'
     }
   ];
 
@@ -617,10 +617,10 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
         <div className="mb-2.5 text-center md:text-left flex items-center justify-between">
           <div>
             <h2 className="text-sm sm:text-base font-bold text-white tracking-tight">
-              Select Authorized Access Tier
+              {t('auth.selectTier')}
             </h2>
             <p className="text-xs text-slate-400">
-              Role-governed single sign-on with cryptographic credentials and digital identity verification.
+              {t('auth.ssoDesc')}
             </p>
           </div>
           <span className="hidden lg:inline-block text-[11px] text-slate-400 font-mono bg-slate-900/80 border border-slate-800 px-2.5 py-1 rounded">
@@ -676,7 +676,7 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
                     }}
                     className={`w-full py-2.5 px-3 rounded-lg text-xs font-bold text-white flex items-center justify-center gap-1.5 transition-all shadow-sm cursor-pointer ${portal.btnBg}`}
                   >
-                    <span>Access Portal</span>
+                    <span>{t('auth.accessPortal')}</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>

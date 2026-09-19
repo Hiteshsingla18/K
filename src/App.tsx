@@ -46,6 +46,8 @@ import GlobalHeaderControls from './components/GlobalHeaderControls';
 import StatutoryDossierModal from './components/StatutoryDossierModal';
 import MineVirtualView from './components/mineVirtualView/MineVirtualView';
 import KhananRakshakLogo from './components/KhananRakshakLogo';
+import { useTranslation } from 'react-i18next';
+import LanguageToggle from './components/LanguageToggle';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 import { useAuth } from './context/AuthContext';
@@ -75,6 +77,8 @@ const INITIAL_MUTATIONS: OfflineMutation[] = [
 ];
 
 export default function App() {
+  const { t } = useTranslation();
+  const [activeTab, setActiveTab] = useState<'surveillance' | 'compliance' | 'workforce' | 'citizen'>('surveillance');
   const {
     user: currentUser,
     loginAs,
@@ -705,14 +709,17 @@ export default function App() {
           </div>
 
           {/* Active Officer Identity Card */}
-          <div className="p-2.5 bg-slate-900/90 rounded-lg border border-slate-800 text-xs space-y-1">
-            <div className="text-[9px] uppercase font-bold text-blue-400 tracking-wider truncate">
+          <div className="p-2.5 bg-slate-900/90 rounded-lg border border-slate-800 text-xs space-y-1 relative">
+            <div className="absolute top-2 right-2">
+              <LanguageToggle />
+            </div>
+            <div className="text-[9px] uppercase font-bold text-blue-400 tracking-wider truncate pr-16">
               {currentUser.badgeText}
             </div>
-            <div className="font-semibold text-white truncate text-[11px]">
+            <div className="font-semibold text-white truncate text-[11px] pr-16">
               {currentUser.name}
             </div>
-            <div className="text-[10px] text-slate-400 truncate">
+            <div className="text-[10px] text-slate-400 truncate pr-16">
               {currentUser.designation}
             </div>
           </div>
@@ -735,7 +742,7 @@ export default function App() {
             }`}
           >
             <TrendingUp className={`w-4 h-4 ${officerNav === 'overview' ? 'text-white' : 'text-slate-400'}`} />
-            <span className="truncate">Overview &amp; Radar</span>
+            <span className="truncate">{t('nav.surveillance')}</span>
           </button>
 
           {/* 2. Mine Explorer */}
@@ -836,7 +843,7 @@ export default function App() {
                 <Sparkles className="w-4 h-4 text-blue-300" />
               </div>
               <div className="text-left">
-                <div className="text-xs font-bold leading-none text-white">AI Regulatory Copilot</div>
+                <div className="text-xs font-bold leading-none text-white">{t('nav.copilot')}</div>
                 <div className="text-[10px] text-blue-300/80 mt-0.5">MoEFCC &amp; DGMS Rules</div>
               </div>
             </div>
