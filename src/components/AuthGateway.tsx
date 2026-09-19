@@ -12,8 +12,11 @@ import {
   X,
   AlertCircle
 } from 'lucide-react';
+import { ShieldAlert, Cpu, FileBadge, Factory, Bot } from 'lucide-react';
 import { AuthUser, UserRole } from '../types';
 import KhananRakshakLogo from './KhananRakshakLogo';
+import { useTranslation } from 'react-i18next';
+import LanguageToggle from './LanguageToggle';
 import { 
   GOV_OFFICER_USER, 
   OPERATOR_USER, 
@@ -30,6 +33,7 @@ interface AuthGatewayProps {
 type ModalType = 'gov' | 'operator' | 'citizen' | 'officer' | 'labour' | null;
 
 export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGatewayProps) {
+  const { t } = useTranslation();
   const [activeModal, setActiveModal] = useState<ModalType>(null);
   
   // Form state
@@ -582,26 +586,29 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
           <div className="min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
               <h1 className="text-base sm:text-lg font-black tracking-tight text-white truncate">
-                K | AI-Based Smart Governance &amp; Compliance System
+                {t('auth.title')}
               </h1>
             </div>
             <div className="text-xs text-slate-400 font-medium truncate flex items-center gap-2">
-              <span>कोयला मंत्रालय &bull; Ministry of Coal</span>
+              <span>{t('auth.ministry')}</span>
               <span className="text-slate-600">&bull;</span>
-              <span>Directorate General of Mines Safety (DGMS)</span>
+              <span>{t('auth.dgms')}</span>
             </div>
           </div>
         </div>
 
         {/* Right: Subtle National Informatics Centre / Parichay SSO Trust Banner */}
-        <div className="shrink-0 flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800 text-xs text-slate-300">
-          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <div className="flex items-center gap-1.5">
-            <Lock className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="font-semibold text-slate-200">National Informatics Centre (NIC)</span>
+        <div className="shrink-0 flex items-center gap-3">
+          <LanguageToggle />
+          <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800 text-xs text-slate-300">
+            <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="flex items-center gap-1.5">
+              <Lock className="w-3.5 h-3.5 text-cyan-400" />
+              <span className="font-semibold text-slate-200">National Informatics Centre (NIC)</span>
+            </div>
+            <span className="text-slate-600 hidden md:inline">|</span>
+            <span className="text-slate-400 hidden md:inline">Parichay 2.0 SSO Verified &bull; TLS 1.3</span>
           </div>
-          <span className="text-slate-600 hidden md:inline">|</span>
-          <span className="text-slate-400 hidden md:inline">Parichay 2.0 SSO Verified &bull; TLS 1.3</span>
         </div>
       </header>
 

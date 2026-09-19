@@ -1,0 +1,40 @@
+{
+  "auth": {
+    "title": "K | AI-Based Smart Governance & Compliance System",
+    "ministry": "Ministry of Coal",
+    "dgms": "Directorate General of Mines Safety (DGMS)",
+    "selectTier": "Select Authorized Access Tier",
+    "ssoDesc": "Role-governed single sign-on with cryptographic credentials and digital identity verification.",
+    "govRegulator": "Government & Regulator",
+    "govDesc": "Real-time radar satellite surveillance, boundary AI audits & statutory show-cause notices.",
+    "mineOfficer": "Mine Officer Portal",
+    "mineOfficerDesc": "Live pit CCTV PPE computer vision, environmental gas telemetry & instant CAPA dispatch.",
+    "labourMobile": "Labour Mobile Portal",
+    "labourMobileDesc": "Offline subterranean shift check-in, bilingual voice memos & near-miss hazard reports.",
+    "operatorDesk": "Colliery Operator Desk",
+    "operatorDeskDesc": "Statutory SCN clarification replies, DGPS lease boundary overlays & compliance filings.",
+    "citizenVigilance": "Citizen Vigilance",
+    "citizenDesc": "Geotagged community reporting of unauthorized mining, dust pollution & blasting tremors.",
+    "accessPortal": "Access Portal",
+    "nicTrust": "National Informatics Centre (NIC) | Parichay 2.0 SSO Verified"
+  },
+  "nav": {
+    "dashboard": "National Dashboard",
+    "surveillance": "Surveillance & Maps",
+    "compliance": "Compliance Audits",
+    "workforce": "Workforce Logistics",
+    "citizen": "Citizen Reports",
+    "copilot": "AI Regulatory Copilot",
+    "help": "Help & Documentation"
+  },
+  "map": {
+    "title": "Nationwide 25-Mine Geospatial Registry",
+    "subtitle": "All Major Belts • Sentinel-2 Sync",
+    "legend": "25-Mine Registry Legend",
+    "criticalBreach": "Critical Breach (<65%: Rajmahal, Jharia, Kaniha)",
+    "needsMonitoring": "Needs Monitoring (Score 65-79)",
+    "compliant": "Compliant (Score >=80)",
+    "approvedLease": "Approved Lease Perimeter",
+    "encroachmentZone": "Encroachment Zone (28 Ha)"
+  }
+}
