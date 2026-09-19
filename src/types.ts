@@ -12,7 +12,7 @@ export interface AuthUser {
   workerId?: string;
 }
 
-export type GovNavType = 'overview' | 'explorer' | 'evidence' | 'citizen' | 'risk';
+export type GovNavType = 'overview' | 'telemetry' | 'explorer' | 'evidence' | 'citizen' | 'risk';
 
 export type ViolationStatus = 
   | 'pending_review' 

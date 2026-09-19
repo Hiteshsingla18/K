@@ -368,7 +368,7 @@ export default function SurveillanceMap({
       overlaysGroup.addLayer(approvedLeasePolygon);
       overlaysGroup.addLayer(encroachmentPolygon);
     }
-  }, [mines, selectedMine, filterState, filterSubsidiary, filterRisk, showBoundaryLayers]);
+  }, [isMounted, mines, selectedMine, filterState, filterSubsidiary, filterRisk, showBoundaryLayers]);
 
   // Pan to selected mine when selectedMine changes
   useEffect(() => {

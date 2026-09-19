@@ -60,7 +60,16 @@ A 6-stage structured audit trail providing verifiable justification for statutor
 - npm or yarn
 
 ### Installation
-```bash
+```
+
+### Supabase backend setup
+
+1. Create a Supabase project and copy its URL and publishable/anon key into a local `.env` file as `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
+2. Apply `supabase/migrations/20260919000000_initial_schema.sql` using the Supabase SQL Editor or Supabase CLI.
+3. Create users through Supabase Authentication. The database trigger creates a `profiles` row automatically; trusted roles are `gov`, `operator`, `officer`, `labour`, and `citizen`.
+4. Seed `mines` and `violations` through Supabase or a separate private seed script. Never put a Supabase service-role key in the browser or commit it.
+
+The frontend uses only the publishable/anon key. Row Level Security protects database access, and operator responses use a server-side Postgres function so inserting a response and updating its violation status happen atomically.bash
 # 1. Clone the repository
 git clone [https://github.com/](https://github.com/)<your-username>/coalguard-ai.git
 
@@ -72,3 +81,19 @@ npm install
 
 # 4. Start the local Vite development server
 npm run dev
+
+### Offline mine virtual telemetry
+
+The mine inspection drawer includes an offline `MineVirtualView`. It stores 24
+synthetic records per mine (one record every four days across approximately 90
+days) in the browser's IndexedDB database `coalguard-mine-telemetry` through
+Dexie. The values are explicitly demo data shaped like future sensor and
+production-reporting payloads; they are not measurements or compliance
+evidence.
+
+For deployment, replace `ensureSyntheticTelemetry` with authenticated ingestion
+from IoT dust/environment sensors, DGMS production returns, and CPCB pollution
+feeds. The production forecast service can remain as the calculation boundary,
+but should consume validated, timestamped backend records with source,
+calibration, and data-quality metadata. The current view makes no external API
+or map-tile requests.

@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { MineRecord } from '../types';
+import type { CreateMineInput } from '../services/coalGuardService';
 import { 
   Search, 
   Filter, 
@@ -22,13 +23,15 @@ interface MineExplorerProps {
   onSelectMine: (mine: MineRecord) => void;
   onInvestigateEvidence: (mine: MineRecord) => void;
   onNavigateToOverview: () => void;
+  onCreateMine?: (input: CreateMineInput) => Promise<void>;
 }
 
 export default function MineExplorer({
   mines,
   onSelectMine,
   onInvestigateEvidence,
-  onNavigateToOverview
+  onNavigateToOverview,
+  onCreateMine
 }: MineExplorerProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedState, setSelectedState] = useState('All States');
@@ -36,6 +39,10 @@ export default function MineExplorer({
   const [selectedStatus, setSelectedStatus] = useState('All Statuses');
   const [sortField, setSortField] = useState<keyof MineRecord>('complianceScore');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [newMine, setNewMine] = useState({ id: '', name: '', state: '', subsidiary: '', operator: '', latitude: '', longitude: '' });
+  const [createError, setCreateError] = useState<string | null>(null);
+  const [isCreating, setIsCreating] = useState(false);
 
   // Filter and sort mines
   const filteredMines = useMemo(() => {
@@ -106,6 +113,26 @@ export default function MineExplorer({
     document.body.removeChild(link);
   };
 
+  const handleCreateMine = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!onCreateMine) return;
+    setCreateError(null);
+    setIsCreating(true);
+    try {
+      await onCreateMine({
+        ...newMine,
+        latitude: Number(newMine.latitude),
+        longitude: Number(newMine.longitude)
+      });
+      setNewMine({ id: '', name: '', state: '', subsidiary: '', operator: '', latitude: '', longitude: '' });
+      setShowCreateForm(false);
+    } catch (error) {
+      setCreateError(error instanceof Error ? error.message : 'Unable to create mine.');
+    } finally {
+      setIsCreating(false);
+    }
+  };
+
   return (
     <div className="space-y-5">
       {/* Explorer Header & Breadcrumb */}
@@ -123,6 +150,15 @@ export default function MineExplorer({
         </div>
 
         <div className="flex items-center gap-2">
+          {onCreateMine && (
+            <button
+              type="button"
+              onClick={() => setShowCreateForm(value => !value)}
+              className="px-3 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-md text-xs font-semibold"
+            >
+              {showCreateForm ? 'Close' : 'Add Mine'}
+            </button>
+          )}
           <button
             onClick={handleExportCSV}
             className="px-3 py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 rounded-md text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-2xs cursor-pointer"
@@ -139,6 +175,33 @@ export default function MineExplorer({
           </button>
         </div>
       </div>
+
+      {showCreateForm && onCreateMine && (
+        <form onSubmit={handleCreateMine} className="bg-blue-50 border border-blue-200 rounded-lg p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {([
+            ['id', 'Mine ID'], ['name', 'Mine name'], ['state', 'State'], ['subsidiary', 'Subsidiary'],
+            ['operator', 'Operator'], ['latitude', 'Latitude'], ['longitude', 'Longitude']
+          ] as const).map(([field, label]) => (
+            <label key={field} className="text-xs font-semibold text-slate-700">
+              {label}
+              <input
+                required
+                type={field === 'latitude' || field === 'longitude' ? 'number' : 'text'}
+                step={field === 'latitude' || field === 'longitude' ? 'any' : undefined}
+                value={newMine[field]}
+                onChange={event => setNewMine(current => ({ ...current, [field]: event.target.value }))}
+                className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm"
+              />
+            </label>
+          ))}
+          <div className="sm:col-span-2 lg:col-span-4 flex items-center gap-3">
+            <button disabled={isCreating} className="rounded-md bg-blue-700 px-4 py-2 text-xs font-bold text-white disabled:opacity-50">
+              {isCreating ? 'Saving...' : 'Save mine to Supabase'}
+            </button>
+            {createError && <span className="text-xs font-semibold text-red-700">{createError}</span>}
+          </div>
+        </form>
+      )}
 
       {/* Filter & Search Bar */}
       <div className="bg-white border border-slate-200 rounded-lg p-4 shadow-2xs flex flex-col md:flex-row items-center justify-between gap-3">

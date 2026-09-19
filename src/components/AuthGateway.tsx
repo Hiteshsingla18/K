@@ -24,11 +24,12 @@ import {
 
 interface AuthGatewayProps {
   onSelectRole: (user: AuthUser, route: string) => void;
+  onSupabaseSignIn?: (email: string, password: string, route: string) => Promise<void>;
 }
 
 type ModalType = 'gov' | 'operator' | 'citizen' | 'officer' | 'labour' | null;
 
-export default function AuthGateway({ onSelectRole }: AuthGatewayProps) {
+export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGatewayProps) {
   const [activeModal, setActiveModal] = useState<ModalType>(null);
   
   // Form state
@@ -89,22 +90,48 @@ export default function AuthGateway({ onSelectRole }: AuthGatewayProps) {
   // -------------------------------------------------------------
   // Form Submission Handlers
   // -------------------------------------------------------------
-  const submitGov = (e: React.FormEvent) => {
+  const submitGov = async (e: React.FormEvent) => {
     e.preventDefault();
     const errors: Record<string, string> = {};
-    if (!formData.username) errors.username = 'Institutional Username is required';
-    if (!formData.password) errors.password = 'Security Password is required';
-    if (!formData.otp || formData.otp.length < 6) errors.otp = 'Valid 6-digit OTP is required';
+    if (onSupabaseSignIn) {
+      if (!formData.email) errors.email = 'Email is required';
+      if (!formData.password) errors.password = 'Password is required';
+    } else {
+      if (!formData.username) errors.username = 'Institutional Username is required';
+      if (!formData.password) errors.password = 'Security Password is required';
+    }
+    if (!onSupabaseSignIn && (!formData.otp || formData.otp.length < 6)) {
+      errors.otp = 'Valid 6-digit OTP is required';
+    }
     
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
       return;
     }
+
+    if (onSupabaseSignIn) {
+      setIsVerifying(true);
+      setVerifyStep('Authenticating with Supabase Auth...');
+      try {
+        await onSupabaseSignIn(formData.email, formData.password, '/command');
+      } catch (error) {
+        setIsVerifying(false);
+        setFormErrors({
+          auth: error instanceof Error ? error.message : 'Supabase authentication failed.'
+        });
+      }
+      return;
+    }
+
     executeAuthSequence(GOV_OFFICER_USER, '/command', 'Jan Parichay SSO');
   };
 
   const submitOperator = (e: React.FormEvent) => {
     e.preventDefault();
+    if (onSupabaseSignIn) {
+      void submitSupabaseCredentials(e, '/operator');
+      return;
+    }
     const errors: Record<string, string> = {};
     if (!formData.leaseCode) errors.leaseCode = 'Mine Lease Code is required';
     if (!formData.dscKey) errors.dscKey = 'Operator DSC Key is required';
@@ -118,6 +145,10 @@ export default function AuthGateway({ onSelectRole }: AuthGatewayProps) {
 
   const submitCitizen = (e: React.FormEvent) => {
     e.preventDefault();
+    if (onSupabaseSignIn) {
+      void submitSupabaseCredentials(e, '/citizen');
+      return;
+    }
     const errors: Record<string, string> = {};
     if (!formData.mobile || formData.mobile.length < 10) errors.mobile = 'Valid 10-digit mobile number required';
     if (!formData.smsOtp || formData.smsOtp.length < 4) errors.smsOtp = 'Valid 4-digit OTP is required';
@@ -131,6 +162,10 @@ export default function AuthGateway({ onSelectRole }: AuthGatewayProps) {
 
   const submitGeneric = (e: React.FormEvent, user: AuthUser, route: string, protocol: string) => {
     e.preventDefault();
+    if (onSupabaseSignIn) {
+      void submitSupabaseCredentials(e, route);
+      return;
+    }
     const errors: Record<string, string> = {};
     if (!formData.userId) errors.userId = 'ID is required';
     if (!formData.secret) errors.secret = 'Secret is required';
@@ -140,6 +175,55 @@ export default function AuthGateway({ onSelectRole }: AuthGatewayProps) {
     }
     executeAuthSequence(user, route, protocol);
   };
+
+  const submitSupabaseCredentials = async (e: React.FormEvent, route: string) => {
+    e.preventDefault();
+    const errors: Record<string, string> = {};
+    if (!formData.email) errors.email = 'Email is required';
+    if (!formData.password) errors.password = 'Password is required';
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
+    setIsVerifying(true);
+    setVerifyStep('Authenticating portal account with Supabase Auth...');
+    try {
+      await onSupabaseSignIn?.(formData.email, formData.password, route);
+    } catch (error) {
+      setIsVerifying(false);
+      setFormErrors({ auth: error instanceof Error ? error.message : 'Supabase authentication failed.' });
+    }
+  };
+
+  const renderSupabaseCredentials = () => onSupabaseSignIn ? (
+    <div className="space-y-3 rounded-lg border border-blue-200 bg-blue-50/60 p-3">
+      <div className="text-[10px] font-bold uppercase tracking-wide text-blue-800">Supabase portal account</div>
+      <div>
+        <label className="block text-xs font-bold text-slate-700 mb-1">Email</label>
+        <input
+          type="email"
+          autoComplete="username"
+          value={formData.email || ''}
+          onChange={(e) => handleInputChange('email', e.target.value)}
+          className={`w-full px-3 py-2 bg-white border rounded-lg text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 ${formErrors.email ? 'border-red-500' : 'border-slate-300'}`}
+        />
+        {formErrors.email && <p className="text-[10px] text-red-600 mt-1">{formErrors.email}</p>}
+      </div>
+      <div>
+        <label className="block text-xs font-bold text-slate-700 mb-1">Password</label>
+        <input
+          type="password"
+          autoComplete="current-password"
+          value={formData.password || ''}
+          onChange={(e) => handleInputChange('password', e.target.value)}
+          className={`w-full px-3 py-2 bg-white border rounded-lg text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 ${formErrors.password ? 'border-red-500' : 'border-slate-300'}`}
+        />
+        {formErrors.password && <p className="text-[10px] text-red-600 mt-1">{formErrors.password}</p>}
+      </div>
+      {formErrors.auth && <p className="text-xs text-red-600">{formErrors.auth}</p>}
+    </div>
+  ) : null;
 
   // -------------------------------------------------------------
   // Quick-Fill Handlers
@@ -265,6 +349,8 @@ export default function AuthGateway({ onSelectRole }: AuthGatewayProps) {
           </div>
           
           <div className="space-y-4">
+            {renderSupabaseCredentials()}
+            {!onSupabaseSignIn && <>
             <div>
               <label className="block text-xs font-bold text-slate-700 mb-1">Institutional Username / Email</label>
               <input 
@@ -287,7 +373,7 @@ export default function AuthGateway({ onSelectRole }: AuthGatewayProps) {
               />
               {formErrors.password && <p className="text-[10px] text-red-600 mt-1 flex items-center gap-1"><AlertCircle className="w-3 h-3"/>{formErrors.password}</p>}
             </div>
-            <div>
+            {!onSupabaseSignIn && <div>
               <label className="block text-xs font-bold text-slate-700 mb-1">6-digit 2FA OTP / DSC PIN</label>
               <input 
                 type="text" 
@@ -298,7 +384,8 @@ export default function AuthGateway({ onSelectRole }: AuthGatewayProps) {
                 className={`w-full px-3 py-2 bg-slate-50 border rounded-lg text-sm text-slate-900 tracking-widest font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 ${formErrors.otp ? 'border-red-500' : 'border-slate-300'}`}
               />
               {formErrors.otp && <p className="text-[10px] text-red-600 mt-1 flex items-center gap-1"><AlertCircle className="w-3 h-3"/>{formErrors.otp}</p>}
-            </div>
+            </div>}
+            </>}
           </div>
 
           <div className="pt-2">
@@ -309,6 +396,7 @@ export default function AuthGateway({ onSelectRole }: AuthGatewayProps) {
               <span>Verify & Launch Surveillance Command</span>
               <ArrowRight className="w-4 h-4" />
             </button>
+            {formErrors.auth && <p className="text-xs text-red-600 mt-2">{formErrors.auth}</p>}
           </div>
         </form>
       );
@@ -326,6 +414,8 @@ export default function AuthGateway({ onSelectRole }: AuthGatewayProps) {
           </div>
           
           <div className="space-y-4">
+            {renderSupabaseCredentials()}
+            {!onSupabaseSignIn && <>
             <div>
               <label className="block text-xs font-bold text-slate-700 mb-1">Mine Lease Code / Colliery ID</label>
               <input 
@@ -348,6 +438,7 @@ export default function AuthGateway({ onSelectRole }: AuthGatewayProps) {
               />
               {formErrors.dscKey && <p className="text-[10px] text-red-600 mt-1 flex items-center gap-1"><AlertCircle className="w-3 h-3"/>{formErrors.dscKey}</p>}
             </div>
+            </>}
           </div>
 
           <div className="pt-2">
@@ -375,6 +466,8 @@ export default function AuthGateway({ onSelectRole }: AuthGatewayProps) {
           </div>
           
           <div className="space-y-4">
+            {renderSupabaseCredentials()}
+            {!onSupabaseSignIn && <>
             <div>
               <label className="block text-xs font-bold text-slate-700 mb-1">Mobile Number</label>
               <div className="flex relative">
@@ -407,6 +500,7 @@ export default function AuthGateway({ onSelectRole }: AuthGatewayProps) {
               />
               {formErrors.smsOtp && <p className="text-[10px] text-red-600 mt-1 flex items-center gap-1"><AlertCircle className="w-3 h-3"/>{formErrors.smsOtp}</p>}
             </div>
+            </>}
           </div>
 
           <div className="pt-2">
@@ -432,6 +526,8 @@ export default function AuthGateway({ onSelectRole }: AuthGatewayProps) {
           </div>
         </div>
         <div className="space-y-4">
+          {renderSupabaseCredentials()}
+          {!onSupabaseSignIn && <>
           <div>
             <label className="block text-xs font-bold text-slate-700 mb-1">ID</label>
             <input 
@@ -452,6 +548,7 @@ export default function AuthGateway({ onSelectRole }: AuthGatewayProps) {
             />
             {formErrors.secret && <p className="text-[10px] text-red-600 mt-1">{formErrors.secret}</p>}
           </div>
+          </>}
         </div>
         <div className="pt-2">
           <button type="button" onClick={activeModal === 'officer' ? autofillOfficer : autofillLabour} className="text-[11px] text-blue-600 font-bold hover:underline mb-3 block">
