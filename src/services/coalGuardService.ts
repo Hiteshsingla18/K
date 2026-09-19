@@ -1,4 +1,4 @@
-import { supabase } from '../lib/supabase';
+import { getSupabaseClient } from '../lib/supabaseClient';
 import { MINES_DATA } from '../data/mines';
 
 // Types
@@ -12,6 +12,19 @@ const DEFAULT_MINES = [
   { id: "MIN-2281-K", name: "Korba West Complex", subsidiary: "SECL", state: "Chhattisgarh", lat: 22.3595, lng: 82.7501, compliance: 81, risk: "MONITOR", operator: "South Eastern Coalfields", last_inspection: "05 Feb 2024", permit_expiry: "Jun 2027", citizen_reports: 8, violations: 0, workforce: 1650 },
   { id: "MIN-7712-S", name: "Singrauli Northern Ridge", subsidiary: "NCL", state: "Madhya Pradesh", lat: 24.2000, lng: 82.6667, compliance: 89, risk: "COMPLIANT", operator: "Northern Coalfields Ltd", last_inspection: "11 Jan 2024", permit_expiry: "Sep 2029", citizen_reports: 5, violations: 0, workforce: 2200 }
 ];
+
+const requireSupabase = () => {
+  const client = getSupabaseClient();
+  if (!client) {
+    throw new Error(
+      'Supabase is not configured. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to .env and restart Vite.'
+    );
+  }
+  return client;
+};
+
+export type CreateMineInput = Pick<MineRecord, 'id' | 'name' | 'state' | 'subsidiary' | 'operator' | 'latitude' | 'longitude'> &
+  Partial<Omit<MineRecord, 'id' | 'name' | 'state' | 'subsidiary' | 'operator' | 'latitude' | 'longitude'>>;
 
 export function normalizeMine(raw: any): MineRecord {
   const score = Number(raw.compliance ?? raw.compliance_score ?? raw.complianceScore ?? raw.score ?? 0);
@@ -48,65 +61,69 @@ export function normalizeMine(raw: any): MineRecord {
 }
 
 export const coalGuardService = {
+  async createMine(input: CreateMineInput): Promise<MineRecord> {
+    const { data, error } = await requireSupabase().rpc('create_mine', {
+      p_mine: {
+        id: input.id,
+        name: input.name,
+        code: input.id,
+        state: input.state,
+        subsidiary: input.subsidiary,
+        latitude: input.latitude,
+        longitude: input.longitude,
+        type: 'OPENCAST',
+        compliance_score: input.complianceScore || 0,
+        status: (input.status || 'monitor').toUpperCase()
+      }
+    });
+    if (error) throw error;
+    return normalizeMine(data);
+  },
+
   async fetchMines(): Promise<MineRecord[]> {
     try {
-      const { data, error } = await supabase.from('mines').select('*');
+      const { data, error } = await requireSupabase().from('mines').select('*').order('name');
       if (error || !data || data.length === 0) {
-        console.warn('Using DEFAULT_MINES fallback due to fetch issue.', error);
+        console.warn('Using local mine registry fallback.', error);
         return DEFAULT_MINES.map(normalizeMine);
       }
       return data.map(normalizeMine);
     } catch (err) {
-      console.warn('Network error, falling back to DEFAULT_MINES.', err);
+      console.warn('Mine registry unavailable; using local fallback.', err);
       return DEFAULT_MINES.map(normalizeMine);
     }
   },
 
   async fetchViolation(id: string) {
-    try {
-      const { data, error } = await supabase.from('violations').select('*').eq('id', id).single();
-      if (error) throw error;
-      return data;
-    } catch (err) {
-      console.warn(`Error fetching violation ${id}, falling back to mock.`, err);
-      return null;
-    }
+    const { data, error } = await requireSupabase()
+      .from('violations')
+      .select('*')
+      .eq('id', id)
+      .single();
+    if (error) throw error;
+    return data;
   },
 
   async issueShowCauseNotice(violationId: string) {
-    try {
-      const { data, error } = await supabase
-        .from('violations')
-        .update({ status: 'Show-Cause Notice Issued' })
-        .eq('id', violationId)
-        .select();
-        
-      if (error) throw error;
-      return data;
-    } catch (err) {
-      console.warn(`Error updating violation ${violationId} status to SCN Issued, simulating success.`, err);
-      return { success: true, simulated: true };
-    }
+    const { data, error } = await requireSupabase()
+      .from('violations')
+      .update({
+        status: 'awaiting_mine_response',
+        notice_issued_at: new Date().toISOString()
+      })
+      .eq('id', violationId)
+      .select()
+      .single();
+    if (error) throw error;
+    return data;
   },
 
-  async submitOperatorResponse(payload: any) {
-    try {
-      // Assuming operator_responses table structure
-      const { error: insertError } = await supabase.from('operator_responses').insert([payload]);
-      if (insertError) throw insertError;
-
-      // Update violation status to 'Response Submitted'
-      const { error: updateError } = await supabase
-        .from('violations')
-        .update({ status: 'Response Submitted' })
-        .eq('id', payload.violationId);
-        
-      if (updateError) throw updateError;
-      
-      return { success: true };
-    } catch (err) {
-      console.warn('Error submitting operator response, simulating success.', err);
-      return { success: true, simulated: true };
-    }
+  async submitOperatorResponse(payload: { violationId: string; details: string }) {
+    const { data, error } = await requireSupabase().rpc('submit_operator_response', {
+      p_violation_id: payload.violationId,
+      p_details: payload.details
+    });
+    if (error) throw error;
+    return data;
   }
 };

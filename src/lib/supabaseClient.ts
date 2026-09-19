@@ -32,9 +32,9 @@ export const supabase: SupabaseClient | null =
   supabaseConfig.url && supabaseConfig.anonKey
     ? createClient(supabaseConfig.url, supabaseConfig.anonKey, {
         auth: {
-          persistSession: false,
-          autoRefreshToken: false,
-          detectSessionInUrl: false
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: true
         }
       })
     : null;

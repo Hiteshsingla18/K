@@ -29,6 +29,7 @@ interface GlobalHeaderControlsProps {
   onSwitchPortal: (targetRole: UserRole, targetRoute: string) => void;
   onSignOut: () => void;
   theme?: 'dark' | 'light';
+  sessionRemainingSeconds?: number | null;
 }
 
 export default function GlobalHeaderControls({
@@ -41,7 +42,8 @@ export default function GlobalHeaderControls({
   onOpenSyncModal,
   onSwitchPortal,
   onSignOut,
-  theme = 'light'
+  theme = 'light',
+  sessionRemainingSeconds = null
 }: GlobalHeaderControlsProps) {
   const [roleDropdownOpen, setRoleDropdownOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -106,6 +108,9 @@ export default function GlobalHeaderControls({
   ];
 
   const isDark = theme === 'dark';
+  const sessionMinutes = sessionRemainingSeconds === null ? null : Math.floor(sessionRemainingSeconds / 60);
+  const sessionSeconds = sessionRemainingSeconds === null ? null : sessionRemainingSeconds % 60;
+  const sessionWarning = sessionRemainingSeconds !== null && sessionRemainingSeconds <= 120;
 
   return (
     <div className="flex items-center gap-2 sm:gap-2.5">
@@ -184,6 +189,23 @@ export default function GlobalHeaderControls({
           </span>
         </div>
       </div>
+
+      {sessionRemainingSeconds !== null && (
+        <div
+          className={`hidden md:flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 font-mono text-[11px] font-bold ${
+            sessionWarning
+              ? 'border-red-300 bg-red-50 text-red-700 animate-pulse'
+              : isDark
+                ? 'border-slate-700 bg-slate-800 text-slate-200'
+                : 'border-slate-300 bg-white text-slate-700'
+          }`}
+          title="Automatic Supabase session expiry countdown"
+          aria-label={`Session expires in ${sessionMinutes} minutes and ${sessionSeconds} seconds`}
+        >
+          <span className="text-[10px] font-sans font-semibold text-slate-400">Session</span>
+          <span>{String(sessionMinutes).padStart(2, '0')}:{String(sessionSeconds).padStart(2, '0')}</span>
+        </div>
+      )}
 
       {/* 2. UNIVERSAL 5-PORTAL ROLE SWITCHER DROPDOWN */}
       <div className="relative" ref={dropdownRef}>

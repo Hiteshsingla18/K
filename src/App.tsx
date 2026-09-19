@@ -29,7 +29,7 @@ import {
 import { MineRecord, ViolationStatus, GovNavType, AuthUser, UserRole, OfflineMutation, WorkforceAttendanceRecord } from './types';
 import { MINES_DATA } from './data/mines';
 import { INITIAL_ATTENDANCE_ROSTER } from './data/initialAttendance';
-import { coalGuardService } from './services/coalGuardService';
+import { coalGuardService, type CreateMineInput } from './services/coalGuardService';
 import SurveillanceMap from './components/SurveillanceMap';
 import MineExplorer from './components/MineExplorer';
 import EvidenceChain from './components/EvidenceChain';
@@ -44,6 +44,7 @@ import LabourMobileApp from './components/LabourMobileApp';
 import SyncQueueModal from './components/SyncQueueModal';
 import GlobalHeaderControls from './components/GlobalHeaderControls';
 import StatutoryDossierModal from './components/StatutoryDossierModal';
+import MineVirtualView from './components/mineVirtualView/MineVirtualView';
 import KhananRakshakLogo from './components/KhananRakshakLogo';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
@@ -74,7 +75,16 @@ const INITIAL_MUTATIONS: OfflineMutation[] = [
 ];
 
 export default function App() {
-  const { user: currentUser, loginAs, logout, role } = useAuth();
+  const {
+    user: currentUser,
+    loginAs,
+    signIn,
+    signOut,
+    role,
+    sessionMessage,
+    clearSessionMessage,
+    sessionRemainingSeconds
+  } = useAuth();
 
   // Path-based routing: '/', '/command', '/operator', '/citizen', '/officer', '/labour'
   const [currentPath, setCurrentPath] = useState<string>(() => {
@@ -184,6 +194,7 @@ export default function App() {
   const [mines, setMines] = useState<MineRecord[]>(MINES_DATA);
   const [selectedMine, setSelectedMine] = useState<MineRecord | null>(MINES_DATA[0]); // Default to Rajmahal OCP
   const [drawerOpen, setDrawerOpen] = useState<boolean>(true);
+  const [virtualViewOpen, setVirtualViewOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -250,6 +261,13 @@ export default function App() {
     }, 4500);
   };
 
+  useEffect(() => {
+    if (!sessionMessage) return;
+    navigate('/');
+    triggerToast(sessionMessage);
+    clearSessionMessage();
+  }, [sessionMessage, clearSessionMessage]);
+
   const handleSelectRole = (user: AuthUser, route: string) => {
     loginAs(user);
     navigate(route);
@@ -262,8 +280,18 @@ export default function App() {
     }.`);
   };
 
-  const handleSignOut = () => {
-    logout();
+  const handleSupabaseSignIn = async (email: string, password: string, route: string) => {
+    await signIn(email, password);
+    navigate(route);
+    triggerToast('Authenticated with Supabase. Government permissions loaded.');
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+    } catch (error) {
+      console.error('Unable to sign out from Supabase.', error);
+    }
     navigate('/');
     triggerToast('Signed out. Returned to National Login Gateway.');
   };
@@ -272,6 +300,14 @@ export default function App() {
     setSelectedMine(mine);
     setDrawerOpen(true);
     triggerToast(`Active surveillance focused on: ${mine.name}`);
+  };
+
+  const handleCreateMine = async (input: CreateMineInput) => {
+    const createdMine = await coalGuardService.createMine(input);
+    setMines(current => [...current, createdMine]);
+    setSelectedMine(createdMine);
+    setDrawerOpen(true);
+    triggerToast(`${createdMine.name} was added to the live mine registry.`);
   };
 
   const handleInvestigateEvidence = (mine?: MineRecord) => {
@@ -283,17 +319,27 @@ export default function App() {
   };
 
   const handleIssueShowCauseNotice = async () => {
-    await coalGuardService.issueShowCauseNotice('ENV-082');
-    setViolationStatus('awaiting_mine_response');
-    triggerToast('Statutory Show-Cause Notice SCN-2026-082 dispatched to ECL Operator Desk (48h countdown active).');
-    handleSwitchPortal('operator', '/operator');
+    try {
+      await coalGuardService.issueShowCauseNotice('ENV-082');
+      setViolationStatus('awaiting_mine_response');
+      triggerToast('Statutory Show-Cause Notice SCN-2026-082 dispatched to ECL Operator Desk (48h countdown active).');
+      handleSwitchPortal('operator', '/operator');
+    } catch (error) {
+      console.error('Unable to issue show-cause notice.', error);
+      triggerToast('Show-cause notice could not be saved. Check your Supabase connection and permissions.');
+    }
   };
 
   const handleSubmitFormalResponse = async () => {
-    await coalGuardService.submitOperatorResponse({ violationId: 'ENV-082', details: 'Operator response submitted' });
-    setViolationStatus('response_submitted_awaiting_verification');
-    triggerToast('Formal clarification received from ECL Operator Desk. Government vigilance notified.');
-    handleSwitchPortal('gov', '/command');
+    try {
+      await coalGuardService.submitOperatorResponse({ violationId: 'ENV-082', details: 'Operator response submitted' });
+      setViolationStatus('response_submitted_awaiting_verification');
+      triggerToast('Formal clarification received from ECL Operator Desk. Government vigilance notified.');
+      handleSwitchPortal('gov', '/command');
+    } catch (error) {
+      console.error('Unable to submit operator response.', error);
+      triggerToast('Operator response could not be saved. Check your Supabase connection and permissions.');
+    }
   };
 
   // =========================================================================
@@ -314,7 +360,10 @@ export default function App() {
             </button>
           </div>
         )}
-        <AuthGateway onSelectRole={handleSelectRole} />
+        <AuthGateway
+          onSelectRole={handleSelectRole}
+          onSupabaseSignIn={handleSupabaseSignIn}
+        />
       </>
     );
   }
@@ -691,6 +740,20 @@ export default function App() {
 
           {/* 2. Mine Explorer */}
           <button
+            id="sidebar-nav-telemetry"
+            onClick={() => setOfficerNav('telemetry')}
+            className={`w-full px-3 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-3 transition-all cursor-pointer ${
+              officerNav === 'telemetry'
+                ? 'bg-[#1E40AF] text-white shadow-sm'
+                : 'text-slate-400 hover:text-white hover:bg-slate-800/70'
+            }`}
+          >
+            <Radio className={`w-4 h-4 ${officerNav === 'telemetry' ? 'text-white' : 'text-cyan-400'}`} />
+            <span className="truncate">Virtual Telemetry Center</span>
+          </button>
+
+          {/* 3. Mine Explorer */}
+          <button
             id="sidebar-nav-explorer"
             onClick={() => setOfficerNav('explorer')}
             className={`w-full px-3 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-3 transition-all cursor-pointer ${
@@ -703,7 +766,7 @@ export default function App() {
             <span className="truncate">Mine Explorer</span>
           </button>
 
-          {/* 3. Evidence Center */}
+          {/* 4. Evidence Center */}
           <button
             id="sidebar-nav-evidence"
             onClick={() => setOfficerNav('evidence')}
@@ -722,7 +785,7 @@ export default function App() {
             </span>
           </button>
 
-          {/* 4. Citizen Reports (Field corroboration review) */}
+          {/* 5. Citizen Reports (Field corroboration review) */}
           <button
             id="sidebar-nav-citizen"
             onClick={() => setOfficerNav('citizen')}
@@ -741,7 +804,7 @@ export default function App() {
             </span>
           </button>
 
-          {/* 5. Risk & Prediction (Q4 Forecast) */}
+          {/* 6. Risk & Prediction (Q4 Forecast) */}
           <button
             id="sidebar-nav-risk"
             onClick={() => setOfficerNav('risk')}
@@ -848,6 +911,7 @@ export default function App() {
               <span className="text-slate-300">/</span>
               <span className="font-semibold text-xs text-slate-700 truncate hidden md:inline">
                 {officerNav === 'overview' && 'Overview & Real-Time Radar'}
+                {officerNav === 'telemetry' && 'Virtual Telemetry Center'}
                 {officerNav === 'explorer' && 'National Mine Explorer Table'}
                 {officerNav === 'evidence' && 'Evidence Chain Investigation (ENV-082)'}
                 {officerNav === 'citizen' && 'Citizen Environmental Vigilance Feed'}
@@ -886,6 +950,7 @@ export default function App() {
                 onOpenSyncModal={() => setIsSyncModalOpen(true)}
                 onSwitchPortal={handleSwitchPortal}
                 onSignOut={handleSignOut}
+                sessionRemainingSeconds={sessionRemainingSeconds}
                 theme="light"
               />
             </div>
@@ -1143,9 +1208,18 @@ export default function App() {
                           <div className="font-semibold text-slate-800">{selectedMine.activeReports} Active</div>
                         </div>
                       </div>
+
                     </div>
 
                     <div className="p-4 border-t border-slate-200 bg-slate-50">
+                      <button
+                        id="btn-open-virtual-view-drawer"
+                        onClick={() => setVirtualViewOpen(true)}
+                        className="mb-2 w-full border border-cyan-700 bg-cyan-50 hover:bg-cyan-100 text-cyan-900 font-semibold py-2.5 px-4 rounded-md transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-wider cursor-pointer"
+                      >
+                        <Radio className="w-4 h-4" />
+                        <span>Virtual View</span>
+                      </button>
                       <button
                         id="btn-investigate-evidence-drawer"
                         onClick={() => handleInvestigateEvidence(selectedMine)}
@@ -1157,12 +1231,45 @@ export default function App() {
                     </div>
                   </div>
                 )}
+                {selectedMine && virtualViewOpen && (
+                  <MineVirtualView
+                    mine={selectedMine}
+                    onClose={() => setVirtualViewOpen(false)}
+                  />
+                )}
               </div>
             </div>
           )}
 
           {/* ===================================================================== */}
-          {/* VIEW 2: MINE EXPLORER                                                  */}
+          {/* VIEW 2: VIRTUAL TELEMETRY CENTER                                       */}
+          {/* ===================================================================== */}
+          {officerNav === 'telemetry' && (
+            <div className="space-y-4">
+              {!selectedMine && (
+                <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+                  <h2 className="text-lg font-bold text-slate-900">Select a mine for virtual telemetry</h2>
+                  <p className="mt-1 text-xs text-slate-500">Choose a facility to load its offline synthetic trend records.</p>
+                  <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                    {mines.slice(0, 12).map(mine => (
+                      <button
+                        key={mine.id}
+                        onClick={() => handleSelectMine(mine)}
+                        className="rounded-lg border border-slate-200 p-3 text-left transition-colors hover:border-blue-400 hover:bg-blue-50"
+                      >
+                        <div className="text-xs font-bold text-slate-900">{mine.name}</div>
+                        <div className="mt-1 text-[10px] text-slate-500">{mine.state} · {mine.subsidiary}</div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {selectedMine && <MineVirtualView mine={selectedMine} />}
+            </div>
+          )}
+
+          {/* ===================================================================== */}
+          {/* VIEW 3: MINE EXPLORER                                                  */}
           {/* ===================================================================== */}
           {officerNav === 'explorer' && (
             <MineExplorer
@@ -1170,6 +1277,7 @@ export default function App() {
               onSelectMine={handleSelectMine}
               onInvestigateEvidence={handleInvestigateEvidence}
               onNavigateToOverview={() => setOfficerNav('overview')}
+              onCreateMine={role === 'gov' ? handleCreateMine : undefined}
             />
           )}
 
