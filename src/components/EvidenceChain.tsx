@@ -231,7 +231,7 @@ export default function EvidenceChain({
                   ? 'bg-blue-900 text-white border-blue-800 shadow-xs' 
                   : 'bg-white border-slate-300 text-slate-700 hover:bg-slate-50 shadow-2xs'
               }`}
-              title="View Explainable AI factor contribution breakdown (SIH26024 Section 8)"
+              title="View Explainable AI factor contribution breakdown"
             >
               <Activity className={`w-3.5 h-3.5 ${xaiExpanded ? 'text-blue-300' : 'text-blue-600'}`} />
               <span>Confidence Decomposition</span>
@@ -251,7 +251,7 @@ export default function EvidenceChain({
                     Explainable AI (XAI) Confidence Decomposition
                   </h4>
                   <span className="bg-blue-500/20 text-blue-400 border border-blue-500/30 text-[10px] px-2 py-0.5 rounded font-mono font-semibold">
-                    SIH26024 Section 8 &bull; SHAP Model Attribution
+                    SHAP Model Attribution
                   </span>
                 </div>
                 <p className="text-xs text-slate-300 mt-0.5">
@@ -629,7 +629,7 @@ export default function EvidenceChain({
           </div>
         )}
 
-        {/* Tab 4: IMMUTABLE AUDIT TRAIL (SIH26024 Section 6 & 7) */}
+        {/* Tab 4: IMMUTABLE AUDIT TRAIL */}
         {activeTab === 'audit_trail' && (
           <div className="p-5 space-y-4">
             {/* Ledger Overview Cards */}
@@ -640,7 +640,7 @@ export default function EvidenceChain({
                   <ShieldCheck className="w-4 h-4 text-emerald-600" />
                   Append-Only (Verified)
                 </span>
-                <span className="text-[10px] text-slate-500 font-mono">SIH26024 Sec 6 &amp; 7</span>
+                <span className="text-[10px] text-slate-500 font-mono">Immutable Ledger</span>
               </div>
               <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg">
                 <span className="text-[10px] uppercase font-bold text-slate-500 block">Total Blocks</span>
@@ -777,7 +777,7 @@ export default function EvidenceChain({
 
               <div className="p-3 bg-slate-50 border-t border-slate-200 text-xs text-slate-500 flex flex-wrap justify-between items-center gap-2">
                 <span>
-                  &bull; All events anchored to Ministry of Coal statutory immutable ledger. Compliant with Evidence Act Section 65B &amp; SIH26024 Section 6 &amp; 7.
+                  &bull; All events anchored to Ministry of Coal statutory immutable ledger. Compliant with Evidence Act Section 65B.
                 </span>
                 <span className="font-mono text-[11px] text-blue-700 font-semibold">
                   Chain Status: Continuous (Valid Proof-of-Authority)

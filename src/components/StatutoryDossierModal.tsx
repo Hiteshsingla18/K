@@ -118,7 +118,7 @@ export default function StatutoryDossierModal({
               GOVERNMENT OF INDIA &bull; DIRECTORATE GENERAL OF MINES SAFETY
             </div>
             <div className="text-xs font-sans text-slate-700 font-semibold tracking-wide">
-              MINISTRY OF COAL &bull; KHANANRAKSHAK AI (K-AI) &bull; SIH26024
+              MINISTRY OF COAL &bull; KHANANRAKSHAK AI (K-AI)
             </div>
             <div className="text-[11px] font-sans text-slate-500">
               AI-Powered Smart Governance &amp; Satellite Surveillance System for Coal Mines &bull; Dhanbad - 826001

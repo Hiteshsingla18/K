@@ -393,7 +393,7 @@ export default function SurveillanceMap({
   };
 
   return (
-    <div className="relative w-full rounded-lg overflow-hidden border border-slate-300 shadow-sm bg-slate-900">
+    <div className="relative w-full h-full rounded-lg overflow-hidden border border-slate-300 shadow-sm bg-slate-900">
       {/* Top Map Control Bar */}
       <div className="absolute top-3 left-3 right-3 z-[1000] flex items-center justify-between pointer-events-none">
         <div className="bg-white/95 backdrop-blur-sm border border-slate-200 px-3 py-1.5 rounded-lg shadow-md flex items-center gap-2 pointer-events-auto">

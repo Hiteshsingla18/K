@@ -574,7 +574,7 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
 
       {/* 1. TOP HEADER: Compact official emblem with logo, title & subtle NIC trust banner */}
       <header className="shrink-0 flex flex-col sm:flex-row items-center justify-between gap-3 pb-3 border-b border-slate-800/80">
-        {/* Left: Emblem, Title & SIH26024 Tag */}
+        {/* Left: Emblem & Title */}
         <div className="flex items-center gap-3 min-w-0">
           <div className="relative shrink-0">
             <KhananRakshakLogo className="h-10 w-10 md:h-11 md:w-11" />
@@ -584,9 +584,6 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
               <h1 className="text-base sm:text-lg font-black tracking-tight text-white truncate">
                 K | AI-Based Smart Governance &amp; Compliance System
               </h1>
-              <span className="bg-cyan-500/20 text-cyan-300 text-[10px] font-mono font-bold px-1.5 py-0.5 rounded border border-cyan-500/40 shrink-0">
-                SIH26024
-              </span>
             </div>
             <div className="text-xs text-slate-400 font-medium truncate flex items-center gap-2">
               <span>कोयला मंत्रालय &bull; Ministry of Coal</span>
@@ -687,7 +684,7 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
         <div className="flex items-center gap-2">
           <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
           <span className="text-slate-300 font-medium">
-            Ministry of Coal &bull; Directorate General of Mines Safety (DGMS) &bull; SIH26024 Compliance Architecture
+            Ministry of Coal &bull; Directorate General of Mines Safety (DGMS) &bull; Compliance Architecture
           </span>
         </div>
         <div className="flex items-center gap-3 text-slate-500 text-[10px]">

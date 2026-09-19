@@ -121,7 +121,7 @@ export default function OperatorPortal({
                 </span>
               </div>
               <div className="text-[11px] text-slate-400 leading-tight truncate mt-0.5">
-                Operator Desk &bull; SIH26024
+                Operator Desk
               </div>
             </div>
           </div>

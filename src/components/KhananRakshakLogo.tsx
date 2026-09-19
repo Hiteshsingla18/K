@@ -338,7 +338,7 @@ export default function KhananRakshakLogo({ className = "w-10 h-10", size, showT
             </span>
           </div>
           <span className="text-[11px] text-slate-400 font-medium tracking-tight">
-            AI Smart Coal Surveillance &bull; SIH26024
+            AI Smart Coal Surveillance
           </span>
         </div>
       )}

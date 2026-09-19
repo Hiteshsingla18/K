@@ -15,25 +15,127 @@ const RINGS: Record<RingId, RingConfig> = {
   environment: { label: 'Environmental / Temperature', color: '#22d3ee', radius: 72 },
   production: { label: 'Production (Current)', color: '#3b82f6', radius: 96 },
   forecast: { label: 'Projected Year-End Production', color: '#a78bfa', radius: 120 },
-  pollution: { label: 'Pollution / Harmful Effects', color: '#f43f5e', radius: 144 }
+  pollution: { label: 'Ring 5: Emissions & CAAQMS', color: '#f43f5e', radius: 144 }
 };
 
 const RING_ORDER = Object.keys(RINGS) as RingId[];
 const circumference = (radius: number) => 2 * Math.PI * radius;
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
-function Sparkline({ values, color }: { values: number[]; color: string }) {
-  const max = Math.max(...values, 100);
-  const points = values.map((value, index) => {
-    const x = values.length > 1 ? (index / (values.length - 1)) * 100 : 0;
-    return `${x},${38 - (value / max) * 32}`;
+function GenericGraph({ values, color, title, legendLabel, limitValue }: { values: number[]; color: string; title?: string; legendLabel: string; limitValue?: number }) {
+  const width = 320;
+  const height = 140;
+  const paddingX = 10;
+  const paddingY = 25;
+  const graphWidth = width - paddingX * 2;
+  const graphHeight = height - paddingY * 2;
+  
+  const minV = Math.min(...values);
+  const maxV = Math.max(...values, limitValue || minV);
+  const range = maxV - minV || 1;
+  const yMin = Math.max(0, minV - range * 0.2);
+  const yMax = maxV + range * 0.2;
+  const yRange = yMax - yMin;
+  
+  const points = values.map((val, i) => {
+    const x = paddingX + (i / (values.length - 1)) * graphWidth;
+    const y = height - paddingY - ((val - yMin) / yRange) * graphHeight;
+    return `${x},${y}`;
   }).join(' ');
+
+  const limitY = limitValue ? height - paddingY - ((limitValue - yMin) / yRange) * graphHeight : null;
+
   return (
-    <svg viewBox="0 0 100 42" className="h-24 w-full" role="img" aria-label="Trend over the last 30 days">
-      <polyline points={points} fill="none" stroke={color} strokeWidth="2" vectorEffect="non-scaling-stroke" />
-      <line x1="0" y1="39" x2="100" y2="39" stroke="#475569" strokeWidth="0.5" />
-    </svg>
+    <div className="mt-4 rounded border border-slate-700 bg-slate-900/40 p-3">
+      <div className="mb-4 flex items-start justify-between">
+        <h4 className="w-2/3 text-[10px] font-bold leading-tight text-slate-200">
+          {title || "90-Day Trend History"}
+        </h4>
+        <div className="flex flex-col items-end gap-1 text-[8px] font-bold uppercase tracking-wider text-slate-400">
+           <span className="rounded bg-slate-800 px-1.5 py-0.5 text-center">Telemetry</span>
+           <div className="mt-1 flex items-center gap-2">
+             <span className="flex items-center gap-1"><span className="h-0.5 w-2" style={{ backgroundColor: color }}></span> {legendLabel}</span>
+           </div>
+        </div>
+      </div>
+      <svg viewBox={`0 0 ${width} ${height}`} className="w-full">
+        {limitY && (
+          <>
+            <line x1={paddingX} y1={limitY} x2={width - paddingX} y2={limitY} stroke="#ef4444" strokeWidth="0.5" strokeDasharray="2 2" opacity="0.4" />
+            <text x={width - paddingX + 2} y={limitY + 2} fontSize="5" fill="#ef4444" opacity="0.8">{Math.round(limitValue!)}</text>
+            <text x={width - paddingX + 2} y={limitY + 8} fontSize="5" fill="#ef4444" opacity="0.8">Target</text>
+          </>
+        )}
+
+        <polyline points={points} fill="none" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
+        
+        <text x={paddingX} y={height - 5} fontSize="6" fill="#64748b">T-90d</text>
+        <text x={width / 2} y={height - 5} fontSize="6" fill="#64748b" textAnchor="middle">T-45d</text>
+        <text x={width - paddingX} y={height - 5} fontSize="6" fill="#64748b" textAnchor="end">Today</text>
+      </svg>
+    </div>
   );
+}
+
+function PollutionGraph({ rows }: { rows: MineTelemetryRow[] }) {
+  const width = 320;
+  const height = 140;
+  const paddingX = 10;
+  const paddingY = 25;
+  const graphWidth = width - paddingX * 2;
+  const graphHeight = height - paddingY * 2;
+  
+  const maxY = 200;
+  
+  const pointsPM10 = rows.map((row, i) => {
+    const x = paddingX + (i / (rows.length - 1)) * graphWidth;
+    const y = height - paddingY - (Math.min(row.dustPpm, maxY) / maxY) * graphHeight;
+    return `${x},${y}`;
+  }).join(' ');
+
+  const pointsPM25 = rows.map((row, i) => {
+    const pm25 = row.dustPpm * 0.45;
+    const x = paddingX + (i / (rows.length - 1)) * graphWidth;
+    const y = height - paddingY - (Math.min(pm25, maxY) / maxY) * graphHeight;
+    return `${x},${y}`;
+  }).join(' ');
+
+  const limit100Y = height - paddingY - (100 / maxY) * graphHeight;
+  const limit60Y = height - paddingY - (60 / maxY) * graphHeight;
+
+  return (
+    <div className="mt-4 rounded border border-slate-700 bg-slate-900/40 p-3">
+      <div className="mb-4 flex items-start justify-between">
+        <h4 className="w-2/3 text-[10px] font-bold leading-tight text-slate-200">
+          90-Day Ambient Particulate History vs National Air Quality Standards
+        </h4>
+        <div className="flex flex-col items-end gap-1 text-[8px] font-bold uppercase tracking-wider text-slate-400">
+           <span className="rounded bg-slate-800 px-1.5 py-0.5 text-center">CAAQMS<br/>Telemetry</span>
+           <div className="mt-1 flex items-center gap-2">
+             <span className="flex items-center gap-1"><span className="h-0.5 w-2 bg-[#f43f5e]"></span> PM10</span>
+             <span className="flex items-center gap-1"><span className="h-0.5 w-2 bg-[#eab308]"></span> PM2.5</span>
+           </div>
+        </div>
+      </div>
+      <svg viewBox={`0 0 ${width} ${height}`} className="w-full">
+        {/* Background grid lines */}
+        <line x1={paddingX} y1={limit100Y} x2={width - paddingX} y2={limit100Y} stroke="#f43f5e" strokeWidth="0.5" strokeDasharray="2 2" opacity="0.4" />
+        <text x={width - paddingX + 2} y={limit100Y + 2} fontSize="5" fill="#f43f5e" opacity="0.8">100/60</text>
+        <text x={width - paddingX + 2} y={limit100Y + 8} fontSize="5" fill="#f43f5e" opacity="0.8">Limits</text>
+        
+        <line x1={paddingX} y1={limit60Y} x2={width - paddingX} y2={limit60Y} stroke="#eab308" strokeWidth="0.5" strokeDasharray="2 2" opacity="0.4" />
+
+        {/* Data Lines */}
+        <polyline points={pointsPM25} fill="none" stroke="#eab308" strokeWidth="1.5" strokeLinejoin="round" />
+        <polyline points={pointsPM10} fill="none" stroke="#f43f5e" strokeWidth="1.5" strokeLinejoin="round" />
+        
+        {/* X Axis labels */}
+        <text x={paddingX} y={height - 5} fontSize="6" fill="#64748b">06-22 (T-90d)</text>
+        <text x={width / 2} y={height - 5} fontSize="6" fill="#64748b" textAnchor="middle">08-05 (T-45d)</text>
+        <text x={width - paddingX} y={height - 5} fontSize="6" fill="#64748b" textAnchor="end">09-18 (Today)</text>
+      </svg>
+    </div>
+  )
 }
 
 function RingDetail({
@@ -65,35 +167,94 @@ function RingDetail({
         <div>
           <div className="mb-1 flex items-center gap-2 text-xs font-bold" style={{ color: config.color }}>
             <span className="h-4 w-1 rounded-full" style={{ backgroundColor: config.color }} />
-            {config.label}
+            {ring === 'pollution' ? 'Ring 5: Emissions & CAAQMS Air Quality Telemetry' : config.label}
           </div>
-          <div className="text-[10px] text-slate-400">Synthetic telemetry · last 30 days</div>
+          <div className="text-[10px] text-slate-400">
+            {ring === 'pollution' ? 'Continuous particulate matter, gaseous dispersion & acoustic noise contours' : 'Synthetic telemetry · last 30 days'}
+          </div>
         </div>
-        <div className="rounded-full px-2 py-1 text-[9px] font-bold uppercase" style={{ color: config.color, backgroundColor: `${config.color}22` }}>Detail</div>
+        {ring === 'pollution' && (
+          <div className="rounded-full px-2 py-1 text-[9px] font-bold uppercase text-rose-300 border border-rose-900 bg-rose-950/50">
+            NAAQS PM10 EXCEEDANCE
+          </div>
+        )}
+        {ring !== 'pollution' && (
+          <div className="rounded-full px-2 py-1 text-[9px] font-bold uppercase" style={{ color: config.color, backgroundColor: `${config.color}22` }}>Detail</div>
+        )}
       </div>
-      <div className="space-y-2 text-xs text-slate-200">
-        {summary.map(item => <div key={item} className="rounded border border-slate-700 bg-slate-900/50 p-2">{item}</div>)}
-      </div>
-      {ring === 'pollution' && (
-        <div className="mt-4 grid grid-cols-3 gap-2 text-center text-[10px]">
-          <div className="rounded bg-slate-800 p-2"><b className="block text-sm text-amber-300">{Math.round(latest?.dustPpm ?? 0)}</b>Dust %</div>
-          <div className="rounded bg-slate-800 p-2"><b className="block text-sm text-orange-300">{Math.round(latest?.noiseDb ?? 0)}</b>Noise dB</div>
-          <div className="rounded bg-slate-800 p-2"><b className="block text-sm text-cyan-300">{Math.round(latest?.waterQuality ?? 0)}</b>Water WQI</div>
-        </div>
+
+      {ring === 'pollution' ? (
+        <>
+          <div className="mt-4 grid grid-cols-2 gap-2">
+            <div className="rounded border border-slate-700 bg-slate-900/50 p-2">
+              <div className="text-[10px] text-slate-400 mb-1">Ambient PM10 (24-hr)</div>
+              <div className="flex items-baseline gap-1">
+                <span className="text-xl font-bold text-[#f43f5e]">{Math.round(latest?.dustPpm ?? 0)}</span>
+                <span className="text-[10px] text-slate-300">µg/m³</span>
+              </div>
+              <div className="text-[8px] text-slate-500 mt-1">NAAQS Cap: 100 µg/m³</div>
+            </div>
+            <div className="rounded border border-slate-700 bg-slate-900/50 p-2">
+              <div className="text-[10px] text-slate-400 mb-1">Fine Dust PM2.5</div>
+              <div className="flex items-baseline gap-1">
+                <span className="text-xl font-bold text-[#eab308]">{Math.round((latest?.dustPpm ?? 0) * 0.45)}</span>
+                <span className="text-[10px] text-slate-300">µg/m³</span>
+              </div>
+              <div className="text-[8px] text-slate-500 mt-1">NAAQS Cap: 60 µg/m³</div>
+            </div>
+            <div className="rounded border border-slate-700 bg-slate-900/50 p-2">
+              <div className="text-[10px] text-slate-400 mb-1">Gaseous SO2 / NOx</div>
+              <div className="flex items-baseline gap-1">
+                <span className="text-lg font-bold text-white">{Math.round((latest?.pollution ?? 0) * 0.5)}</span> <span className="text-[10px] text-slate-400 mr-1">SO2</span>
+                <span className="text-slate-500">/</span>
+                <span className="text-lg font-bold text-white ml-1">{Math.round((latest?.pollution ?? 0) * 0.6)}</span> <span className="text-[10px] text-slate-400">NOx</span>
+              </div>
+              <div className="text-[8px] text-slate-500 mt-1">Standard: 80 µg/m³ safe</div>
+            </div>
+            <div className="rounded border border-slate-700 bg-slate-900/50 p-2">
+              <div className="text-[10px] text-slate-400 mb-1">Mist Cannons & Noise</div>
+              <div className="flex items-baseline gap-1">
+                <span className="text-lg font-bold text-[#eab308]">{Math.round((latest?.waterQuality ?? 0) / 2)}%</span>
+                <span className="text-[10px] text-slate-300">Eff.</span>
+              </div>
+              <div className="text-[8px] text-slate-500 mt-1">Noise: {latest?.noiseDb?.toFixed(1)} dB(A)</div>
+            </div>
+          </div>
+          
+          <PollutionGraph rows={rows} />
+          
+          <div className="mt-4 flex items-start gap-2">
+             <div className="mt-1"><AlertTriangle className="h-4 w-4 text-rose-400" /></div>
+             <div className="rounded border border-slate-700/50 bg-slate-800/30 p-3 text-[10px] leading-relaxed text-slate-300">
+               <span className="text-blue-400 font-bold">Central Pollution Control Board (CPCB) CAAQMS Telemetry Diagnostic</span><br/>
+               Online CAAQMS Station #1 (Haul Road Alpha) records 24-hr PM10 at <b className="text-[#f43f5e]">{Math.round(latest?.dustPpm ?? 0)} µg/m³</b> (limit 100).
+               <span className="text-rose-400"> Fugitive dust plume detected during heavy hauler movement.</span> High-pressure fogging cannons at Coal Handling Plant (CHP) operating at {Math.round((latest?.waterQuality ?? 0) / 2)}% efficiency; automated nozzle descaling recommended.
+             </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="space-y-2 text-xs text-slate-200">
+            {summary.map(item => <div key={item} className="rounded border border-slate-700 bg-slate-900/50 p-2">{item}</div>)}
+          </div>
+          {ring === 'environment' && (
+            <div className="mt-4 grid grid-cols-2 gap-2 text-[10px] text-slate-300">
+              {['N · 34°C', 'E · 31°C', 'S · 33°C', 'W · 30°C'].map(zone => <div key={zone} className="rounded bg-slate-800 p-2">{zone}</div>)}
+            </div>
+          )}
+          <GenericGraph 
+             values={values} 
+             color={config.color} 
+             title={`90-Day ${config.label} Trend`} 
+             legendLabel={config.label.split(' ')[0]} 
+             limitValue={ring === 'production' ? forecast.targetYearEndTons / 12 : undefined} 
+          />
+          <div className="mt-3 text-[10px] text-slate-400">Last updated {new Date(latest.recordedAt).toLocaleString()}</div>
+          <div className="mt-4 text-[10px] leading-relaxed text-slate-400">
+            {mine.name} · Data is synthetic/demo shaped for future sensor and production integrations.
+          </div>
+        </>
       )}
-      {ring === 'environment' && (
-        <div className="mt-4 grid grid-cols-2 gap-2 text-[10px] text-slate-300">
-          {['N · 34°C', 'E · 31°C', 'S · 33°C', 'W · 30°C'].map(zone => <div key={zone} className="rounded bg-slate-800 p-2">{zone}</div>)}
-        </div>
-      )}
-      <div className="mt-5 border-t border-slate-700 pt-3">
-        <div className="mb-1 text-[10px] uppercase text-slate-400">Trend</div>
-        <Sparkline values={values.slice(-8)} color={config.color} />
-        <div className="text-[10px] text-slate-400">Last updated {new Date(latest.recordedAt).toLocaleString()}</div>
-      </div>
-      <div className="mt-4 text-[10px] leading-relaxed text-slate-400">
-        {mine.name} · Data is synthetic/demo shaped for future sensor and production integrations.
-      </div>
     </aside>
   );
 }

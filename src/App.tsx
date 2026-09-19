@@ -493,7 +493,7 @@ export default function App() {
                     />
                   </div>
                   <div className="font-bold text-sm tracking-wide uppercase font-sans">Government of India &bull; Ministry of Coal</div>
-                  <div className="text-[11px] font-sans text-slate-600">KhananRakshak AI (K-AI) &bull; DGMS Environmental Oversight (SIH26024)</div>
+                  <div className="text-[11px] font-sans text-slate-600">KhananRakshak AI (K-AI) &bull; DGMS Environmental Oversight</div>
                   <div className="font-bold text-xs mt-1 text-red-700 font-sans">STATUTORY INSPECTION &amp; SHOW-CAUSE DOSSIER #ENV-082</div>
                 </div>
 
@@ -699,7 +699,7 @@ export default function App() {
                 </span>
               </div>
               <div className="text-[11px] text-slate-400 leading-tight truncate mt-0.5">
-                AI Smart Governance &bull; SIH26024
+                AI Smart Governance
               </div>
             </div>
           </div>

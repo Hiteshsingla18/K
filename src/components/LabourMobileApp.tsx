@@ -376,7 +376,7 @@ export default function LabourMobileApp({
                 </span>
               </div>
               <span className="text-xs text-slate-400 hidden sm:block">
-                Authentic Smartphone Bezel &bull; Bilingual &bull; Offline Subterranean Sync (SIH26024)
+                Authentic Smartphone Bezel &bull; Bilingual &bull; Offline Subterranean Sync
               </span>
             </div>
           </div>
