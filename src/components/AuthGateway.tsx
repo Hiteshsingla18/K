@@ -93,8 +93,13 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
   const submitGov = async (e: React.FormEvent) => {
     e.preventDefault();
     const errors: Record<string, string> = {};
-    if (!formData.username) errors.username = 'Institutional Username is required';
-    if (!formData.password) errors.password = 'Security Password is required';
+    if (onSupabaseSignIn) {
+      if (!formData.email) errors.email = 'Email is required';
+      if (!formData.password) errors.password = 'Password is required';
+    } else {
+      if (!formData.username) errors.username = 'Institutional Username is required';
+      if (!formData.password) errors.password = 'Security Password is required';
+    }
     if (!onSupabaseSignIn && (!formData.otp || formData.otp.length < 6)) {
       errors.otp = 'Valid 6-digit OTP is required';
     }
@@ -108,7 +113,7 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
       setIsVerifying(true);
       setVerifyStep('Authenticating with Supabase Auth...');
       try {
-        await onSupabaseSignIn(formData.username, formData.password, '/command');
+        await onSupabaseSignIn(formData.email, formData.password, '/command');
       } catch (error) {
         setIsVerifying(false);
         setFormErrors({
@@ -344,6 +349,7 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
           </div>
           
           <div className="space-y-4">
+            {renderSupabaseCredentials()}
             {!onSupabaseSignIn && <>
             <div>
               <label className="block text-xs font-bold text-slate-700 mb-1">Institutional Username / Email</label>
