@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0B2545">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="KhananRakshak AI - Labour Shramik Companion App for Coal Mine Workers">
+  <title>KhananRakshak AI • Shramik App</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0B2545; --navy-deep: #071a33; --emerald: #10b981;
+      --amber: #f59e0b; --red: #ef4444;
+      --slate-50: #f8fafc; --slate-100: #f1f5f9; --slate-200: #e2e8f0;
+      --slate-300: #cbd5e1; --slate-400: #94a3b8; --slate-500: #64748b;
+      --slate-600: #475569; --slate-700: #334155; --slate-800: #1e293b;
+      --slate-900: #0f172a;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    html, body {
+      height: 100%; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--slate-50); color: var(--slate-800);
+      -webkit-font-smoothing: antialiased; overflow: hidden; touch-action: manipulation;
+    }
+    #app {
+      display: flex; flex-direction: column; height: 100dvh;
+      max-width: 480px; margin: 0 auto; background: var(--slate-50);
+      position: relative; overflow: hidden;
+    }
+    .status-bar {
+      background: var(--navy-deep); color: white; padding: 6px 20px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 11px; font-weight: 600; flex-shrink: 0;
+    }
+    .status-bar .signal { display: flex; align-items: center; gap: 6px; }
+    .app-header { background: var(--navy); color: white; padding: 14px 16px; flex-shrink: 0; }
+    .header-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .worker-info { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .worker-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, #d97706, #b45309);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 13px; color: white; flex-shrink: 0;
+      box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.3);
+    }
+    .worker-name { font-weight: 700; font-size: 13px; display: flex; align-items: center; gap: 6px; }
+    .worker-badge {
+      font-size: 9px; font-weight: 700; padding: 1px 6px; border-radius: 4px;
+      font-family: monospace; background: rgba(251,191,36,0.2); color: #fcd34d;
+      border: 1px solid rgba(251,191,36,0.3);
+    }
+    .worker-role { font-size: 10px; color: #94a3b8; margin-top: 2px; }
+    .lang-btn {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: white; font-size: 11px; font-weight: 700; padding: 5px 10px;
+      border-radius: 20px; cursor: pointer; flex-shrink: 0;
+      display: flex; align-items: center; gap: 5px; transition: background 0.2s;
+    }
+    .lang-btn:hover { background: rgba(255,255,255,0.2); }
+    .mine-strip {
+      margin-top: 10px; background: rgba(0,0,0,0.3); padding: 8px 10px;
+      border-radius: 8px; font-size: 10px; display: flex;
+      justify-content: space-between; align-items: center;
+    }
+    .mine-strip .mine-id { color: #94a3b8; }
+    .mine-strip .mine-id strong { color: white; font-family: monospace; }
+    .online-pill { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; font-family: monospace; }
+    .online-pill.on { background: rgba(52,211,153,0.2); color: #6ee7b7; }
+    .content {
+      flex: 1; overflow-y: auto; padding: 16px; padding-bottom: 20px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .content::-webkit-scrollbar { display: none; }
+    .content { -ms-overflow-style: none; scrollbar-width: none; }
+    .card {
+      background: white; border-radius: 16px; border: 1px solid var(--slate-200);
+      padding: 16px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .card-title { font-weight: 700; font-size: 14px; color: var(--slate-900); }
+    .card-subtitle { font-size: 11px; color: var(--slate-500); margin-top: 2px; }
+    .punch-btn {
+      width: 100%; padding: 24px 16px; border-radius: 16px; border: none;
+      font-weight: 800; font-size: 13px; color: white; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      transition: all 0.2s; margin-top: 12px; font-family: inherit;
+    }
+    .punch-btn.ready {
+      background: linear-gradient(180deg, #138808, #0f6b06);
+      box-shadow: 0 4px 14px rgba(16,104,6,0.3);
+    }
+    .punch-btn.ready:active { transform: scale(0.97); }
+    .punch-btn.loading { background: #2563eb; animation: pulse 1.5s ease-in-out infinite; }
+    .punch-btn .icon-circle {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.4);
+      display: flex; align-items: center; justify-content: center; font-size: 28px;
+    }
+    .punch-btn .sub { font-size: 10px; color: rgba(255,255,255,0.7); font-weight: 500; }
+    .feedback-pill {
+      padding: 12px; border-radius: 12px; border: 1px solid; font-size: 12px;
+      margin-top: 12px; animation: slideUp 0.3s ease-out;
+    }
+    .feedback-pill.success { background: #ecfdf5; border-color: #6ee7b7; color: #065f46; }
+    .feedback-pill .fb-header { display: flex; justify-content: space-between; align-items: center; }
+    .feedback-pill .fb-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; }
+    .feedback-pill .fb-detail { font-size: 10px; color: var(--slate-500); margin-top: 4px; font-family: monospace; }
+    .history-item {
+      padding: 10px 12px; background: var(--slate-50); border-radius: 12px;
+      border: 1px solid var(--slate-200); display: flex; justify-content: space-between;
+      align-items: center; font-size: 12px; margin-top: 8px;
+    }
+    .history-item .hi-title { font-weight: 700; color: var(--slate-800); }
+    .history-item .hi-sub { font-size: 10px; color: var(--slate-500); margin-top: 2px; }
+    .sync-badge { font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 10px; white-space: nowrap; }
+    .sync-badge.synced { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+    .sync-badge.pending { background: #fef3c7; color: #78350f; border: 1px solid #fcd34d; }
+    .section-label { font-size: 11px; font-weight: 700; color: var(--slate-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+    .cat-btn {
+      padding: 10px; border-radius: 12px; border: 1px solid var(--slate-200);
+      background: var(--slate-50); font-size: 11px; font-weight: 600;
+      color: var(--slate-700); cursor: pointer; text-align: left;
+      transition: all 0.15s; font-family: inherit;
+    }
+    .cat-btn.active { background: #fff7ed; border-color: #fb923c; color: #431407; font-weight: 700; box-shadow: 0 0 0 1px #fb923c; }
+    .media-section { background: var(--slate-50); padding: 12px; border-radius: 12px; border: 1px solid var(--slate-200); margin-top: 10px; }
+    .media-header { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 700; color: var(--slate-800); }
+    .media-header .done { color: #059669; font-size: 10px; font-weight: 700; }
+    .media-btn {
+      width: 100%; padding: 10px; border-radius: 10px; border: none; font-size: 12px;
+      font-weight: 600; cursor: pointer; display: flex; align-items: center;
+      justify-content: center; gap: 8px; margin-top: 8px; transition: all 0.15s; font-family: inherit;
+    }
+    .media-btn.idle { background: var(--slate-200); color: var(--slate-700); }
+    .media-btn.recording { background: #dc2626; color: white; animation: pulse 1.2s infinite; }
+    .media-btn.done { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+    .text-input {
+      width: 100%; padding: 10px; border: 1px solid var(--slate-300); border-radius: 10px;
+      font-size: 12px; font-family: inherit; resize: none; background: var(--slate-50);
+      color: var(--slate-800); outline: none; margin-top: 6px;
+    }
+    .text-input:focus { border-color: #3b82f6; }
+    .submit-btn {
+      width: 100%; padding: 14px; border: none; border-radius: 12px; background: var(--navy);
+      color: white; font-weight: 700; font-size: 13px; cursor: pointer;
+      margin-top: 12px; transition: background 0.2s; font-family: inherit;
+    }
+    .submit-btn:active { transform: scale(0.98); }
+    .info-card { padding: 14px; border-radius: 12px; border: 1px solid; margin-bottom: 10px; }
+    .info-card.blue { background: #eff6ff; border-color: #bfdbfe; }
+    .info-card.green { background: #ecfdf5; border-color: #a7f3d0; }
+    .info-card .ic-header { font-weight: 700; font-size: 12px; display: flex; align-items: center; gap: 6px; }
+    .info-card.blue .ic-header { color: #1e3a5f; }
+    .info-card .ic-value { font-size: 14px; font-weight: 800; margin-top: 4px; }
+    .info-card.blue .ic-value { color: #1e40af; }
+    .info-card .ic-detail { font-size: 10px; margin-top: 4px; }
+    .info-card.blue .ic-detail { color: #3b82f6; }
+    .sos-btn {
+      width: 100%; padding: 16px; border: none; border-radius: 14px;
+      background: linear-gradient(180deg, #ef4444, #b91c1c); color: white;
+      font-weight: 900; font-size: 14px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      box-shadow: 0 4px 14px rgba(239,68,68,0.35); transition: all 0.15s;
+      font-family: inherit; margin-top: 4px;
+    }
+    .sos-btn:active { transform: scale(0.96); }
+    .sos-btn .sos-icon { font-size: 20px; animation: bounce 1s infinite; }
+    .success-card {
+      padding: 20px; background: #ecfdf5; border: 2px solid #34d399;
+      border-radius: 14px; text-align: center;
+    }
+    .success-card .sc-icon { font-size: 40px; margin-bottom: 8px; }
+    .success-card .sc-title { font-weight: 800; font-size: 13px; color: #064e3b; }
+    .success-card .sc-id {
+      font-family: monospace; font-size: 14px; font-weight: 800;
+      background: rgba(16,185,129,0.1); border: 1px solid #6ee7b7;
+      padding: 6px 14px; border-radius: 8px; display: inline-block;
+      margin: 8px 0; color: #065f46;
+    }
+    .success-card .sc-details {
+      text-align: left; background: white; padding: 10px; border-radius: 8px;
+      border: 1px solid #a7f3d0; font-size: 11px; color: var(--slate-700); margin-top: 10px;
+    }
+    .success-card .sc-details div { margin-bottom: 4px; }
+    .reset-btn {
+      width: 100%; padding: 10px; margin-top: 12px; background: #047857;
+      color: white; border: none; border-radius: 10px; font-weight: 700;
+      font-size: 12px; cursor: pointer; font-family: inherit;
+    }
+    .ppe-item {
+      display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+      background: var(--slate-50); border-radius: 10px; border: 1px solid var(--slate-200);
+      margin-bottom: 6px; font-size: 12px; cursor: pointer; transition: all 0.15s;
+    }
+    .ppe-item.checked { background: #ecfdf5; border-color: #6ee7b7; }
+    .ppe-check {
+      width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--slate-300);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      font-size: 14px; transition: all 0.15s;
+    }
+    .ppe-item.checked .ppe-check { background: #10b981; border-color: #10b981; color: white; }
+    .ppe-label { font-weight: 600; color: var(--slate-700); }
+    .bottom-nav {
+      background: white; border-top: 1px solid var(--slate-200);
+      display: flex; align-items: center; justify-content: space-around;
+      padding: 8px 4px; padding-bottom: calc(8px + var(--safe-bottom));
+      flex-shrink: 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    }
+    .nav-item {
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      cursor: pointer; background: none; border: none; color: var(--slate-400);
+      font-size: 9px; font-weight: 600; padding: 4px 8px; border-radius: 8px;
+      transition: all 0.15s; font-family: inherit;
+    }
+    .nav-item.active { color: var(--navy); font-weight: 800; }
+    .nav-item .nav-icon { font-size: 22px; line-height: 1; }
+    .toast {
+      position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(100px);
+      background: var(--slate-900); color: white; padding: 12px 20px; border-radius: 12px;
+      font-size: 12px; font-weight: 600; z-index: 100; max-width: 90%; text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3); opacity: 0; transition: all 0.3s ease; pointer-events: none;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .spin { animation: spin 0.8s linear infinite; display: inline-block; }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div class="status-bar">
+    <span>09:41</span>
+    <div class="signal"><span class="status-online" style="color:#34d399">📶 5G</span><span>🔋 94%</span></div>
+  </div>
+  <div class="app-header">
+    <div class="header-top">
+      <div class="worker-info">
+        <div class="worker-avatar">RS</div>
+        <div>
+          <div class="worker-name"><span>Ramesh Soren</span><span class="worker-badge">Contractual</span></div>
+          <div class="worker-role">Agency: Apex Mining Logistics</div>
+        </div>
+      </div>
+      <button class="lang-btn" onclick="toggleLang()"><span>🌐</span><span id="lang-label">हिन्दी</span></button>
+    </div>
+    <div class="mine-strip">
+      <div class="mine-id"><span id="label-wid">Worker ID:</span> <strong>WKR-8812</strong> • <span id="mine-name">Rajmahal OCP (Pit-2)</span></div>
+      <span class="online-pill on">● Online</span>
+    </div>
+  </div>
+  <div class="content" id="content"></div>
+  <div class="bottom-nav">
+    <button class="nav-item active" id="nav-attendance" onclick="switchTab('attendance')"><span class="nav-icon">📋</span><span id="nl-att">Attendance</span></button>
+    <button class="nav-item" id="nav-nearmiss" onclick="switchTab('nearmiss')"><span class="nav-icon">⚠️</span><span id="nl-nm">Near-Miss</span></button>
+    <button class="nav-item" id="nav-safety" onclick="switchTab('safety')"><span class="nav-icon">🛡️</span><span id="nl-sf">Safety</span></button>
+    <button class="nav-item" id="nav-benefits" onclick="switchTab('benefits')"><span class="nav-icon">🏛️</span><span id="nl-bn">Benefits</span></button>
+  </div>
+  <div class="toast" id="toast"></div>
+</div>
+<script>
+let lang='en',activeTab='attendance',isPunching=false,lastPunchTime=null,nearMissCategory='bench',
+isRecording=false,recordingTime=0,recordingTimer=null,audioRecorded=false,photoAttached=false,
+nearMissSubmitted=false,ppeChecked={helmet:true,mask:true,boots:true,harness:false,gloves:false};
+const T={en:{attendance:'Attendance',nearMiss:'Near-Miss',safety:'Safety',benefits:'Benefits',
+punchTitle:'Subterranean Shift Punch',punchSub:'Offline Geofence & QR Check-in',tapPunch:'TAP TO PUNCH SHIFT',
+punching:'Validating GPS Geofence...',punchDone:'Shift Marked Successfully',pendingSync:'⏳ Pending Sync',
+synced:'✓ Synced',recentShifts:'Recent Shift Records',shiftLog:'Shift Log',
+nearMissTitle:'Safety & Near-Miss Hazard Report',nearMissSub:'Instant hazard reporting to Colliery Safety Officer.',
+selectCat:'Select Hazard Category',catGas:'Gas Smell / Leak',catPpe:'Missing PPE',
+catBench:'Unstable Bench / Crack',catMachine:'Machinery Fault',voiceMemo:'Voice Memo',
+tapRecord:'Tap to Record Voice Note',stopRecord:'Stop Recording',recorded:'Voice memo recorded',
+photoSlot:'Attach Photo Evidence',attachPhoto:'Snap Photo / Select',photoOk:'Photo attached ✓',
+noteLabel:'Brief Note (Optional)',notePlaceholder:'Describe the hazard location...',
+submitReport:'Submit Hazard Report',grievanceFiled:'Grievance Registered',reportId:'Report ID: WKR-7031',
+submitAnother:'Submit Another Report',safetyTitle:'Personal Safety & Compliance',
+nextTraining:'Next Safety Training',trainingDate:'12 Oct 2026 (Mine Gas Safety)',
+trainingDetail:'DGMS VTC Godda • Mandatory Gas & InSAR Safety',ppeTitle:'PPE Compliance Checklist',
+ppeDate:'Tap items to confirm wearing',helmet:'Hardhat Class-E (Yellow)',mask:'FFP3 Anti-Dust Respirator',
+boots:'Steel-Toe Metatarsal Boots',harness:'Reflective Safety Harness',gloves:'Cut-Resistant Work Gloves',
+ppeScore:'PPE Score',sosBtn:'🚨 Emergency SOS • Call Pit Rescue',benefitsTitle:'Government Welfare Schemes',
+benefitsSub:'Eligible schemes for coal mine workers',scheme1:'PM Shram Yogi Maan-Dhan',
+scheme1d:'Pension ₹3,000/month after age 60. Enrolled ✓',scheme2:'ESIC Health Insurance',
+scheme2d:'Medical coverage for worker & family. Active ✓',scheme3:'PM Jeevan Jyoti Bima',
+scheme3d:'Life insurance ₹2 lakh. Auto-deducted ✓',scheme4:'Coal Mines Provident Fund',
+scheme4d:'EPF balance: ₹1,84,200. Last: Aug 2026',enrolled:'Enrolled ✓',active:'Active ✓',
+workerId:'Worker ID:',mineName:'Rajmahal OCP (Pit-2)'},
+hi:{attendance:'उपस्थिति',nearMiss:'सुरक्षा शिकायत',safety:'सुरक्षा',benefits:'सरकारी योजना',
+punchTitle:'भूमिगत शिफ्ट उपस्थिति',punchSub:'ऑफ़लाइन जियोफेंस एवं QR पंच',tapPunch:'शिफ्ट पंच करें',
+punching:'GPS जियोफेंस जांच हो रही है...',punchDone:'शिफ्ट सफलतापूर्वक दर्ज',pendingSync:'⏳ सिंक लंबित',
+synced:'✓ सिंक हुआ',recentShifts:'हाल की उपस्थिति',shiftLog:'शिफ्ट लॉग',
+nearMissTitle:'सुरक्षा एवं खतरा रिपोर्ट',nearMissSub:'खदान सुरक्षा अधिकारी को तत्काल रिपोर्ट।',
+selectCat:'खतरे की श्रेणी चुनें',catGas:'गैस रिसाव / गंध',catPpe:'पीपीई किट गायब',
+catBench:'अस्थिर बेंच / दरार',catMachine:'मशीनरी खराबी',voiceMemo:'आवाज संदेश',
+tapRecord:'आवाज रिकॉर्ड करें',stopRecord:'रिकॉर्डिंग बंद करें',recorded:'आवाज रिकॉर्ड हुई',
+photoSlot:'फोटो साक्ष्य संलग्न करें',attachPhoto:'फोटो खींचें / चुनें',photoOk:'फोटो संलग्न ✓',
+noteLabel:'संक्षिप्त विवरण (वैकल्पिक)',notePlaceholder:'खतरे का स्थान और विवरण लिखें...',
+submitReport:'शिकायत दर्ज करें',grievanceFiled:'शिकायत दर्ज हो गई',reportId:'रिपोर्ट आईडी: WKR-7031',
+submitAnother:'और शिकायत दर्ज करें',safetyTitle:'व्यक्तिगत सुरक्षा एवं अनुपालन',
+nextTraining:'अगला सुरक्षा प्रशिक्षण',trainingDate:'12 अक्टूबर 2026 (गैस सुरक्षा)',
+trainingDetail:'DGMS VTC गोड्डा • अनिवार्य गैस और InSAR सुरक्षा',ppeTitle:'पीपीई चेकलिस्ट',
+ppeDate:'पहने हुए आइटम पर टैप करें',helmet:'हेलमेट क्लास-E (पीला)',mask:'FFP3 धूल-रोधी मास्क',
+boots:'स्टील-टो सुरक्षा जूते',harness:'परावर्तक सुरक्षा हार्नेस',gloves:'कट-प्रतिरोधी दस्ताने',
+ppeScore:'पीपीई स्कोर',sosBtn:'🚨 आपातकालीन SOS • बचाव दल को कॉल',benefitsTitle:'सरकारी कल्याण योजनाएं',
+benefitsSub:'खदान श्रमिकों के लिए पात्र योजनाएं',scheme1:'पीएम श्रम योगी मान-धन',
+scheme1d:'60 वर्ष बाद ₹3,000/माह पेंशन। नामांकित ✓',scheme2:'ESIC स्वास्थ्य बीमा',
+scheme2d:'श्रमिक और परिवार के लिए चिकित्सा। सक्रिय ✓',scheme3:'पीएम जीवन ज्योति बीमा',
+scheme3d:'₹2 लाख जीवन बीमा। स्वतः कटौती ✓',scheme4:'कोयला खदान भविष्य निधि',
+scheme4d:'EPF शेष: ₹1,84,200। अंतिम: अगस्त 2026',enrolled:'नामांकित ✓',active:'सक्रिय ✓',
+workerId:'श्रमिक आईडी:',mineName:'राजमहल OCP (पिट-2)'}};
+function t(k){return T[lang][k]||T.en[k]||k}
+function toggleLang(){lang=lang==='en'?'hi':'en';document.getElementById('lang-label').textContent=lang==='en'?'हिन्दी':'English';
+document.getElementById('mine-name').textContent=t('mineName');document.getElementById('label-wid').textContent=t('workerId');
+document.getElementById('nl-att').textContent=t('attendance');document.getElementById('nl-nm').textContent=t('nearMiss');
+document.getElementById('nl-sf').textContent=t('safety');document.getElementById('nl-bn').textContent=t('benefits');renderTab();}
+function switchTab(tab){activeTab=tab;document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
+document.getElementById('nav-'+tab).classList.add('active');renderTab();}
+function showToast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),3000);}
+function renderTab(){const c=document.getElementById('content');
+if(activeTab==='attendance')c.innerHTML=renderAttendance();
+else if(activeTab==='nearmiss')c.innerHTML=renderNearMiss();
+else if(activeTab==='safety')c.innerHTML=renderSafety();
+else if(activeTab==='benefits')c.innerHTML=renderBenefits();c.scrollTop=0;}
+
+function renderAttendance(){let fb='';
+if(lastPunchTime)fb=`<div class="feedback-pill success"><div class="fb-header"><strong>✓ ${t('punchDone')}</strong><span class="fb-badge" style="background:#d1fae5;color:#065f46">${t('synced')}</span></div><div class="fb-detail">Time: ${lastPunchTime} • UUID: uuid-att-${Math.random().toString(36).substr(2,7)}</div></div>`;
+return `<div class="card"><div class="card-title">${t('punchTitle')}</div><div class="card-subtitle">${t('punchSub')}</div>
+<button class="punch-btn ready" id="punch-btn" onclick="handlePunch()"><div class="icon-circle">📍</div><span>${t('tapPunch')}</span><span class="sub">DGMS Section 48 • Geofence Authenticated</span></button>${fb}</div>
+<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span class="card-title" style="font-size:13px">${t('recentShifts')}</span><span style="font-size:10px;color:var(--slate-400)">${t('shiftLog')}</span></div>
+${lastPunchTime?`<div class="history-item"><div><div class="hi-title">Shift B • ${lastPunchTime}</div><div class="hi-sub">Today • Verified Inside Pit #2</div></div><span class="sync-badge synced">${t('synced')}</span></div>`:''}
+<div class="history-item"><div><div class="hi-title">Shift A • 06:02 AM</div><div class="hi-sub">Yesterday (02 Sep 2026) • Verified Pit #2</div></div><span class="sync-badge synced">${t('synced')}</span></div>
+<div class="history-item"><div><div class="hi-title">Shift B • 02:15 PM</div><div class="hi-sub">01 Sep 2026 • Verified Pit #2</div></div><span class="sync-badge synced">${t('synced')}</span></div></div>`;}
+
+function handlePunch(){const btn=document.getElementById('punch-btn');btn.className='punch-btn loading';
+btn.innerHTML=`<div class="icon-circle"><span class="spin">⟳</span></div><span>${t('punching')}</span>`;
+setTimeout(()=>{lastPunchTime=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});showToast(`✓ ${t('punchDone')} — ${lastPunchTime}`);renderTab();},800);}
+
+function renderNearMiss(){if(nearMissSubmitted){const catKeys={gas:'catGas',ppe:'catPpe',bench:'catBench',machine:'catMachine'};
+return `<div class="card"><div class="success-card"><div class="sc-icon">✅</div><div class="sc-title">${t('grievanceFiled')}</div><div class="sc-id">${t('reportId')}</div>
+<div class="sc-details"><div><strong>Category:</strong> ${t(catKeys[nearMissCategory])}</div><div><strong>Audio:</strong> ${audioRecorded?'✓':'—'}</div><div><strong>Photo:</strong> ${photoAttached?'✓':'—'}</div><div><strong>Status:</strong> Assigned to Safety Officer</div></div>
+<button class="reset-btn" onclick="resetNearMiss()">${t('submitAnother')}</button></div></div>`;}
+const cats=[{key:'gas',icon:'💨'},{key:'ppe',icon:'🦺'},{key:'bench',icon:'⛰️'},{key:'machine',icon:'⚙️'}];
+return `<div class="card"><div class="card-title">${t('nearMissTitle')}</div><div class="card-subtitle">${t('nearMissSub')}</div>
+<div class="section-label" style="margin-top:14px">${t('selectCat')}</div><div class="cat-grid">${cats.map(c=>`<button class="cat-btn ${nearMissCategory===c.key?'active':''}" onclick="selectCategory('${c.key}')">${c.icon} ${t('cat'+c.key.charAt(0).toUpperCase()+c.key.slice(1))}</button>`).join('')}</div>
+<div class="media-section" style="margin-top:14px"><div class="media-header"><span>🎙️ ${t('voiceMemo')}</span>${audioRecorded?`<span class="done">✓</span>`:''}</div>
+<button class="media-btn ${isRecording?'recording':audioRecorded?'done':'idle'}" onclick="toggleRecording()">${isRecording?`⏹ ${t('stopRecord')} (${recordingTime}s)`:audioRecorded?`🔊 ${t('recorded')} (${recordingTime}s)`:`🎤 ${t('tapRecord')}`}</button></div>
+<div class="media-section"><div class="media-header"><span>📷 ${t('photoSlot')}</span></div>
+<button class="media-btn ${photoAttached?'done':'idle'}" onclick="togglePhoto()">${photoAttached?`📸 ${t('photoOk')}`:`📷 ${t('attachPhoto')}`}</button></div>
+<div style="margin-top:10px"><div class="section-label">${t('noteLabel')}</div><textarea class="text-input" rows="2" placeholder="${t('notePlaceholder')}"></textarea></div>
+<button class="submit-btn" onclick="submitNearMiss()">${t('submitReport')}</button></div>`;}
+
+function selectCategory(c){nearMissCategory=c;renderTab();}
+function togglePhoto(){photoAttached=!photoAttached;renderTab();}
+function toggleRecording(){if(isRecording){isRecording=false;audioRecorded=true;clearInterval(recordingTimer);renderTab();}
+else{isRecording=true;audioRecorded=false;recordingTime=0;recordingTimer=setInterval(()=>{recordingTime++;
+const b=document.querySelector('.media-btn.recording');if(b)b.innerHTML=`⏹ ${t('stopRecord')} (${recordingTime}s)`;},1000);renderTab();}}
+function submitNearMiss(){nearMissSubmitted=true;showToast(`✓ ${t('grievanceFiled')}`);renderTab();}
+function resetNearMiss(){nearMissSubmitted=false;audioRecorded=false;photoAttached=false;isRecording=false;recordingTime=0;renderTab();}
+
+function renderSafety(){const items=['helmet','mask','boots','harness','gloves'];
+const cnt=items.filter(p=>ppeChecked[p]).length;const score=Math.round(cnt/items.length*100);
+const sc=score>=80?'#059669':score>=60?'#d97706':'#dc2626';
+return `<div class="info-card blue"><div class="ic-header">📅 ${t('nextTraining')}</div><div class="ic-value">${t('trainingDate')}</div><div class="ic-detail">${t('trainingDetail')}</div></div>
+<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div><div class="card-title" style="font-size:13px">🦺 ${t('ppeTitle')}</div><div class="card-subtitle">${t('ppeDate')}</div></div>
+<div style="text-align:center"><div style="font-size:22px;font-weight:900;color:${sc}">${score}%</div><div style="font-size:9px;font-weight:700;color:var(--slate-400)">${t('ppeScore')}</div></div></div>
+${items.map(p=>`<div class="ppe-item ${ppeChecked[p]?'checked':''}" onclick="togglePPE('${p}')"><div class="ppe-check">${ppeChecked[p]?'✓':''}</div><span class="ppe-label">${t(p)}</span></div>`).join('')}</div>
+<button class="sos-btn" onclick="triggerSOS()"><span class="sos-icon">📞</span><span>${t('sosBtn')}</span></button>`;}
+function togglePPE(i){ppeChecked[i]=!ppeChecked[i];renderTab();}
+function triggerSOS(){showToast('🚨 Emergency SOS sent to Control Room!');}
+
+function renderBenefits(){const s=[{key:'scheme1',icon:'👴',st:'enrolled',cl:'#059669'},{key:'scheme2',icon:'🏥',st:'active',cl:'#2563eb'},
+{key:'scheme3',icon:'🛡️',st:'active',cl:'#7c3aed'},{key:'scheme4',icon:'🏦',st:'active',cl:'#0891b2'}];
+return `<div class="card"><div class="card-title">🏛️ ${t('benefitsTitle')}</div><div class="card-subtitle">${t('benefitsSub')}</div></div>
+${s.map(x=>`<div class="card" style="padding:14px"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div style="display:flex;gap:10px;align-items:flex-start">
+<span style="font-size:24px">${x.icon}</span><div><div style="font-weight:700;font-size:13px;color:var(--slate-900)">${t(x.key)}</div>
+<div style="font-size:11px;color:var(--slate-500);margin-top:3px">${t(x.key+'d')}</div></div></div>
+<span style="font-size:10px;font-weight:700;color:${x.cl};background:${x.cl}15;padding:3px 8px;border-radius:6px;white-space:nowrap;border:1px solid ${x.cl}30">${t(x.st)}</span></div></div>`).join('')}`;}
+
+renderTab();
+</script>
+</body>
+</html>

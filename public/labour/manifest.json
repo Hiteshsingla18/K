@@ -1,0 +1,17 @@
+{
+  "name": "KhananRakshak Shramik",
+  "short_name": "K-Shramik",
+  "description": "KhananRakshak AI - Labour Shramik Companion App for Coal Mine Workers",
+  "start_url": "/labour/",
+  "display": "standalone",
+  "background_color": "#0B2545",
+  "theme_color": "#0B2545",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B2545'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='%2310b981' font-weight='bold' font-family='Arial'>K</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}
