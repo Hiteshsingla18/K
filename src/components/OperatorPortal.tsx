@@ -22,6 +22,8 @@ import {
 } from 'lucide-react';
 import { AuthUser, MineRecord, ViolationStatus, UserRole, WorkforceAttendanceRecord } from '../types';
 import RegulatoryCopilot from './RegulatoryCopilot';
+import { useTranslation } from 'react-i18next';
+import LanguageToggle from './LanguageToggle';
 import SurveillanceMap from './SurveillanceMap';
 import GlobalHeaderControls from './GlobalHeaderControls';
 import WorkforceAttendanceRoster from './WorkforceAttendanceRoster';
@@ -61,6 +63,7 @@ export default function OperatorPortal({
   onSwitchPortal = () => {},
   attendanceRoster
 }: OperatorPortalProps) {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<OperatorNavTab>('notice_response');
   const [isCopilotOpen, setIsCopilotOpen] = useState<boolean>(false);
 
@@ -127,14 +130,17 @@ export default function OperatorPortal({
           </div>
 
           {/* Active Operator Profile Card */}
-          <div className="p-2.5 bg-slate-900/90 rounded-lg border border-slate-800 text-xs space-y-1">
-            <div className="text-[9px] uppercase font-bold text-amber-400 tracking-wider truncate">
+          <div className="p-2.5 bg-slate-900/90 rounded-lg border border-slate-800 text-xs space-y-1 relative">
+            <div className="absolute top-2 right-2">
+              <LanguageToggle />
+            </div>
+            <div className="text-[9px] uppercase font-bold text-amber-400 tracking-wider truncate pr-16">
               {currentUser.badgeText}
             </div>
-            <div className="font-semibold text-white truncate text-[11px]">
+            <div className="font-semibold text-white truncate text-[11px] pr-16">
               {currentUser.name}
             </div>
-            <div className="text-[10px] text-slate-400 truncate">
+            <div className="text-[10px] text-slate-400 truncate pr-16">
               {currentUser.designation}
             </div>
           </div>

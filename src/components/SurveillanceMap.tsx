@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { useTranslation } from 'react-i18next';
 
 // Fix missing default Leaflet icons in Vite/React
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -32,6 +33,7 @@ export default function SurveillanceMap({
   filterSubsidiary = 'All Subsidiaries',
   filterRisk
 }: SurveillanceMapProps) {
+  const { t } = useTranslation();
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
   const markersLayerRef = useRef<L.LayerGroup | null>(null);
@@ -398,9 +400,9 @@ export default function SurveillanceMap({
       <div className="absolute top-3 left-3 right-3 z-[1000] flex items-center justify-between pointer-events-none">
         <div className="bg-white/95 backdrop-blur-sm border border-slate-200 px-3 py-1.5 rounded-lg shadow-md flex items-center gap-2 pointer-events-auto">
           <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
-          <span className="text-xs font-bold text-slate-800">Nationwide 25-Mine Geospatial Registry</span>
+          <span className="text-xs font-bold text-slate-800">{t('map.title')}</span>
           <span className="text-[10px] font-mono text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">
-            All Major Belts &bull; Sentinel-2 Sync
+            {t('map.subtitle')}
           </span>
         </div>
 
@@ -476,29 +478,29 @@ export default function SurveillanceMap({
 
       {/* Floating Status Legend */}
       <div className="absolute bottom-3 left-3 z-[1000] bg-white/95 backdrop-blur-sm border border-slate-300 rounded-lg p-3 shadow-md">
-        <div className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1.5">25-Mine Registry Legend</div>
+        <div className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1.5">{t('map.legend')}</div>
         <div className="flex flex-col gap-1.5 text-xs text-slate-700 font-medium">
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-[#EF4444] border border-white shadow-xs"></span>
-            <span>Critical Breach (&lt;65%: Rajmahal, Jharia, Kaniha)</span>
+            <span>{t('map.criticalBreach')}</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-[#F59E0B] border border-white shadow-xs"></span>
-            <span>Needs Monitoring (Score 65-79)</span>
+            <span>{t('map.needsMonitoring')}</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-[#10B981] border border-white shadow-xs"></span>
-            <span>Compliant (Score &ge;80)</span>
+            <span>{t('map.compliant')}</span>
           </div>
           {showBoundaryLayers && (
             <div className="pt-1.5 border-t border-slate-200 flex flex-col gap-1 text-[11px] text-slate-600">
               <div className="flex items-center gap-2">
                 <span className="w-3 h-1 bg-emerald-500 rounded"></span>
-                <span>Approved Lease Perimeter</span>
+                <span>{t('map.approvedLease')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-3 h-1 bg-red-500 rounded"></span>
-                <span>Encroachment Zone (28 Ha)</span>
+                <span>{t('map.encroachmentZone')}</span>
               </div>
             </div>
           )}
