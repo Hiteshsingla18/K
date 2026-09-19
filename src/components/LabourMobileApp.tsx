@@ -25,10 +25,13 @@ import {
   Info,
   Check,
   Languages,
-  RotateCcw
+  RotateCcw,
+  ShieldCheck
 } from 'lucide-react';
 import { AuthUser, LabourAttendanceRecord, LabourNearMissRecord, OfflineMutation, WorkforceAttendanceRecord } from '../types';
 import GlobalHeaderControls from './GlobalHeaderControls';
+import LabourGovernmentBenefits from './LabourGovernmentBenefits';
+
 
 export interface LabourWorkerProfile {
   id: string;
@@ -103,7 +106,7 @@ export default function LabourMobileApp({
   const [phoneFrameMode, setPhoneFrameMode] = useState<boolean>(true);
 
   // Active Bottom Nav Tab inside Mobile App
-  const [mobileTab, setMobileTab] = useState<'attendance' | 'near_miss' | 'safety_vault'>('attendance');
+  const [mobileTab, setMobileTab] = useState<'attendance' | 'near_miss' | 'safety_vault' | 'govt_benefits'>('attendance');
 
   // Attendance State
   const [attendanceRecords, setAttendanceRecords] = useState<LabourAttendanceRecord[]>([
@@ -134,12 +137,13 @@ export default function LabourMobileApp({
 
   // Audio recording timer simulation
   useEffect(() => {
-    let timer: NodeJS.Timeout;
+    let timer: any;
     if (isRecordingAudio) {
       timer = setInterval(() => {
         setAudioDuration(prev => prev + 1);
       }, 1000);
     }
+
     return () => clearInterval(timer);
   }, [isRecordingAudio]);
 
@@ -153,8 +157,9 @@ export default function LabourMobileApp({
       mineLabel: 'Rajmahal OCP (Pit-2 Highwall Sector)',
       empId: 'Emp ID: WKR-8812',
       tabAttendance: 'Attendance',
-      tabNearMiss: 'Near-Miss Report',
+      tabNearMiss: 'Near-Miss',
       tabVault: 'Safety Vault',
+      tabGovtBenefits: 'Govt Benefits',
       punchHeader: 'Subterranean Shift Punch',
       punchSub: 'Offline Geofence & QR Check-in',
       tapToPunch: 'TAP TO PUNCH SHIFT QR / GEOFENCE',
@@ -198,6 +203,7 @@ export default function LabourMobileApp({
       tabAttendance: 'उपस्थिति दर्ज',
       tabNearMiss: 'सुरक्षा शिकायत',
       tabVault: 'सुरक्षा तिजोरी',
+      tabGovtBenefits: 'सरकारी योजनाएं',
       punchHeader: 'भूमिगत / खदान शिफ्ट उपस्थिति',
       punchSub: 'ऑफ़लाइन जियोफेंस एवं क्यूआर पंच',
       tapToPunch: 'शिफ्ट पंच करें (QR / जियोफेंस)',
@@ -232,6 +238,7 @@ export default function LabourMobileApp({
       sosBtn: 'आपातकालीन एसओएस &bull; बचाव दल को कॉल करें'
     }
   }[lang];
+
 
   // Shift Punch Action
   const handlePunchShift = () => {
@@ -861,10 +868,21 @@ export default function LabourMobileApp({
                   </div>
                 </div>
               )}
+
+              {/* ========================================================================= */}
+              {/* TAB 4: REAL GOVERNMENT BENEFITS & SOCIAL SECURITY                         */}
+              {/* ========================================================================= */}
+              {mobileTab === 'govt_benefits' && (
+                <LabourGovernmentBenefits
+                  currentUser={currentUser}
+                  activeWorkerId={activeWorker.id}
+                  triggerToast={triggerToast}
+                />
+              )}
             </div>
 
             {/* Mobile Bottom Navigation Bar inside Phone Screen */}
-            <div className="bg-white border-t border-slate-200 px-3 py-2 flex items-center justify-around text-xs shrink-0 select-none">
+            <div className="bg-white border-t border-slate-200 px-2 py-2 flex items-center justify-around text-xs shrink-0 select-none">
               <button
                 onClick={() => setMobileTab('attendance')}
                 className={`flex flex-col items-center gap-1 cursor-pointer transition-colors ${
@@ -872,7 +890,7 @@ export default function LabourMobileApp({
                 }`}
               >
                 <QrCode className="w-5 h-5" />
-                <span className="text-[10px]">{t.tabAttendance}</span>
+                <span className="text-[9px] font-medium">{t.tabAttendance}</span>
               </button>
 
               <button
@@ -882,7 +900,7 @@ export default function LabourMobileApp({
                 }`}
               >
                 <AlertTriangle className="w-5 h-5" />
-                <span className="text-[10px]">{t.tabNearMiss}</span>
+                <span className="text-[9px] font-medium">{t.tabNearMiss}</span>
               </button>
 
               <button
@@ -892,9 +910,20 @@ export default function LabourMobileApp({
                 }`}
               >
                 <Shield className="w-5 h-5" />
-                <span className="text-[10px]">{t.tabVault}</span>
+                <span className="text-[9px] font-medium">{t.tabVault}</span>
+              </button>
+
+              <button
+                onClick={() => setMobileTab('govt_benefits')}
+                className={`flex flex-col items-center gap-1 cursor-pointer transition-colors ${
+                  mobileTab === 'govt_benefits' ? 'text-[#0B2545] font-bold' : 'text-slate-400 hover:text-slate-700'
+                }`}
+              >
+                <ShieldCheck className="w-5 h-5" />
+                <span className="text-[9px] font-medium">{t.tabGovtBenefits}</span>
               </button>
             </div>
+
 
             {/* Smartphone Bottom Home Bar */}
             <div className="bg-white py-1 flex justify-center">

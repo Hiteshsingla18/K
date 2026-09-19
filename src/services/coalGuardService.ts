@@ -108,5 +108,140 @@ export const coalGuardService = {
       console.warn('Error submitting operator response, simulating success.', err);
       return { success: true, simulated: true };
     }
+  },
+
+  async fetchGovernmentBenefitSchemes(): Promise<import('../types').GovernmentBenefitScheme[]> {
+    const DEFAULT_SCHEMES: import('../types').GovernmentBenefitScheme[] = [
+      {
+        id: 'sch-esic-01',
+        schemeCode: 'ESIC',
+        schemeName: "Employees' State Insurance Scheme (ESI / ESIC)",
+        category: 'Health Insurance',
+        providerBody: "Employees' State Insurance Corporation (ESIC), Ministry of Labour & Employment",
+        description: 'Comprehensive multidimensional social security and health protection scheme providing full medical care and cash benefits for industrial and mine workers.',
+        intendedFor: 'Factory workers, mine employees, and establishment staff in covered areas.',
+        keyBenefits: [
+          'Full Outpatient & Inpatient Hospitalization',
+          'Specialist Treatment & Diagnostic Investigations',
+          'Full Medical Care for Eligible Family Dependants',
+          'Sickness & Temporary Disablement Cash Benefits',
+          'Maternity Benefits & Extended Medical Care',
+          'Funeral Expense Support & Dependant Pension'
+        ],
+        coverageAmount: 'Full Medical Care (No treatment cap at ESIC facilities)',
+        eligibilityNotes: 'Workers in covered establishments with monthly wages up to statutory wage limits.',
+        officialUrl: 'https://www.esic.gov.in/',
+        active: true
+      },
+      {
+        id: 'sch-pmjay-02',
+        schemeCode: 'AB_PMJAY',
+        schemeName: 'Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana (AB PM-JAY)',
+        category: 'Health Insurance',
+        providerBody: 'National Health Authority (NHA), Ministry of Health & Family Welfare',
+        description: 'Flagship national health assurance scheme providing secondary and tertiary cashless hospitalization coverage to vulnerable families and converged unorganized/BOCW workers.',
+        intendedFor: 'Vulnerable families listed in SECC 2011 and registered Building & Other Construction / Colliery workers.',
+        keyBenefits: [
+          'Cashless and paperless hospitalization treatment',
+          'Covers secondary & tertiary care procedures',
+          'Pre-hospitalization (3 days) & post-hospitalization (15 days) coverage',
+          'National portability across all empanelled public & private hospitals'
+        ],
+        coverageAmount: 'Up to ₹5,00,000 per family per year',
+        eligibilityNotes: 'Beneficiaries identified via SECC 2011 database or converged state BOCW worker registries.',
+        officialUrl: 'https://pmjay.gov.in/',
+        active: true
+      },
+      {
+        id: 'sch-pmjjby-03',
+        schemeCode: 'PMJJBY',
+        schemeName: 'Pradhan Mantri Jeevan Jyoti Bima Yojana (PMJJBY)',
+        category: 'Life & Accident Insurance',
+        providerBody: 'Ministry of Finance / LIC & Empanelled Life Insurers',
+        description: 'Government-backed one-year renewable life insurance scheme offering financial protection against death due to any cause.',
+        intendedFor: 'Savings bank account holders aged 18 to 50 years.',
+        keyBenefits: [
+          'Lump-sum life insurance benefit paid to designated nominee',
+          'Protection against death due to any cause (medical, natural, or accidental)',
+          'Simple annual auto-debit subscription via linked bank account'
+        ],
+        coverageAmount: '₹2,00,000 upon death due to any cause',
+        eligibilityNotes: 'Individuals aged 18–50 with a bank account who give consent for auto-debit.',
+        officialUrl: 'https://www.financialservices.gov.in/',
+        active: true
+      },
+      {
+        id: 'sch-pmsby-04',
+        schemeCode: 'PMSBY',
+        schemeName: 'Pradhan Mantri Suraksha Bima Yojana (PMSBY)',
+        category: 'Life & Accident Insurance',
+        providerBody: 'Ministry of Finance / Public General Insurance Companies',
+        description: 'Government-backed accident insurance scheme offering financial protection against accidental death and permanent disability.',
+        intendedFor: 'Savings bank account holders aged 18 to 70 years.',
+        keyBenefits: [
+          'Financial protection against accidental death',
+          'Coverage for total and irrecoverable loss of both eyes, limbs, or sight',
+          'Coverage for permanent partial disability'
+        ],
+        coverageAmount: '₹2,00,000 for accidental death / total disability; ₹1,00,000 for partial disability',
+        eligibilityNotes: 'Individuals aged 18–70 with a bank account who give consent for auto-debit.',
+        officialUrl: 'https://www.financialservices.gov.in/',
+        active: true
+      }
+    ];
+
+    try {
+      const { data, error } = await supabase.from('government_benefit_schemes').select('*');
+      if (error || !data || data.length === 0) {
+        return DEFAULT_SCHEMES;
+      }
+      return data.map((item: any) => ({
+        id: item.id,
+        schemeCode: item.scheme_code,
+        schemeName: item.scheme_name,
+        category: item.category,
+        providerBody: item.provider_body,
+        description: item.description,
+        intendedFor: item.intended_for,
+        keyBenefits: item.key_benefits || [],
+        coverageAmount: item.coverage_amount,
+        eligibilityNotes: item.eligibility_notes,
+        officialUrl: item.official_url,
+        active: item.active
+      }));
+    } catch (err) {
+      console.warn('Error fetching government benefit schemes, returning official catalog fallback.', err);
+      return DEFAULT_SCHEMES;
+    }
+  },
+
+  async fetchWorkerBenefitEnrollments(workerId: string): Promise<import('../types').GovernmentBenefitEnrollment[]> {
+    try {
+      const { data, error } = await supabase
+        .from('government_benefit_enrollments')
+        .select('*')
+        .eq('worker_id', workerId);
+        
+      if (error || !data) {
+        return [];
+      }
+      return data.map((item: any) => ({
+        id: item.id,
+        workerId: item.worker_id,
+        schemeId: item.scheme_id,
+        schemeCode: item.scheme_code,
+        enrollmentStatus: item.enrollment_status,
+        verificationStatus: item.verification_status,
+        referenceNumber: item.reference_number,
+        coverageStart: item.coverage_start,
+        coverageEnd: item.coverage_end,
+        lastVerifiedAt: item.last_verified_at,
+        source: item.source || 'Ministry of Labour & Employment / GOI'
+      }));
+    } catch (err) {
+      console.warn(`Error fetching benefit enrollments for worker ${workerId}. Returning unverified status.`, err);
+      return [];
+    }
   }
 };
+

@@ -175,3 +175,33 @@ export interface AuditTrailEntry {
   details: string;
   coordinates?: string;
 }
+
+export interface GovernmentBenefitScheme {
+  id: string;
+  schemeCode: 'ESIC' | 'AB_PMJAY' | 'PMJJBY' | 'PMSBY';
+  schemeName: string;
+  category: 'Health Insurance' | 'Life & Accident Insurance';
+  providerBody: string;
+  description: string;
+  intendedFor: string;
+  keyBenefits: string[];
+  coverageAmount?: string;
+  eligibilityNotes: string;
+  officialUrl: string;
+  active: boolean;
+}
+
+export interface GovernmentBenefitEnrollment {
+  id: string;
+  workerId: string;
+  schemeId: string;
+  schemeCode: 'ESIC' | 'AB_PMJAY' | 'PMJJBY' | 'PMSBY';
+  enrollmentStatus: 'enrolled' | 'not_enrolled' | 'verification_required';
+  verificationStatus: 'verified' | 'unverified' | 'pending_documents';
+  referenceNumber?: string;
+  coverageStart?: string;
+  coverageEnd?: string;
+  lastVerifiedAt?: string;
+  source: string;
+}
+
