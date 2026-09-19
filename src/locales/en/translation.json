@@ -61,5 +61,30 @@
     "investigate": "Investigate Evidence Chain",
     "surveillanceFilter": "Surveillance Filter",
     "activeTarget": "Active Telemetry Target"
+  },
+  "operatorNav": {
+    "desk": "Operator Action Desk",
+    "notice": "Notice SCN-2026-082 Desk",
+    "radar": "Lease Boundary & Radar",
+    "clearances": "Statutory Clearances Log",
+    "workforce": "Workforce & Attendance"
+  },
+  "operatorPortal": {
+    "noticeTitle": "48 HOURS STATUTORY NOTICE",
+    "issued": "Issued: 26 Aug 2026",
+    "awaiting": "Awaiting Operator Response (Active Notice)",
+    "deskTitle": "Colliery Operator Clarification Desk: Show-Cause Notice ENV-082",
+    "authority": "Authority: Directorate General of Mines Vigilance, Ministry of Coal, Govt. of India.",
+    "dossier": "Government Allegation Dossier",
+    "discrepancy": "Discrepancy detected:",
+    "evidence": "Evidence attached by Ministry:",
+    "violation": "Regulatory violation cited:",
+    "filing": "Operator Clarification Filing",
+    "filingDesc": "File technical rebuttal and surveyor attachments to Ministry of Coal.",
+    "explanation": "TECHNICAL EXPLANATION & REBUTTAL STATEMENT",
+    "supporting": "SUPPORTING DOCUMENTATION & SURVEY EVIDENCE",
+    "attach": "Attach Additional Survey Map or Gazette Clearance",
+    "signoff": "AUTHORIZED SIGN-OFF",
+    "submit": "SUBMIT FORMAL RESPONSE TO MINISTRY"
   }
 }

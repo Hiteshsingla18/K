@@ -149,7 +149,7 @@ export default function OperatorPortal({
         {/* Operator Navigation Items (Role-Specific ONLY) */}
         <div className="p-3 space-y-1.5 flex-1 overflow-y-auto">
           <div className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500">
-            Operator Action Desk
+            {t('operatorNav.desk')}
           </div>
 
           {/* 1. SCN Response Desk */}
@@ -164,7 +164,7 @@ export default function OperatorPortal({
           >
             <div className="flex items-center gap-3 min-w-0">
               <FileText className={`w-4 h-4 ${activeTab === 'notice_response' ? 'text-white' : 'text-slate-400'}`} />
-              <span className="truncate">Notice SCN-2026-082 Desk</span>
+              <span className="truncate">{t('operatorNav.notice')}</span>
             </div>
             <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded font-mono shrink-0 ${
               violationStatus === 'response_submitted_awaiting_verification'
@@ -186,7 +186,7 @@ export default function OperatorPortal({
             }`}
           >
             <Satellite className={`w-4 h-4 ${activeTab === 'lease_map' ? 'text-white' : 'text-slate-400'}`} />
-            <span className="truncate">Lease Boundary &amp; Radar</span>
+            <span className="truncate">{t('operatorNav.radar')}</span>
           </button>
 
           {/* 3. Statutory Clearances & EC/FC History */}
@@ -200,7 +200,7 @@ export default function OperatorPortal({
             }`}
           >
             <FileCheck className={`w-4 h-4 ${activeTab === 'compliance_history' ? 'text-white' : 'text-slate-400'}`} />
-            <span className="truncate">Statutory Clearances Log</span>
+            <span className="truncate">{t('operatorNav.clearances')}</span>
           </button>
 
           {/* 4. Labour Attendance & Workforce Composition */}
@@ -215,7 +215,7 @@ export default function OperatorPortal({
           >
             <div className="flex items-center gap-3 min-w-0">
               <Users className={`w-4 h-4 ${activeTab === 'workforce_attendance' ? 'text-white' : 'text-slate-400'}`} />
-              <span className="truncate">Workforce &amp; Attendance</span>
+              <span className="truncate">{t('operatorNav.workforce')}</span>
             </div>
             <span className="text-[10px] font-bold px-1.5 py-0.5 rounded font-mono shrink-0 bg-amber-900/60 text-amber-200 border border-amber-600/40">
               412
@@ -340,18 +340,18 @@ export default function OperatorPortal({
                     <div className="flex items-center gap-2.5 flex-wrap">
                       <span className="bg-red-50 text-red-700 border border-red-200 px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
                         <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse"></span>
-                        48 Hours Statutory Notice
+                        {t('operatorPortal.noticeTitle')}
                       </span>
                       <span className="font-mono text-xs text-slate-500 font-semibold">SCN-2026-082</span>
                       <span className="text-slate-300">|</span>
-                      <span className="font-mono text-xs text-slate-500">Issued: 26 Aug 2026</span>
+                      <span className="font-mono text-xs text-slate-500">{t('operatorPortal.issued')}</span>
                     </div>
 
                     <h1 className="text-xl lg:text-2xl font-bold text-slate-900">
-                      Colliery Operator Clarification Desk: Show-Cause Notice ENV-082
+                      {t('operatorPortal.deskTitle')}
                     </h1>
                     <p className="text-xs text-slate-600">
-                      Authority: Directorate General of Mines Vigilance, Ministry of Coal, Govt. of India.
+                      {t('operatorPortal.authority')}
                     </p>
                   </div>
 
@@ -364,7 +364,7 @@ export default function OperatorPortal({
                       <Clock className="w-3.5 h-3.5" />
                       {violationStatus === 'response_submitted_awaiting_verification'
                         ? 'Response Submitted (Under Verification)'
-                        : 'Awaiting Operator Response (Active Notice)'}
+                        : t('operatorPortal.awaiting')}
                     </span>
                   </div>
                 </div>
@@ -376,7 +376,7 @@ export default function OperatorPortal({
                 <div className="bg-white border border-slate-200 rounded-lg p-5 lg:p-6 space-y-5 shadow-2xs">
                   <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
                     <FileText className="w-5 h-5 text-slate-700" />
-                    <h2 className="text-base font-bold text-slate-900">Government Allegation Dossier</h2>
+                    <h2 className="text-base font-bold text-slate-900">{t('operatorPortal.dossier')}</h2>
                   </div>
 
                   <ul className="space-y-3.5 text-xs">
@@ -385,7 +385,7 @@ export default function OperatorPortal({
                         <AlertTriangle className="w-4 h-4" />
                       </div>
                       <div>
-                        <p className="font-bold text-slate-800">Discrepancy detected:</p>
+                        <p className="font-bold text-slate-800">{t('operatorPortal.discrepancy')}</p>
                         <p className="text-slate-600 font-mono mt-0.5">28 Hectares active extraction outside approved lease line</p>
                       </div>
                     </li>
@@ -395,7 +395,7 @@ export default function OperatorPortal({
                         <Satellite className="w-4 h-4" />
                       </div>
                       <div>
-                        <p className="font-bold text-slate-800">Evidence attached by Ministry:</p>
+                        <p className="font-bold text-slate-800">{t('operatorPortal.evidence')}</p>
                         <p className="text-slate-600 mt-0.5">Optical/Radar Sentinel-2 satellite scan + 14 corroborating citizen geotagged reports</p>
                       </div>
                     </li>
@@ -405,7 +405,7 @@ export default function OperatorPortal({
                         <Shield className="w-4 h-4" />
                       </div>
                       <div>
-                        <p className="font-bold text-slate-800">Regulatory violation cited:</p>
+                        <p className="font-bold text-slate-800">{t('operatorPortal.violation')}</p>
                         <p className="text-slate-600 font-mono mt-0.5">MoEFCC Clearance Rule 14(b) - Statutory Boundary Adherence</p>
                       </div>
                     </li>
@@ -453,8 +453,8 @@ export default function OperatorPortal({
                 <div className="bg-white border border-slate-200 rounded-lg p-5 lg:p-6 shadow-2xs space-y-5">
                   <div className="border-b border-slate-200 pb-3 flex items-center justify-between">
                     <div>
-                      <h2 className="text-base font-bold text-slate-900">Operator Clarification Filing</h2>
-                      <p className="text-xs text-slate-500">File technical rebuttal and surveyor attachments to Ministry of Coal.</p>
+                      <h2 className="text-base font-bold text-slate-900">{t('operatorPortal.filing')}</h2>
+                      <p className="text-xs text-slate-500">{t('operatorPortal.filingDesc')}</p>
                     </div>
                   </div>
 
@@ -479,7 +479,7 @@ export default function OperatorPortal({
                     <form onSubmit={handleSubmit} className="space-y-4">
                       <div className="space-y-1.5">
                         <label className="text-xs font-bold uppercase tracking-wider text-slate-700 block">
-                          Technical Explanation &amp; Rebuttal Statement
+                          {t('operatorPortal.explanation')}
                         </label>
                         <textarea
                           value={operatorExplanation}
@@ -495,7 +495,7 @@ export default function OperatorPortal({
 
                       <div className="space-y-1.5">
                         <label className="text-xs font-bold uppercase tracking-wider text-slate-700 block">
-                          Supporting Documentation &amp; Survey Evidence
+                          {t('operatorPortal.supporting')}
                         </label>
                         
                         <div className="space-y-2">
@@ -527,13 +527,13 @@ export default function OperatorPortal({
                           className="text-xs text-amber-800 hover:underline font-semibold flex items-center gap-1 mt-1 cursor-pointer"
                         >
                           <Paperclip className="w-3.5 h-3.5" />
-                          <span>+ Attach Additional Survey Map or Gazette Clearance</span>
+                          <span>+ {t('operatorPortal.attach')}</span>
                         </button>
                       </div>
 
                       <div className="space-y-1.5 pt-2">
                         <label className="text-xs font-bold uppercase tracking-wider text-slate-700 block">
-                          Authorized Sign-Off
+                          {t('operatorPortal.signoff')}
                         </label>
                         <select
                           value={authorizedOfficer}
@@ -552,7 +552,7 @@ export default function OperatorPortal({
                           type="submit"
                           className="w-full bg-amber-600 hover:bg-amber-700 active:bg-amber-800 text-white py-3 px-4 rounded-md text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
                         >
-                          <span>Submit Formal Response to Ministry</span>
+                          <span>{t('operatorPortal.submit')}</span>
                           <Send className="w-4 h-4" />
                         </button>
                         <p className="text-[11px] text-slate-500 text-center flex items-center justify-center gap-1">
