@@ -143,7 +143,10 @@ export default function SurveillanceMap({
     const hasStateFilter = filterState && filterState !== 'All States';
     const hasSubFilter = filterSubsidiary && filterSubsidiary !== 'All Subsidiaries';
 
-    if (hasStateFilter || hasSubFilter) {
+    if (mines.length === 1) {
+      // If exactly one mine is provided (e.g. in Operator Portal), zoom tightly onto it
+      map.flyTo([mines[0].latitude, mines[0].longitude], 12, { duration: 1.0 });
+    } else if (hasStateFilter || hasSubFilter) {
       const clusterMines = mines.filter(m => {
         if (hasStateFilter && m.state !== filterState) return false;
         if (hasSubFilter && m.subsidiary !== filterSubsidiary) return false;
