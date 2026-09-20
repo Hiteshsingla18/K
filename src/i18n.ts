@@ -17,7 +17,12 @@ i18n
         translation: hiTranslations
       }
     },
+    supportedLngs: ['en', 'hi'],
     fallbackLng: 'en',
+    detection: {
+      order: ['navigator', 'localStorage', 'cookie', 'htmlTag'],
+      caches: ['localStorage', 'cookie'],
+    },
     interpolation: {
       escapeValue: false // react already safes from xss
     }

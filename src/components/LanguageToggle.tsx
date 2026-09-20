@@ -5,8 +5,11 @@ import { Languages } from 'lucide-react';
 export default function LanguageToggle() {
   const { i18n } = useTranslation();
 
+  const currentLang = i18n.resolvedLanguage || i18n.language;
+  const isHindi = currentLang.startsWith('hi');
+
   const toggleLanguage = () => {
-    const newLang = i18n.language === 'hi' ? 'en' : 'hi';
+    const newLang = isHindi ? 'en' : 'hi';
     i18n.changeLanguage(newLang);
   };
 
@@ -17,7 +20,7 @@ export default function LanguageToggle() {
       title="Toggle Language (English / हिन्दी)"
     >
       <Languages className="w-3.5 h-3.5 text-blue-400" />
-      <span>{i18n.language === 'hi' ? 'English' : 'हिन्दी'}</span>
+      <span>{isHindi ? 'English' : 'हिन्दी'}</span>
     </button>
   );
 }

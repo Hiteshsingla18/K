@@ -16,7 +16,6 @@ import { ShieldAlert, Cpu, FileBadge, Factory, Bot } from 'lucide-react';
 import { AuthUser, UserRole } from '../types';
 import KhananRakshakLogo from './KhananRakshakLogo';
 import { useTranslation } from 'react-i18next';
-import LanguageToggle from './LanguageToggle';
 import { 
   GOV_OFFICER_USER, 
   OPERATOR_USER, 
@@ -599,7 +598,6 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
 
         {/* Right: Subtle National Informatics Centre / Parichay SSO Trust Banner */}
         <div className="shrink-0 flex items-center gap-3">
-          <LanguageToggle />
           <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-white border border-[#DDD8CF] shadow-sm text-xs text-[#5C6B57]">
             <div className="w-2 h-2 rounded-full bg-[#1B7A46] animate-pulse" />
             <div className="flex items-center gap-1.5">

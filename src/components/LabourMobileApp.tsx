@@ -30,6 +30,7 @@ import {
 } from 'lucide-react';
 import { AuthUser, LabourAttendanceRecord, LabourNearMissRecord, OfflineMutation, WorkforceAttendanceRecord } from '../types';
 import GlobalHeaderControls from './GlobalHeaderControls';
+import LanguageToggle from './LanguageToggle';
 import LabourGovernmentBenefits from './LabourGovernmentBenefits';
 
 
@@ -393,6 +394,7 @@ export default function LabourMobileApp({
             </button>
 
             {/* Global Header Controls (Offline Simulator & Universal Role Switcher) */}
+            <LanguageToggle />
             <GlobalHeaderControls
               currentUser={currentUser}
               currentPath={currentPath}

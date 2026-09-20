@@ -41,6 +41,7 @@ import { MineRecord, AuthUser, CitizenReportRecord, UserRole } from '../types';
 import CitizenReportTracker from './CitizenReportTracker';
 import CitizenReceiptCard from './CitizenReceiptCard';
 import GlobalHeaderControls from './GlobalHeaderControls';
+import LanguageToggle from './LanguageToggle';
 
 interface CitizenPortalProps {
   currentUser: AuthUser;
@@ -424,8 +425,10 @@ export default function CitizenPortal({
             </div>
 
             {/* Global Offline-First Simulator & Universal 5-Role Switcher */}
-            <GlobalHeaderControls
-              currentUser={currentUser}
+            <div className="flex items-center gap-3">
+              <LanguageToggle />
+              <GlobalHeaderControls
+                currentUser={currentUser}
               currentPath="/citizen"
               isOnline={isOnline}
               isSyncing={isSyncing}
@@ -436,6 +439,7 @@ export default function CitizenPortal({
               onSignOut={onSignOut}
               theme="light"
             />
+            </div>
           </div>
         </div>
 

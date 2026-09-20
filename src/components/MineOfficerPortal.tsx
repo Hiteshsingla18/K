@@ -29,6 +29,7 @@ import {
 } from 'lucide-react';
 import { AuthUser, CapaRecord, OfflineMutation, SafetyTelemetry, WorkforceAttendanceRecord } from '../types';
 import GlobalHeaderControls from './GlobalHeaderControls';
+import LanguageToggle from './LanguageToggle';
 import WorkforceAttendanceRoster from './WorkforceAttendanceRoster';
 
 interface MineOfficerPortalProps {
@@ -214,18 +215,21 @@ export default function MineOfficerPortal({
           </div>
 
           {/* Global Header Controls (Offline Simulator & Universal Role Switcher) */}
-          <GlobalHeaderControls
-            currentUser={currentUser}
-            currentPath={currentPath}
-            isOnline={isOnline}
-            isSyncing={isSyncing}
-            pendingSyncCount={pendingSyncCount}
-            onToggleNetwork={onToggleNetwork}
-            onOpenSyncModal={onOpenSyncModal}
-            onSwitchPortal={onSwitchPortal}
-            onSignOut={onSignOut}
-            theme="dark"
-          />
+          <div className="flex items-center gap-3">
+            <LanguageToggle />
+            <GlobalHeaderControls
+              currentUser={currentUser}
+              currentPath={currentPath}
+              isOnline={isOnline}
+              isSyncing={isSyncing}
+              pendingSyncCount={pendingSyncCount}
+              onToggleNetwork={onToggleNetwork}
+              onOpenSyncModal={onOpenSyncModal}
+              onSwitchPortal={onSwitchPortal}
+              onSignOut={onSignOut}
+              theme="dark"
+            />
+          </div>
         </div>
 
         {/* Operational Navigation Tabs */}
