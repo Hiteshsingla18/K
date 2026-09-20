@@ -957,7 +957,6 @@ export default function App() {
                 onOpenSyncModal={() => setIsSyncModalOpen(true)}
                 onSwitchPortal={handleSwitchPortal}
                 onSignOut={handleSignOut}
-                sessionRemainingSeconds={sessionRemainingSeconds}
                 theme="light"
               />
             </div>
