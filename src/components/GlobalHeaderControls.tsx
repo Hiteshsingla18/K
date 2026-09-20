@@ -183,7 +183,6 @@ export default function GlobalHeaderControls({
             {currentUser.designation}
           </span>
         </div>
-        </div>
       </div>
 
       {/* 2. UNIVERSAL 5-PORTAL ROLE SWITCHER DROPDOWN */}
