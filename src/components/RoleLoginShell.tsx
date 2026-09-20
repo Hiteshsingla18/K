@@ -90,7 +90,7 @@ export default function RoleLoginShell({
               </label>
             ))}
             <button type="submit" className={`w-full rounded-lg px-4 py-3 text-sm font-black transition-colors ${styles.button}`}>
-              Enter {role === 'GOVT' ? 'Government Command' : role === 'MINE_OFFICER' ? 'Officer Desk' : role === 'LABOUR' ? 'Worker Portal' : 'Compliance Portal'}
+              Enter {role === 'gov' ? 'Government Command' : role === 'officer' ? 'Officer Desk' : role === 'labour' ? 'Worker Portal' : 'Compliance Portal'}
               <ArrowRight className="inline-block w-4 h-4 ml-2" />
             </button>
           </form>

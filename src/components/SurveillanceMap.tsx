@@ -395,24 +395,24 @@ export default function SurveillanceMap({
   };
 
   return (
-    <div className="relative w-full h-full rounded-lg overflow-hidden border border-slate-300 shadow-sm bg-slate-900">
+    <div className="relative w-full h-full rounded-lg overflow-hidden border border-[#DDD8CF] shadow-sm bg-[#1A2810]">
       {/* Top Map Control Bar */}
       <div className="absolute top-3 left-3 right-3 z-[1000] flex items-center justify-between pointer-events-none">
-        <div className="bg-white/95 backdrop-blur-sm border border-slate-200 px-3 py-1.5 rounded-lg shadow-md flex items-center gap-2 pointer-events-auto">
+        <div className="bg-white/95 backdrop-blur-sm border border-[#DDD8CF] px-3 py-1.5 rounded-lg shadow-md flex items-center gap-2 pointer-events-auto">
           <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
-          <span className="text-xs font-bold text-slate-800">{t('map.title')}</span>
-          <span className="text-[10px] font-mono text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">
+          <span className="text-xs font-bold text-[#1A2810]">{t('map.title')}</span>
+          <span className="text-[10px] font-mono text-[#5C6B57] bg-[#FAF8F4] px-1.5 py-0.5 rounded">
             {t('map.subtitle')}
           </span>
         </div>
 
         <div className="flex items-center gap-2 pointer-events-auto">
           {/* Tile Layer Selector */}
-          <div className="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-lg p-1 shadow-md flex items-center gap-1 text-xs">
+          <div className="bg-white/95 backdrop-blur-sm border border-[#DDD8CF] rounded-lg p-1 shadow-md flex items-center gap-1 text-xs">
             <button
               onClick={() => setMapType('satellite')}
               className={`px-2.5 py-1 rounded font-semibold transition-all ${
-                mapType === 'satellite' ? 'bg-[#0A192F] text-white shadow-xs' : 'text-slate-700 hover:bg-slate-100'
+                mapType === 'satellite' ? 'bg-[#1A2810] text-white shadow-xs' : 'text-[#1A2810] hover:bg-[#FAF8F4]'
               }`}
             >
               Satellite
@@ -420,7 +420,7 @@ export default function SurveillanceMap({
             <button
               onClick={() => setMapType('topo')}
               className={`px-2.5 py-1 rounded font-semibold transition-all ${
-                mapType === 'topo' ? 'bg-[#0A192F] text-white shadow-xs' : 'text-slate-700 hover:bg-slate-100'
+                mapType === 'topo' ? 'bg-[#1A2810] text-white shadow-xs' : 'text-[#1A2810] hover:bg-[#FAF8F4]'
               }`}
             >
               Topography
@@ -428,7 +428,7 @@ export default function SurveillanceMap({
             <button
               onClick={() => setMapType('street')}
               className={`px-2.5 py-1 rounded font-semibold transition-all ${
-                mapType === 'street' ? 'bg-[#0A192F] text-white shadow-xs' : 'text-slate-700 hover:bg-slate-100'
+                mapType === 'street' ? 'bg-[#1A2810] text-white shadow-xs' : 'text-[#1A2810] hover:bg-[#FAF8F4]'
               }`}
             >
               Cartographic
@@ -440,8 +440,8 @@ export default function SurveillanceMap({
             onClick={() => setShowBoundaryLayers(!showBoundaryLayers)}
             className={`px-2.5 py-1.5 rounded-lg border text-xs font-semibold flex items-center gap-1.5 shadow-md backdrop-blur-sm transition-all ${
               showBoundaryLayers 
-                ? 'bg-blue-900/90 text-white border-blue-500' 
-                : 'bg-white/95 text-slate-700 border-slate-300 hover:bg-slate-50'
+                ? 'bg-[#2A5C45]/90 text-white border-[#1E3A2F]' 
+                : 'bg-white/95 text-[#1A2810] border-[#DDD8CF] hover:bg-[#FAF8F4]'
             }`}
             title="Toggle Statutory Lease & Encroachment Overlay Boundaries"
           >
@@ -455,21 +455,21 @@ export default function SurveillanceMap({
       <div className="absolute top-16 right-3 z-[1000] flex flex-col gap-1.5">
         <button
           onClick={handleZoomIn}
-          className="w-8 h-8 bg-white/95 backdrop-blur-sm text-slate-700 hover:bg-slate-100 border border-slate-300 rounded shadow-md flex items-center justify-center transition-colors cursor-pointer"
+          className="w-8 h-8 bg-white/95 backdrop-blur-sm text-[#1A2810] hover:bg-[#FAF8F4] border border-[#DDD8CF] rounded shadow-md flex items-center justify-center transition-colors cursor-pointer"
           title="Zoom In"
         >
           <ZoomIn className="w-4 h-4" />
         </button>
         <button
           onClick={handleZoomOut}
-          className="w-8 h-8 bg-white/95 backdrop-blur-sm text-slate-700 hover:bg-slate-100 border border-slate-300 rounded shadow-md flex items-center justify-center transition-colors cursor-pointer"
+          className="w-8 h-8 bg-white/95 backdrop-blur-sm text-[#1A2810] hover:bg-[#FAF8F4] border border-[#DDD8CF] rounded shadow-md flex items-center justify-center transition-colors cursor-pointer"
           title="Zoom Out"
         >
           <ZoomOut className="w-4 h-4" />
         </button>
         <button
           onClick={handleReset}
-          className="w-8 h-8 bg-white/95 backdrop-blur-sm text-slate-700 hover:bg-slate-100 border border-slate-300 rounded shadow-md flex items-center justify-center transition-colors cursor-pointer"
+          className="w-8 h-8 bg-white/95 backdrop-blur-sm text-[#1A2810] hover:bg-[#FAF8F4] border border-[#DDD8CF] rounded shadow-md flex items-center justify-center transition-colors cursor-pointer"
           title="Reset View to Central India [22.5, 82.0]"
         >
           <RotateCcw className="w-4 h-4" />
@@ -477,9 +477,9 @@ export default function SurveillanceMap({
       </div>
 
       {/* Floating Status Legend */}
-      <div className="absolute bottom-3 left-3 z-[1000] bg-white/95 backdrop-blur-sm border border-slate-300 rounded-lg p-3 shadow-md">
-        <div className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1.5">{t('map.legend')}</div>
-        <div className="flex flex-col gap-1.5 text-xs text-slate-700 font-medium">
+      <div className="absolute bottom-3 left-3 z-[1000] bg-white/95 backdrop-blur-sm border border-[#DDD8CF] rounded-lg p-3 shadow-md">
+        <div className="text-[10px] font-bold uppercase tracking-wider text-[#5C6B57] mb-1.5">{t('map.legend')}</div>
+        <div className="flex flex-col gap-1.5 text-xs text-[#1A2810] font-medium">
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-[#EF4444] border border-white shadow-xs"></span>
             <span>{t('map.criticalBreach')}</span>
@@ -493,7 +493,7 @@ export default function SurveillanceMap({
             <span>{t('map.compliant')}</span>
           </div>
           {showBoundaryLayers && (
-            <div className="pt-1.5 border-t border-slate-200 flex flex-col gap-1 text-[11px] text-slate-600">
+            <div className="pt-1.5 border-t border-[#EDE9E2] flex flex-col gap-1 text-[11px] text-[#5C6B57]">
               <div className="flex items-center gap-2">
                 <span className="w-3 h-1 bg-emerald-500 rounded"></span>
                 <span>{t('map.approvedLease')}</span>

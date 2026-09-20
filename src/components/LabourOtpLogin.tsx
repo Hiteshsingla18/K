@@ -3,7 +3,7 @@ import { ActiveRole } from '../types';
 
 export default function LabourOtpLogin({ onAuthenticate, onBack }: { onAuthenticate: (role: ActiveRole) => void; onBack: () => void }) {
   return <RoleLoginShell
-    role="LABOUR"
+    role="labour"
     eyebrow="e-Shramik · श्रमिक पहचान सत्यापन"
     title="खनन श्रमिक उपस्थिति एवं सुरक्षा पोर्टल"
     subtitle="Khanan Shramik Portal · Check in for your shift, report near misses, and stay connected even in offline mode."

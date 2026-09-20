@@ -3,7 +3,7 @@ import { ActiveRole } from '../types';
 
 export default function CollieryCorporateLogin({ onAuthenticate, onBack }: { onAuthenticate: (role: ActiveRole) => void; onBack: () => void }) {
   return <RoleLoginShell
-    role="OPERATOR"
+    role="operator"
     eyebrow="Enterprise compliance identity gateway"
     title="Colliery Leaseholder Compliance & SCN Resolution Desk"
     subtitle="Corporate access for ECL lease filings, statutory responses, boundary evidence, and SCN resolution."

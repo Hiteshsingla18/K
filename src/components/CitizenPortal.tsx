@@ -380,7 +380,7 @@ export default function CitizenPortal({
   });
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#F4F1EB] text-[#1A2810] flex flex-col font-sans">
       {/* 1. TOP NATIONAL TRICOLOR BAR */}
       <div className="h-1 w-full grid grid-cols-3">
         <div className="bg-[#FF9933]" />
@@ -389,19 +389,19 @@ export default function CitizenPortal({
       </div>
 
       {/* 2. CITIZEN ACCESSIBILITY & OFFICIAL HEADER */}
-      <header className="bg-white border-b border-slate-200 shadow-2xs sticky top-0 z-30">
+      <header className="bg-white border-b border-[#DDD8CF] shadow-sm sticky top-0 z-30">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3">
           {/* Official Emblem & Portal Title */}
           <div className="flex items-center gap-3.5">
-            <div className="flex flex-col items-center justify-center pr-3.5 border-r border-slate-200">
-              <span className="font-serif font-bold text-[#0B2545] text-base leading-none">सत्यमेव जयते</span>
-              <span className="text-[9px] text-slate-500 font-sans tracking-wide uppercase mt-0.5">Govt. of India</span>
+            <div className="flex flex-col items-center justify-center pr-3.5 border-r border-[#EDE9E2]">
+              <span className="font-serif font-bold text-[#1A2810] text-base leading-none">सत्यमेव जयते</span>
+              <span className="text-[9px] text-[#5C6B57] font-sans tracking-wide uppercase mt-0.5">Govt. of India</span>
             </div>
             <div>
-              <div className="text-[11px] font-bold text-[#0B2545] uppercase tracking-wider">
+              <div className="text-[11px] font-bold text-[#1A2810] uppercase tracking-wider">
                 Ministry of Coal &bull; Khanan Prahari Network
               </div>
-              <h1 className="text-base sm:text-lg font-bold text-slate-900 leading-tight">
+              <h1 className="text-base sm:text-lg font-bold text-[#1A2810] leading-tight">
                 Citizen Environmental Vigilance Portal
               </h1>
             </div>
@@ -440,14 +440,14 @@ export default function CitizenPortal({
         </div>
 
         {/* 3. CITIZEN NAVIGATION TABS (Light, warm, touch-friendly, mobile-first) */}
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 border-t border-slate-100 flex items-center gap-2 overflow-x-auto py-2 scrollbar-none">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 border-t border-[#EDE9E2] flex items-center gap-2 overflow-x-auto py-2 scrollbar-none">
           <button
             id="tab-track-my-report"
             onClick={() => setActiveTab('track_my_report')}
             className={`px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
               activeTab === 'track_my_report'
-                ? 'bg-[#0B2545] text-white shadow-xs'
-                : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100 font-bold'
+                ? 'bg-[#1A2810] text-white shadow-xs'
+                : 'text-[#1A2810] hover:text-[#2A5C45] hover:bg-[#FAF8F4] font-bold'
             }`}
           >
             <KeyRound className="w-4 h-4 text-amber-500" />
@@ -464,8 +464,8 @@ export default function CitizenPortal({
             onClick={() => setActiveTab('file_concern')}
             className={`px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
               activeTab === 'file_concern'
-                ? 'bg-[#138808] text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                ? 'bg-[#2A5C45] text-white shadow-xs'
+                : 'text-[#5C6B57] hover:text-[#1A2810] hover:bg-[#FAF8F4]'
             }`}
           >
             <AlertTriangle className="w-4 h-4" />
@@ -477,8 +477,8 @@ export default function CitizenPortal({
             onClick={() => setActiveTab('public_map')}
             className={`px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
               activeTab === 'public_map'
-                ? 'bg-[#138808] text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                ? 'bg-[#2A5C45] text-white shadow-xs'
+                : 'text-[#5C6B57] hover:text-[#1A2810] hover:bg-[#FAF8F4]'
             }`}
           >
             <MapPin className="w-4 h-4" />
@@ -490,8 +490,8 @@ export default function CitizenPortal({
             onClick={() => setActiveTab('track_reports')}
             className={`px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
               activeTab === 'track_reports'
-                ? 'bg-[#138808] text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                ? 'bg-[#2A5C45] text-white shadow-xs'
+                : 'text-[#5C6B57] hover:text-[#1A2810] hover:bg-[#FAF8F4]'
             }`}
           >
             <FileText className="w-4 h-4" />
@@ -508,8 +508,8 @@ export default function CitizenPortal({
             onClick={() => setActiveTab('environmental_health')}
             className={`px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
               activeTab === 'environmental_health'
-                ? 'bg-[#138808] text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                ? 'bg-[#2A5C45] text-white shadow-xs'
+                : 'text-[#5C6B57] hover:text-[#1A2810] hover:bg-[#FAF8F4]'
             }`}
           >
             <Wind className="w-4 h-4" />
@@ -522,7 +522,7 @@ export default function CitizenPortal({
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 space-y-6">
         {/* PROMINENT QUICK-TRACK ENTRY POINT (Visible on other tabs for effortless access) */}
         {activeTab !== 'track_my_report' && (
-          <div className="bg-gradient-to-r from-[#0B2545] via-[#103460] to-[#0B2545] text-white rounded-xl p-4 sm:p-5 shadow-sm border border-slate-700 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="bg-gradient-to-r from-[#1A2810] via-[#2A5C45] to-[#1A2810] text-white rounded-xl p-4 sm:p-5 shadow-sm border border-[#152D22] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div className="flex items-start gap-3.5">
               <div className="w-10 h-10 rounded-lg bg-amber-400/20 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0 mt-0.5">
                 <KeyRound className="w-5 h-5" />
@@ -560,7 +560,7 @@ export default function CitizenPortal({
               />
               <button
                 type="submit"
-                className="bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs px-4 py-2 rounded-lg transition-colors flex items-center justify-center gap-1.5 shrink-0 cursor-pointer shadow-xs w-full sm:w-auto"
+                className="bg-[#B5601B] hover:bg-[#8F4A13] text-white font-bold text-xs px-4 py-2 rounded-lg transition-colors flex items-center justify-center gap-1.5 shrink-0 cursor-pointer shadow-xs w-full sm:w-auto"
               >
                 <span>Track</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -619,9 +619,9 @@ export default function CitizenPortal({
                 }}
               />
             ) : (
-              <form onSubmit={handleSubmitReport} className="bg-white border border-slate-200 rounded-xl p-5 sm:p-7 shadow-2xs space-y-6">
+              <form onSubmit={handleSubmitReport} className="bg-white border border-[#DDD8CF] rounded-xl p-5 sm:p-7 shadow-sm space-y-6">
                 <div>
-                  <h3 className="text-base font-bold text-slate-900">
+                  <h3 className="text-base font-bold text-[#1A2810]">
                     1. Select Violation Type
                   </h3>
                   <p className="text-xs text-slate-500 mt-0.5">
@@ -634,8 +634,8 @@ export default function CitizenPortal({
                       onClick={() => setViolationCategory('boundary_encroachment')}
                       className={`p-3.5 rounded-lg border-2 cursor-pointer transition-all ${
                         violationCategory === 'boundary_encroachment'
-                          ? 'border-[#138808] bg-emerald-50/50 shadow-2xs'
-                          : 'border-slate-200 hover:border-slate-300 bg-white'
+                          ? 'border-[#2A5C45] bg-[#E6F2EC] shadow-sm'
+                          : 'border-[#DDD8CF] hover:border-[#B5D4C5] bg-white'
                       }`}
                     >
                       <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center mb-2">
@@ -649,8 +649,8 @@ export default function CitizenPortal({
                       onClick={() => setViolationCategory('dust_air_pollution')}
                       className={`p-3.5 rounded-lg border-2 cursor-pointer transition-all ${
                         violationCategory === 'dust_air_pollution'
-                          ? 'border-[#138808] bg-emerald-50/50 shadow-2xs'
-                          : 'border-slate-200 hover:border-slate-300 bg-white'
+                          ? 'border-[#2A5C45] bg-[#E6F2EC] shadow-sm'
+                          : 'border-[#DDD8CF] hover:border-[#B5D4C5] bg-white'
                       }`}
                     >
                       <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center mb-2">
@@ -664,8 +664,8 @@ export default function CitizenPortal({
                       onClick={() => setViolationCategory('blasting_vibration')}
                       className={`p-3.5 rounded-lg border-2 cursor-pointer transition-all ${
                         violationCategory === 'blasting_vibration'
-                          ? 'border-[#138808] bg-emerald-50/50 shadow-2xs'
-                          : 'border-slate-200 hover:border-slate-300 bg-white'
+                          ? 'border-[#2A5C45] bg-[#E6F2EC] shadow-sm'
+                          : 'border-[#DDD8CF] hover:border-[#B5D4C5] bg-white'
                       }`}
                     >
                       <div className="w-8 h-8 rounded-lg bg-red-100 text-red-800 flex items-center justify-center mb-2">
@@ -679,8 +679,8 @@ export default function CitizenPortal({
                       onClick={() => setViolationCategory('water_contamination')}
                       className={`p-3.5 rounded-lg border-2 cursor-pointer transition-all ${
                         violationCategory === 'water_contamination'
-                          ? 'border-[#138808] bg-emerald-50/50 shadow-2xs'
-                          : 'border-slate-200 hover:border-slate-300 bg-white'
+                          ? 'border-[#2A5C45] bg-[#E6F2EC] shadow-sm'
+                          : 'border-[#DDD8CF] hover:border-[#B5D4C5] bg-white'
                       }`}
                     >
                       <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-800 flex items-center justify-center mb-2">
@@ -695,13 +695,13 @@ export default function CitizenPortal({
                 {/* 2. Mine & Village Details */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-100">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-800 block">
+                    <label className="text-xs font-bold text-[#1A2810] block">
                       Mine / Colliery Name
                     </label>
                     <select
                       value={selectedMineId}
                       onChange={(e) => setSelectedMineId(e.target.value)}
-                      className="w-full border border-slate-300 rounded-lg p-3 text-xs bg-white text-slate-800 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 shadow-2xs"
+                      className="w-full border border-[#DDD8CF] rounded-lg p-3 text-xs bg-[#FAF8F4] text-[#1A2810] focus:ring-2 focus:ring-[#2A5C45] focus:border-[#2A5C45] shadow-sm"
                     >
                       {mines.map(m => (
                         <option key={m.id} value={m.id}>{m.name} ({m.region}, {m.state})</option>
@@ -718,7 +718,7 @@ export default function CitizenPortal({
                       value={villageName}
                       onChange={(e) => setVillageName(e.target.value)}
                       placeholder="e.g., Simlong Village, Boundary Milestone #14, Taljhari"
-                      className="w-full border border-slate-300 rounded-lg p-3 text-xs bg-white text-slate-800 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 shadow-2xs"
+                      className="w-full border border-[#DDD8CF] rounded-lg p-3 text-xs bg-[#FAF8F4] text-[#1A2810] focus:ring-2 focus:ring-[#2A5C45] focus:border-[#2A5C45] shadow-sm"
                       required
                     />
                   </div>
@@ -734,7 +734,7 @@ export default function CitizenPortal({
                     value={observationText}
                     onChange={(e) => setObservationText(e.target.value)}
                     placeholder="Describe what you observed: e.g., On Monday evening, heavy bulldozers cleared green trees outside boundary marker 14; or high dust cloud drifted into the village school between 2 PM and 4 PM..."
-                    className="w-full border border-slate-300 rounded-lg p-3 text-xs bg-white text-slate-800 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 shadow-2xs leading-relaxed"
+                    className="w-full border border-[#DDD8CF] rounded-lg p-3 text-xs bg-[#FAF8F4] text-[#1A2810] focus:ring-2 focus:ring-[#2A5C45] focus:border-[#2A5C45] shadow-sm leading-relaxed"
                     required
                   />
                 </div>
@@ -754,7 +754,7 @@ export default function CitizenPortal({
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="w-full bg-[#138808] hover:bg-emerald-800 text-white font-bold text-sm py-3.5 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                    className="w-full bg-[#2A5C45] hover:bg-[#1E3A2F] text-white font-bold text-sm py-3.5 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                   >
                     <Send className="w-4 h-4" />
                     <span>Submit Verified Concern to Ministry of Coal</span>
@@ -773,7 +773,7 @@ export default function CitizenPortal({
         {/* ========================================================================= */}
         {activeTab === 'public_map' && (
           <div className="space-y-5">
-            <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-2xs space-y-4">
+            <div className="bg-white border border-[#DDD8CF] rounded-xl p-5 shadow-sm space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
                 <div>
                   <span className="text-[10px] font-bold uppercase text-emerald-700 tracking-wider">
@@ -846,7 +846,7 @@ export default function CitizenPortal({
         {/* ========================================================================= */}
         {activeTab === 'track_reports' && (
           <div className="space-y-5">
-            <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-2xs space-y-4">
+            <div className="bg-white border border-[#DDD8CF] rounded-xl p-5 shadow-sm space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
                 <div>
                   <span className="text-[10px] font-bold uppercase text-emerald-700 tracking-wider">
@@ -890,7 +890,7 @@ export default function CitizenPortal({
               {/* Grievance Cards List */}
               <div className="space-y-3">
                 {filteredReports.map((report) => (
-                  <div key={report.id} className="border border-slate-200 rounded-lg p-4 bg-white hover:border-emerald-300 transition-colors shadow-2xs space-y-2.5">
+                  <div key={report.id} className="border border-[#DDD8CF] rounded-lg p-4 bg-white hover:border-[#B5D4C5] transition-colors shadow-sm space-y-2.5">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                       <div className="flex items-center gap-2.5 flex-wrap">
                         <span className="font-mono text-xs font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
@@ -960,7 +960,7 @@ export default function CitizenPortal({
         {/* ========================================================================= */}
         {activeTab === 'environmental_health' && (
           <div className="space-y-5">
-            <div className="bg-white border border-slate-200 rounded-xl p-5 sm:p-6 shadow-2xs space-y-6">
+            <div className="bg-white border border-[#DDD8CF] rounded-xl p-5 sm:p-6 shadow-sm space-y-6">
               <div className="border-b border-slate-100 pb-3">
                 <span className="text-[10px] font-bold uppercase text-emerald-700 tracking-wider">
                   Community Health &amp; Ambient Monitoring
@@ -1034,7 +1034,7 @@ export default function CitizenPortal({
       </main>
 
       {/* 5. OFFICIAL CITIZEN FOOTER */}
-      <footer className="bg-white border-t border-slate-200 text-xs text-slate-600 mt-12">
+      <footer className="bg-white border-t border-[#DDD8CF] text-xs text-[#5C6B57] mt-12">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-3">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
             <div>

@@ -1,1 +1,112 @@
 @import "tailwindcss";
+
+/* =========================================================
+   CoalGuard AI — Environmental Civic Design System
+   Font: Plus Jakarta Sans (Google Fonts)
+   Theme: Warm Parchment + Forest Green + Ochre + Terracotta
+   ========================================================= */
+
+@theme {
+  /* Override Tailwind's font-sans to Plus Jakarta Sans */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+/* ─── Base Reset ─────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: #F4F1EB;
+  color: #1A2810;
+}
+
+/* ─── CSS Design Tokens ──────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --cg-bg:           #F4F1EB;   /* Page background — warm parchment */
+  --cg-surface:      #FFFFFF;   /* Cards, panels */
+  --cg-surface-alt:  #FAF8F4;   /* Alternate card bg, input backgrounds */
+  --cg-sidebar:      #1E3A2F;   /* Dark forest green sidebar */
+  --cg-sidebar-deep: #131F18;   /* Deepest sidebar footer */
+  --cg-sidebar-item: #162B22;   /* Sidebar card / identity widget */
+
+  /* Borders */
+  --cg-border:       #DDD8CF;   /* All borders — warm gray */
+  --cg-border-light: #EDE9E2;   /* Lighter borders for dividers */
+  --cg-border-dark:  #C8C2B7;   /* Stronger borders for cards */
+
+  /* Primary — Forest Green */
+  --cg-primary:       #2A5C45;  /* Main action color */
+  --cg-primary-hover: #1F4433;  /* Hover */
+  --cg-primary-pale:  #E6F2EC;  /* Light green highlight bg */
+  --cg-primary-mid:   #3B7A5E;  /* Mid-tone for gradients */
+
+  /* Accent — Ochre (Operator / Warnings) */
+  --cg-accent:        #B5601B;  /* Ochre — operator, emphasis */
+  --cg-accent-hover:  #8F4A13;  /* Darker hover */
+  --cg-accent-pale:   #FFF3E6;  /* Light amber tint */
+
+  /* Danger — Terracotta (Violations / Breaches) */
+  --cg-danger:        #9B2335;  /* Violation red */
+  --cg-danger-hover:  #7C1A28;
+  --cg-danger-pale:   #FEF0F2;  /* Light red tint */
+
+  /* Success */
+  --cg-success:       #1B7A46;  /* Bright forest for confirmed states */
+  --cg-success-pale:  #EAFAF1;
+
+  /* Text */
+  --cg-text:          #1A2810;  /* Body — dark green-tinted black */
+  --cg-text-muted:    #5C6B57;  /* Secondary — warm gray-green */
+  --cg-text-faint:    #8FA08A;  /* Placeholder / caption */
+  --cg-text-sidebar:  #A8C4B0;  /* Inactive sidebar nav text */
+  --cg-text-sidebar-section: #7DAA8C; /* Sidebar section labels */
+
+  /* Semantic role accent colors */
+  --cg-gov:           #2A5C45;  /* Gov/DGMS — forest green */
+  --cg-operator:      #B5601B;  /* Operator — ochre */
+  --cg-officer:       #8B5E00;  /* Safety officer — amber */
+  --cg-labour:        #1B7A46;  /* Labour — bright green */
+  --cg-citizen:       #3B7A5E;  /* Citizen — mid forest */
+}
+
+/* ─── Scrollbar Styling ──────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cg-surface-alt);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--cg-border-dark);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cg-text-faint);
+}
+
+/* ─── Selection ──────────────────────────────────────── */
+::selection {
+  background: var(--cg-primary-pale);
+  color: var(--cg-primary);
+}
+
+/* ─── Focus Ring ─────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--cg-primary);
+  outline-offset: 2px;
+}
+
+/* ─── Input Base ─────────────────────────────────────── */
+input, select, textarea {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}

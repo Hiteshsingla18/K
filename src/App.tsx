@@ -353,12 +353,12 @@ export default function App() {
     return (
       <>
         {toastMessage && (
-          <div className="fixed top-4 right-4 z-50 bg-[#0A192F] text-white text-xs px-4 py-3 rounded-lg shadow-xl border border-blue-500/30 flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-200 max-w-md">
-            <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse shrink-0"></div>
+          <div className="fixed top-4 right-4 z-50 bg-white text-[#1A2810] text-xs px-4 py-3 rounded-lg shadow-xl border-l-4 border-[#2A5C45] border border-[#DDD8CF] flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-200 max-w-md">
+            <div className="w-2 h-2 rounded-full bg-[#2A5C45] shrink-0"></div>
             <p className="flex-1 font-medium">{toastMessage}</p>
             <button 
               onClick={() => setToastMessage(null)}
-              className="text-slate-400 hover:text-white transition-colors cursor-pointer"
+              className="text-[#8FA08A] hover:text-[#1A2810] transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -380,12 +380,12 @@ export default function App() {
     return (
       <>
         {toastMessage && (
-          <div className="fixed top-4 right-4 z-50 bg-slate-900 text-white text-xs px-4 py-3 rounded-lg shadow-xl border border-emerald-500/30 flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-200 max-w-md">
-            <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></div>
+          <div className="fixed top-4 right-4 z-50 bg-white text-[#1A2810] text-xs px-4 py-3 rounded-lg shadow-xl border-l-4 border-[#1B7A46] border border-[#DDD8CF] flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-200 max-w-md">
+            <div className="w-2 h-2 rounded-full bg-[#1B7A46] shrink-0"></div>
             <p className="flex-1 font-medium">{toastMessage}</p>
             <button 
               onClick={() => setToastMessage(null)}
-              className="text-slate-400 hover:text-white transition-colors cursor-pointer"
+              className="text-[#8FA08A] hover:text-[#1A2810] transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -426,12 +426,12 @@ export default function App() {
     return (
       <>
         {toastMessage && (
-          <div className="fixed top-4 right-4 z-50 bg-[#0A192F] text-white text-xs px-4 py-3 rounded-lg shadow-xl border border-amber-500/30 flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-200 max-w-md">
-            <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse shrink-0"></div>
+          <div className="fixed top-4 right-4 z-50 bg-white text-[#1A2810] text-xs px-4 py-3 rounded-lg shadow-xl border-l-4 border-[#B5601B] border border-[#DDD8CF] flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-200 max-w-md">
+            <div className="w-2 h-2 rounded-full bg-[#B5601B] shrink-0"></div>
             <p className="flex-1 font-medium">{toastMessage}</p>
             <button 
               onClick={() => setToastMessage(null)}
-              className="text-slate-400 hover:text-white transition-colors cursor-pointer"
+              className="text-[#8FA08A] hover:text-[#1A2810] transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -469,9 +469,9 @@ export default function App() {
         {showDossierModal && (
           <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
             <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden border border-slate-200 animate-in fade-in zoom-in-95 duration-200">
-              <div className="p-4 bg-[#0A192F] text-white flex justify-between items-center">
+              <div className="p-4 bg-[#1E3A2F] text-white flex justify-between items-center">
                 <div className="flex items-center gap-2">
-                  <FileText className="w-5 h-5 text-amber-400" />
+                  <FileText className="w-5 h-5 text-[#B5601B]" />
                   <span className="font-bold text-sm">Ministry Inspection Dossier #ENV-082</span>
                 </div>
                 <button 
@@ -532,20 +532,20 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="p-3.5 bg-slate-100 border-t border-slate-200 flex justify-end gap-2">
+              <div className="p-3.5 bg-[#FAF8F4] border-t border-[#DDD8CF] flex justify-end gap-2">
                 <button
                   onClick={() => {
                     triggerToast('Official Dossier certified PDF downloaded.');
                     setShowDossierModal(false);
                   }}
-                  className="px-4 py-1.5 bg-[#1E40AF] hover:bg-blue-800 text-white text-xs font-semibold rounded flex items-center gap-1.5 cursor-pointer shadow-xs"
+                  className="px-4 py-1.5 bg-[#2A5C45] hover:bg-[#1F4433] text-white text-xs font-semibold rounded flex items-center gap-1.5 cursor-pointer shadow-sm"
                 >
                   <Download className="w-3.5 h-3.5" />
                   <span>Download Certified PDF</span>
                 </button>
                 <button
                   onClick={() => setShowDossierModal(false)}
-                  className="px-3 py-1.5 border border-slate-300 text-slate-700 text-xs font-semibold rounded hover:bg-slate-200 transition-colors cursor-pointer"
+                  className="px-3 py-1.5 border border-[#DDD8CF] text-[#5C6B57] text-xs font-semibold rounded hover:bg-[#EDE9E2] transition-colors cursor-pointer"
                 >
                   Close
                 </button>
@@ -564,12 +564,12 @@ export default function App() {
     return (
       <>
         {toastMessage && (
-          <div className="fixed top-4 right-4 z-50 bg-[#0A192F] text-white text-xs px-4 py-3 rounded-lg shadow-xl border border-blue-500/30 flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-200 max-w-md">
-            <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse shrink-0"></div>
+          <div className="fixed top-4 right-4 z-50 bg-white text-[#1A2810] text-xs px-4 py-3 rounded-lg shadow-xl border-l-4 border-[#8B5E00] border border-[#DDD8CF] flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-200 max-w-md">
+            <div className="w-2 h-2 rounded-full bg-[#8B5E00] shrink-0"></div>
             <p className="flex-1 font-medium">{toastMessage}</p>
             <button 
               onClick={() => setToastMessage(null)}
-              className="text-slate-400 hover:text-white transition-colors cursor-pointer"
+              className="text-[#8FA08A] hover:text-[#1A2810] transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -611,12 +611,12 @@ export default function App() {
     return (
       <>
         {toastMessage && (
-          <div className="fixed top-4 right-4 z-50 bg-[#0A192F] text-white text-xs px-4 py-3 rounded-lg shadow-xl border border-amber-500/30 flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-200 max-w-md">
-            <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse shrink-0"></div>
+          <div className="fixed top-4 right-4 z-50 bg-white text-[#1A2810] text-xs px-4 py-3 rounded-lg shadow-xl border-l-4 border-[#1B7A46] border border-[#DDD8CF] flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-200 max-w-md">
+            <div className="w-2 h-2 rounded-full bg-[#1B7A46] shrink-0"></div>
             <p className="flex-1 font-medium">{toastMessage}</p>
             <button 
               onClick={() => setToastMessage(null)}
-              className="text-slate-400 hover:text-white transition-colors cursor-pointer"
+              className="text-[#8FA08A] hover:text-[#1A2810] transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -658,15 +658,15 @@ export default function App() {
   return (
     <AuthGuard requiredRole="gov">
       <ErrorBoundary>
-        <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex font-sans antialiased overflow-x-hidden">
+        <div className="min-h-screen bg-[#F4F1EB] text-[#1A2810] flex antialiased overflow-x-hidden" style={{fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif"}}>
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-4 right-4 z-50 bg-[#0A192F] text-white text-xs px-4 py-3 rounded-lg shadow-xl border border-blue-500/30 flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-200 max-w-md">
-          <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse shrink-0"></div>
+        <div className="fixed top-4 right-4 z-50 bg-white text-[#1A2810] text-xs px-4 py-3 rounded-lg shadow-xl border-l-4 border-[#2A5C45] border border-[#DDD8CF] flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-200 max-w-md">
+          <div className="w-2 h-2 rounded-full bg-[#2A5C45] shrink-0"></div>
           <p className="flex-1 font-medium">{toastMessage}</p>
           <button 
             onClick={() => setToastMessage(null)}
-            className="text-slate-400 hover:text-white transition-colors cursor-pointer"
+            className="text-[#8FA08A] hover:text-[#1A2810] transition-colors cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -674,14 +674,14 @@ export default function App() {
       )}
 
       {/* ========================================================================= */}
-      {/* 1. DGMS SURVEILLANCE SIDEBAR (Width: 260px, Background: #0A192F)          */}
+      {/* 1. DGMS SURVEILLANCE SIDEBAR (Width: 260px, Background: #1E3A2F Forest)   */}
       {/* ========================================================================= */}
       <aside 
         id="command-sidebar"
-        className="w-[260px] bg-[#0A192F] text-white flex flex-col shrink-0 min-h-screen border-r border-slate-800 sticky top-0 h-screen z-30 select-none shadow-xl"
+        className="w-[260px] bg-[#1E3A2F] text-white flex flex-col shrink-0 min-h-screen border-r border-[#152D22] sticky top-0 h-screen z-30 select-none shadow-xl"
       >
         {/* Branding & Active Role Profile at Top */}
-        <div className="p-4 border-b border-slate-800/80 shrink-0 space-y-3">
+        <div className="p-4 border-b border-[#152D22] shrink-0 space-y-3">
           <div className="flex items-center gap-3">
             <div className="relative inline-flex items-center justify-center shrink-0">
               <img 
@@ -690,7 +690,7 @@ export default function App() {
                 className="h-9 w-9 object-contain rounded-full" 
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
-                  e.currentTarget.parentElement?.classList.add('w-9', 'h-9', 'rounded-full', 'bg-[#0A192F]', 'border-2', 'border-cyan-400', 'flex', 'items-center', 'justify-center', 'text-cyan-300', 'font-mono', 'font-black', 'text-sm', 'shadow-[0_0_12px_rgba(6,182,212,0.5)]');
+                  e.currentTarget.parentElement?.classList.add('w-9', 'h-9', 'rounded-full', 'bg-[#2A5C45]', 'border-2', 'border-[#74C69D]', 'flex', 'items-center', 'justify-center', 'text-white', 'font-mono', 'font-black', 'text-sm');
                   e.currentTarget.parentElement?.appendChild(document.createTextNode('K'));
                 }}
               />
@@ -698,36 +698,36 @@ export default function App() {
             <div className="min-w-0">
               <div className="flex items-center gap-2">
                 <span className="font-extrabold text-base tracking-tight text-white truncate">KhananRakshak AI</span>
-                <span className="bg-blue-600/30 text-blue-300 text-[10px] font-bold px-1.5 py-0.5 rounded border border-blue-500/30 font-mono">
+                <span className="bg-[#2A5C45] text-[#A8C4B0] text-[10px] font-bold px-1.5 py-0.5 rounded border border-[#3B7A5E] font-mono">
                   K-AI
                 </span>
               </div>
-              <div className="text-[11px] text-slate-400 leading-tight truncate mt-0.5">
-                AI Smart Governance
+              <div className="text-[11px] text-[#7DAA8C] leading-tight truncate mt-0.5">
+                Environmental Compliance
               </div>
             </div>
           </div>
 
           {/* Active Officer Identity Card */}
-          <div className="p-2.5 bg-slate-900/90 rounded-lg border border-slate-800 text-xs space-y-1 relative">
+          <div className="p-2.5 bg-[#162B22] rounded-lg border border-[#152D22] text-xs space-y-1 relative">
             <div className="absolute top-2 right-2">
               <LanguageToggle />
             </div>
-            <div className="text-[9px] uppercase font-bold text-blue-400 tracking-wider truncate pr-16">
+            <div className="text-[9px] uppercase font-bold text-[#7DAA8C] tracking-wider truncate pr-16">
               {currentUser.badgeText}
             </div>
             <div className="font-semibold text-white truncate text-[11px] pr-16">
               {currentUser.name}
             </div>
-            <div className="text-[10px] text-slate-400 truncate pr-16">
+            <div className="text-[10px] text-[#A8C4B0] truncate pr-16">
               {currentUser.designation}
             </div>
           </div>
         </div>
 
         {/* Navigation Items (Officer Role-Specific ONLY - No Operator Desk) */}
-        <div className="p-3 space-y-1.5 flex-1 overflow-y-auto">
-          <div className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+        <div className="p-3 space-y-1 flex-1 overflow-y-auto">
+          <div className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#7DAA8C]">
             Surveillance Command
           </div>
 
@@ -737,25 +737,25 @@ export default function App() {
             onClick={() => setOfficerNav('overview')}
             className={`w-full px-3 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-3 transition-all cursor-pointer ${
               officerNav === 'overview'
-                ? 'bg-[#1E40AF] text-white shadow-sm'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/70'
+                ? 'bg-[#2A5C45] text-white shadow-sm'
+                : 'text-[#A8C4B0] hover:text-white hover:bg-[#253F32]'
             }`}
           >
-            <TrendingUp className={`w-4 h-4 ${officerNav === 'overview' ? 'text-white' : 'text-slate-400'}`} />
+            <TrendingUp className={`w-4 h-4 ${officerNav === 'overview' ? 'text-white' : 'text-[#7DAA8C]'}`} />
             <span className="truncate">{t('nav.surveillance')}</span>
           </button>
 
-          {/* 2. Mine Explorer */}
+          {/* 2. Telemetry */}
           <button
             id="sidebar-nav-telemetry"
             onClick={() => setOfficerNav('telemetry')}
             className={`w-full px-3 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-3 transition-all cursor-pointer ${
               officerNav === 'telemetry'
-                ? 'bg-[#1E40AF] text-white shadow-sm'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/70'
+                ? 'bg-[#2A5C45] text-white shadow-sm'
+                : 'text-[#A8C4B0] hover:text-white hover:bg-[#253F32]'
             }`}
           >
-            <Radio className={`w-4 h-4 ${officerNav === 'telemetry' ? 'text-white' : 'text-cyan-400'}`} />
+            <Radio className={`w-4 h-4 ${officerNav === 'telemetry' ? 'text-white' : 'text-[#74C69D]'}`} />
             <span className="truncate">{t('nav.telemetry')}</span>
           </button>
 
@@ -765,11 +765,11 @@ export default function App() {
             onClick={() => setOfficerNav('explorer')}
             className={`w-full px-3 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-3 transition-all cursor-pointer ${
               officerNav === 'explorer'
-                ? 'bg-[#1E40AF] text-white shadow-sm'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/70'
+                ? 'bg-[#2A5C45] text-white shadow-sm'
+                : 'text-[#A8C4B0] hover:text-white hover:bg-[#253F32]'
             }`}
           >
-            <MapPin className={`w-4 h-4 ${officerNav === 'explorer' ? 'text-white' : 'text-slate-400'}`} />
+            <MapPin className={`w-4 h-4 ${officerNav === 'explorer' ? 'text-white' : 'text-[#A8C4B0]'}`} />
             <span className="truncate">{t('nav.explorer')}</span>
           </button>
 
@@ -779,96 +779,96 @@ export default function App() {
             onClick={() => setOfficerNav('evidence')}
             className={`w-full px-3 py-2.5 rounded-lg text-xs font-semibold flex items-center justify-between transition-all cursor-pointer ${
               officerNav === 'evidence'
-                ? 'bg-[#1E40AF] text-white shadow-sm'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/70'
+                ? 'bg-[#2A5C45] text-white shadow-sm'
+                : 'text-[#A8C4B0] hover:text-white hover:bg-[#253F32]'
             }`}
           >
             <div className="flex items-center gap-3 min-w-0">
               <AlertTriangle className={`w-4 h-4 ${officerNav === 'evidence' ? 'text-white' : 'text-red-400'}`} />
               <span className="truncate">{t('nav.evidence')}</span>
             </div>
-            <span className="text-[10px] font-bold bg-red-600 text-white px-1.5 py-0.5 rounded font-mono animate-pulse shrink-0">
+            <span className="text-[10px] font-bold bg-[#9B2335] text-white px-1.5 py-0.5 rounded font-mono shrink-0">
               1 Active
             </span>
           </button>
 
-          {/* 5. Citizen Reports (Field corroboration review) */}
+          {/* 5. Citizen Reports */}
           <button
             id="sidebar-nav-citizen"
             onClick={() => setOfficerNav('citizen')}
             className={`w-full px-3 py-2.5 rounded-lg text-xs font-semibold flex items-center justify-between transition-all cursor-pointer ${
               officerNav === 'citizen'
-                ? 'bg-[#1E40AF] text-white shadow-sm'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/70'
+                ? 'bg-[#2A5C45] text-white shadow-sm'
+                : 'text-[#A8C4B0] hover:text-white hover:bg-[#253F32]'
             }`}
           >
             <div className="flex items-center gap-3 min-w-0">
-              <Users className={`w-4 h-4 ${officerNav === 'citizen' ? 'text-white' : 'text-slate-400'}`} />
+              <Users className={`w-4 h-4 ${officerNav === 'citizen' ? 'text-white' : 'text-[#A8C4B0]'}`} />
               <span className="truncate">{t('nav.citizen')}</span>
             </div>
-            <span className="text-[10px] font-bold bg-blue-900/90 text-blue-200 px-1.5 py-0.5 rounded font-mono border border-blue-700/50 shrink-0">
+            <span className="text-[10px] font-bold bg-[#162B22] text-[#A8C4B0] px-1.5 py-0.5 rounded font-mono border border-[#2A5C45] shrink-0">
               43
             </span>
           </button>
 
-          {/* 6. Risk & Prediction (Q4 Forecast) */}
+          {/* 6. Risk & Prediction */}
           <button
             id="sidebar-nav-risk"
             onClick={() => setOfficerNav('risk')}
             className={`w-full px-3 py-2.5 rounded-lg text-xs font-semibold flex items-center justify-between transition-all cursor-pointer ${
               officerNav === 'risk'
-                ? 'bg-[#1E40AF] text-white shadow-sm'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/70'
+                ? 'bg-[#2A5C45] text-white shadow-sm'
+                : 'text-[#A8C4B0] hover:text-white hover:bg-[#253F32]'
             }`}
           >
             <div className="flex items-center gap-3 min-w-0">
-              <Activity className={`w-4 h-4 ${officerNav === 'risk' ? 'text-white' : 'text-purple-400'}`} />
+              <Activity className={`w-4 h-4 ${officerNav === 'risk' ? 'text-white' : 'text-[#74C69D]'}`} />
               <span className="truncate">{t('nav.risk')}</span>
             </div>
-            <span className="text-[10px] font-bold bg-purple-900/60 text-purple-200 px-1.5 py-0.5 rounded font-mono border border-purple-600/40 shrink-0">
+            <span className="text-[10px] font-bold bg-[#162B22] text-[#74C69D] px-1.5 py-0.5 rounded font-mono border border-[#2A5C45] shrink-0">
               AI Q4
             </span>
           </button>
         </div>
 
         {/* Bottom of Sidebar: AI Regulatory Copilot, Telemetry, and Help */}
-        <div className="p-3 space-y-2.5 border-t border-slate-800 bg-[#071324] shrink-0">
+        <div className="p-3 space-y-2.5 border-t border-[#152D22] bg-[#131F18] shrink-0">
           <button
             id="btn-sidebar-copilot"
             onClick={() => setIsCopilotOpen(true)}
-            className="w-full bg-gradient-to-r from-blue-900/60 to-indigo-950/80 hover:from-blue-800/80 hover:to-indigo-900/95 border border-blue-500/40 text-white rounded-lg p-2.5 flex items-center justify-between shadow-xs transition-all text-xs font-semibold cursor-pointer group"
+            className="w-full bg-[#2A5C45] hover:bg-[#1F4433] border border-[#3B7A5E] text-white rounded-lg p-2.5 flex items-center justify-between shadow-sm transition-all text-xs font-semibold cursor-pointer group"
           >
             <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded bg-[#1E40AF] flex items-center justify-center text-blue-200 group-hover:scale-105 transition-transform shadow-2xs">
-                <Sparkles className="w-4 h-4 text-blue-300" />
+              <div className="w-7 h-7 rounded bg-[#1F4433] flex items-center justify-center group-hover:scale-105 transition-transform">
+                <Sparkles className="w-4 h-4 text-[#74C69D]" />
               </div>
               <div className="text-left">
                 <div className="text-xs font-bold leading-none text-white">{t('nav.copilot')}</div>
-                <div className="text-[10px] text-blue-300/80 mt-0.5">MoEFCC &amp; DGMS Rules</div>
+                <div className="text-[10px] text-[#A8C4B0] mt-0.5">MoEFCC &amp; DGMS Rules</div>
               </div>
             </div>
-            <span className="text-[10px] bg-blue-500/30 text-blue-200 px-1.5 py-0.5 rounded border border-blue-400/30 font-mono">
+            <span className="text-[10px] bg-[#1F4433] text-[#74C69D] px-1.5 py-0.5 rounded border border-[#3B7A5E] font-mono">
               Ask &rarr;
             </span>
           </button>
 
           {/* Satellite Telemetry Status */}
-          <div className="p-2 bg-slate-900/80 rounded-md border border-slate-800/80 text-[11px] space-y-1">
-            <div className="flex items-center justify-between text-slate-400 text-[10px]">
+          <div className="p-2 bg-[#162B22] rounded-md border border-[#152D22] text-[11px] space-y-1">
+            <div className="flex items-center justify-between text-[#7DAA8C] text-[10px]">
               <span className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#1B7A46] animate-ping"></span>
                 <span>Sentinel-2 Constellation</span>
               </span>
-              <span className="text-emerald-400 font-mono font-bold">10m Multispec</span>
+              <span className="text-[#74C69D] font-mono font-bold">10m Multispec</span>
             </div>
-            <div className="text-[10px] text-slate-500 flex justify-between">
+            <div className="text-[10px] text-[#5C7A65] flex justify-between">
               <span>Next Satellite Overpass:</span>
-              <span className="font-mono text-slate-300">T-04:18:22</span>
+              <span className="font-mono text-[#A8C4B0]">T-04:18:22</span>
             </div>
           </div>
 
           {/* Quick Support & Protocol links */}
-          <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1">
+          <div className="flex items-center justify-between text-[11px] text-[#7DAA8C] pt-1">
             <button 
               id="btn-sidebar-settings"
               onClick={() => setShowSettingsModal(true)}
@@ -894,7 +894,7 @@ export default function App() {
       {/* ========================================================================= */}
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
         {/* TOP STATUS & COMMAND HEADER */}
-        <header className="bg-white border-b border-slate-200 sticky top-0 z-20 shrink-0 shadow-2xs">
+        <header className="bg-white border-b border-[#DDD8CF] sticky top-0 z-20 shrink-0 shadow-sm">
           <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3">
             {/* Breadcrumb & Global Header K Emblem */}
             <div className="flex items-center gap-2.5 min-w-0">
@@ -905,18 +905,18 @@ export default function App() {
                   className="h-7 w-7 object-contain rounded-full" 
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
-                    e.currentTarget.parentElement?.classList.add('w-7', 'h-7', 'rounded-full', 'bg-[#0A192F]', 'border', 'border-cyan-400', 'flex', 'items-center', 'justify-center', 'text-cyan-300', 'font-mono', 'font-black', 'text-xs');
+                    e.currentTarget.parentElement?.classList.add('w-7', 'h-7', 'rounded-full', 'bg-[#2A5C45]', 'border', 'border-[#74C69D]', 'flex', 'items-center', 'justify-center', 'text-white', 'font-mono', 'font-black', 'text-xs');
                     e.currentTarget.parentElement?.appendChild(document.createTextNode('K'));
                   }}
                 />
               </div>
-              <span className="font-bold text-sm text-slate-900 truncate">KhananRakshak AI</span>
-              <span className="text-slate-300">/</span>
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider truncate">
+              <span className="font-bold text-sm text-[#1A2810] truncate">KhananRakshak AI</span>
+              <span className="text-[#DDD8CF]">/</span>
+              <span className="text-xs font-bold text-[#5C6B57] uppercase tracking-wider truncate">
                 Surveillance Command
               </span>
-              <span className="text-slate-300">/</span>
-              <span className="font-semibold text-xs text-slate-700 truncate hidden md:inline">
+              <span className="text-[#DDD8CF]">/</span>
+              <span className="font-semibold text-xs text-[#2A5C45] truncate hidden md:inline">
                 {officerNav === 'overview' && 'Overview & Real-Time Radar'}
                 {officerNav === 'telemetry' && 'Virtual Telemetry Center'}
                 {officerNav === 'explorer' && 'National Mine Explorer Table'}
@@ -929,10 +929,10 @@ export default function App() {
             {/* Officer Header Actions */}
             <div className="flex items-center gap-2.5 sm:gap-3 text-xs shrink-0">
               {/* Satellite Sync Indicator */}
-              <div className="hidden xl:flex items-center gap-2 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">
-                <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
-                <span className="text-slate-600 font-mono text-[11px]">
-                  Satellite Sync: <strong className="text-slate-900">Sentinel-2 (T-2h)</strong>
+              <div className="hidden xl:flex items-center gap-2 bg-[#E6F2EC] px-2.5 py-1 rounded-md border border-[#B5D4C5]">
+                <span className="w-2 h-2 rounded-full bg-[#1B7A46]"></span>
+                <span className="text-[#2A5C45] font-mono text-[11px]">
+                  Satellite Sync: <strong className="text-[#1A2810]">Sentinel-2 (T-2h)</strong>
                 </span>
               </div>
 
@@ -940,7 +940,7 @@ export default function App() {
               <button
                 id="btn-top-view-dossier"
                 onClick={() => setShowDossierModal(true)}
-                className="hidden md:flex text-xs text-[#1E40AF] hover:bg-blue-50 px-2.5 py-1.5 rounded border border-blue-200 font-semibold items-center gap-1.5 transition-colors cursor-pointer"
+                className="hidden md:flex text-xs text-[#2A5C45] hover:bg-[#E6F2EC] px-2.5 py-1.5 rounded border border-[#B5D4C5] font-semibold items-center gap-1.5 transition-colors cursor-pointer"
               >
                 <FileText className="w-3.5 h-3.5" />
                 <span>Legal Dossier</span>
@@ -965,7 +965,7 @@ export default function App() {
         </header>
 
         {/* OFFICER MAIN WORKSPACE */}
-        <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6">
+        <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 bg-[#F4F1EB]">
           {/* ===================================================================== */}
           {/* VIEW 1: OVERVIEW & RADAR                                               */}
           {/* ===================================================================== */}
@@ -998,45 +998,45 @@ export default function App() {
 
               {/* KPI Telemetry Header - Dynamically Computed Across 25 Nationwide Mines */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="bg-white border border-slate-200 rounded-lg p-4 shadow-2xs">
-                  <div className="text-[10px] uppercase font-bold text-slate-500">{t('dashboard.totalMines')}</div>
-                  <div className="text-2xl font-bold text-slate-900 mt-1">{totalMinesCount} {t('dashboard.facilities')}</div>
-                  <div className="text-xs text-slate-500 mt-0.5">7 Coal States &bull; 8 CIL/SCCL Subsidiaries</div>
+                <div className="bg-white border border-[#DDD8CF] rounded-lg p-4 shadow-sm">
+                  <div className="text-[10px] uppercase font-bold text-[#5C6B57] tracking-wide">{t('dashboard.totalMines')}</div>
+                  <div className="text-2xl font-bold text-[#1A2810] mt-1">{totalMinesCount} {t('dashboard.facilities')}</div>
+                  <div className="text-xs text-[#8FA08A] mt-0.5">7 Coal States &bull; 8 CIL/SCCL Subsidiaries</div>
                 </div>
 
-                <div className="bg-white border border-slate-200 rounded-lg p-4 shadow-2xs">
-                  <div className="text-[10px] uppercase font-bold text-slate-500">{t('dashboard.activeWorkforce')}</div>
-                  <div className="text-2xl font-bold text-slate-900 mt-1">{totalActiveWorkforce.toLocaleString()}</div>
-                  <div className="text-xs text-slate-500 mt-0.5">
+                <div className="bg-white border border-[#DDD8CF] rounded-lg p-4 shadow-sm">
+                  <div className="text-[10px] uppercase font-bold text-[#5C6B57] tracking-wide">{t('dashboard.activeWorkforce')}</div>
+                  <div className="text-2xl font-bold text-[#1A2810] mt-1">{totalActiveWorkforce.toLocaleString()}</div>
+                  <div className="text-xs text-[#8FA08A] mt-0.5">
                     {totalPermanentWorkforce.toLocaleString()} Regular &bull; {totalContractualWorkforce.toLocaleString()} Contractual
                   </div>
                 </div>
 
-                <div className="bg-white border border-slate-200 rounded-lg p-4 shadow-2xs">
-                  <div className="text-[10px] uppercase font-bold text-slate-500">{t('dashboard.criticalBreaches')}</div>
-                  <div className="text-2xl font-bold text-red-600 mt-1 flex items-center gap-2">
+                <div className="bg-white border border-[#DDD8CF] rounded-lg p-4 shadow-sm">
+                  <div className="text-[10px] uppercase font-bold text-[#5C6B57] tracking-wide">{t('dashboard.criticalBreaches')}</div>
+                  <div className="text-2xl font-bold text-[#9B2335] mt-1 flex items-center gap-2">
                     <span>{criticalBreachesCount} {t('dashboard.active')}</span>
-                    <span className="text-[10px] font-bold bg-red-100 text-red-700 px-1.5 py-0.5 rounded uppercase">
+                    <span className="text-[10px] font-bold bg-[#FEF0F2] text-[#9B2335] px-1.5 py-0.5 rounded uppercase border border-[#9B2335]/20">
                       {t('dashboard.scnTriggered')}
                     </span>
                   </div>
-                  <div className="text-xs text-slate-500 mt-0.5 truncate" title={criticalBreaches.map(m => m.name.split(' ')[0]).join(', ')}>
+                  <div className="text-xs text-[#8FA08A] mt-0.5 truncate" title={criticalBreaches.map(m => m.name.split(' ')[0]).join(', ')}>
                     {criticalBreaches.map(m => m.name.split(' ')[0]).join(', ')}
                   </div>
                 </div>
 
-                <div className="bg-white border border-slate-200 rounded-lg p-4 shadow-2xs">
-                  <div className="text-[10px] uppercase font-bold text-slate-500">{t('dashboard.avgCompliance')}</div>
-                  <div className="text-2xl font-bold text-emerald-700 mt-1">{avgComplianceRating}%</div>
-                  <div className="text-xs text-emerald-600 mt-0.5">Nationwide Sentinel-2 Real-Time</div>
+                <div className="bg-white border border-[#DDD8CF] rounded-lg p-4 shadow-sm">
+                  <div className="text-[10px] uppercase font-bold text-[#5C6B57] tracking-wide">{t('dashboard.avgCompliance')}</div>
+                  <div className="text-2xl font-bold text-[#1B7A46] mt-1">{avgComplianceRating}%</div>
+                  <div className="text-xs text-[#3B7A5E] mt-0.5">Nationwide Sentinel-2 Real-Time</div>
                 </div>
               </div>
 
               {/* Map Filters & Controls Bar */}
-              <div className="bg-white border border-slate-200 rounded-lg p-3.5 shadow-2xs flex flex-wrap items-center justify-between gap-3">
+              <div className="bg-white border border-[#DDD8CF] rounded-lg p-3.5 shadow-sm flex flex-wrap items-center justify-between gap-3">
                 <div className="flex items-center gap-2 flex-wrap text-xs">
-                  <div className="flex items-center gap-1.5 font-bold text-slate-700 mr-2">
-                    <Filter className="w-3.5 h-3.5 text-slate-500" />
+                  <div className="flex items-center gap-1.5 font-bold text-[#1A2810] mr-2">
+                    <Filter className="w-3.5 h-3.5 text-[#5C6B57]" />
                     <span>{t('dashboard.surveillanceFilter')}:</span>
                   </div>
 
@@ -1044,7 +1044,7 @@ export default function App() {
                   <select
                     value={filterState}
                     onChange={(e) => setFilterState(e.target.value)}
-                    className="px-2.5 py-1.5 border border-slate-300 rounded bg-white text-slate-800 text-xs font-medium focus:ring-1 focus:ring-blue-500"
+                    className="px-2.5 py-1.5 border border-[#DDD8CF] rounded bg-[#FAF8F4] text-[#1A2810] text-xs font-medium focus:ring-1 focus:ring-[#2A5C45] focus:outline-none"
                   >
                     <option value="All States">All Coal States (7)</option>
                     <option value="Jharkhand">Jharkhand (5)</option>
@@ -1056,11 +1056,11 @@ export default function App() {
                     <option value="Telangana">Telangana (2)</option>
                   </select>
 
-                  {/* Subsidiary Filter - 8 Major Coal Subsidiaries */}
+                  {/* Subsidiary Filter */}
                   <select
                     value={filterSubsidiary}
                     onChange={(e) => setFilterSubsidiary(e.target.value)}
-                    className="px-2.5 py-1.5 border border-slate-300 rounded bg-white text-slate-800 text-xs font-medium focus:ring-1 focus:ring-blue-500"
+                    className="px-2.5 py-1.5 border border-[#DDD8CF] rounded bg-[#FAF8F4] text-[#1A2810] text-xs font-medium focus:ring-1 focus:ring-[#2A5C45] focus:outline-none"
                   >
                     <option value="All Subsidiaries">All Subsidiaries (8)</option>
                     <option value="ECL">ECL (Eastern Coalfields)</option>
@@ -1073,11 +1073,11 @@ export default function App() {
                     <option value="SCCL">SCCL (Singareni Collieries)</option>
                   </select>
 
-                  {/* Risk Filter - Score Thresholds */}
+                  {/* Risk Filter */}
                   <select
                     value={filterRisk}
                     onChange={(e) => setFilterRisk(e.target.value)}
-                    className="px-2.5 py-1.5 border border-slate-300 rounded bg-white text-slate-800 text-xs font-medium focus:ring-1 focus:ring-blue-500"
+                    className="px-2.5 py-1.5 border border-[#DDD8CF] rounded bg-[#FAF8F4] text-[#1A2810] text-xs font-medium focus:ring-1 focus:ring-[#2A5C45] focus:outline-none"
                   >
                     <option value="All Risks">All Compliance Statuses</option>
                     <option value="Critical Only">Critical Breaches (&lt;65%)</option>
@@ -1087,8 +1087,8 @@ export default function App() {
                 </div>
 
                 <div className="flex items-center gap-3 text-xs">
-                  <span className="text-slate-500 hidden sm:inline">{t('dashboard.activeTarget')}:</span>
-                  <span className="font-bold text-slate-800 bg-slate-100 px-2.5 py-1 rounded border border-slate-200">
+                  <span className="text-[#5C6B57] hidden sm:inline">{t('dashboard.activeTarget')}:</span>
+                  <span className="font-bold text-[#1A2810] bg-[#E6F2EC] px-2.5 py-1 rounded border border-[#B5D4C5]">
                     {selectedMine ? selectedMine.name : 'No Mine Selected'}
                   </span>
                 </div>
@@ -1097,8 +1097,8 @@ export default function App() {
               {/* Leaflet Satellite Map & Slide-out Inspection Drawer */}
               <div className="relative rounded-xl overflow-hidden border border-slate-300 shadow-sm bg-slate-900 h-[640px] min-h-[400px]">
                 {isLoading ? (
-                  <div className="w-full h-full flex flex-col items-center justify-center text-slate-400 bg-slate-800 animate-pulse">
-                    <div className="w-12 h-12 rounded-full border-4 border-slate-600 border-t-blue-500 animate-spin mb-4"></div>
+                  <div className="w-full h-full flex flex-col items-center justify-center text-[#5C6B57] bg-[#F4F1EB]">
+                    <div className="w-12 h-12 rounded-full border-4 border-[#DDD8CF] border-t-[#2A5C45] animate-spin mb-4"></div>
                     <p className="font-semibold">Syncing Live Geospatial Data from Supabase...</p>
                   </div>
                 ) : (
@@ -1118,53 +1118,53 @@ export default function App() {
 
                 {/* SLIDE-OUT INSPECTION DRAWER */}
                 {selectedMine && drawerOpen && (
-                  <div className="absolute top-0 right-0 h-full w-80 sm:w-96 bg-white border-l border-slate-200 shadow-2xl z-[1000] flex flex-col justify-between animate-in slide-in-from-right duration-200">
-                    <div className="p-4 border-b border-slate-200 bg-[#0A192F] text-white flex items-center justify-between">
+                  <div className="absolute top-0 right-0 h-full w-80 sm:w-96 bg-white border-l border-[#DDD8CF] shadow-2xl z-[1000] flex flex-col justify-between animate-in slide-in-from-right duration-200">
+                    <div className="p-4 border-b border-[#DDD8CF] bg-[#1E3A2F] text-white flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <Shield className="w-4 h-4 text-blue-400" />
-                        <span className="font-bold text-xs uppercase tracking-wider text-slate-200">
+                        <Shield className="w-4 h-4 text-[#74C69D]" />
+                        <span className="font-bold text-xs uppercase tracking-wider text-[#A8C4B0]">
                           {t('dashboard.inspection')}
                         </span>
                       </div>
                       <button
                         onClick={() => setDrawerOpen(false)}
-                        className="text-slate-400 hover:text-white transition-colors cursor-pointer"
+                        className="text-[#7DAA8C] hover:text-white transition-colors cursor-pointer"
                         title="Close Inspector Drawer"
                       >
                         <X className="w-4 h-4" />
                       </button>
                     </div>
 
-                    <div className="p-5 overflow-y-auto space-y-4 text-slate-800">
+                    <div className="p-5 overflow-y-auto space-y-4 text-[#1A2810]">
                       <div>
                         <div className="flex items-center justify-between">
-                          <span className="font-mono text-xs text-slate-400 font-semibold">{selectedMine?.id}</span>
+                          <span className="font-mono text-xs text-[#8FA08A] font-semibold">{selectedMine?.id}</span>
                           <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded ${
-                            selectedMine?.status === 'critical' ? 'bg-red-100 text-red-700' :
-                            selectedMine?.status === 'monitor' ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'
+                            selectedMine?.status === 'critical' ? 'bg-[#FEF0F2] text-[#9B2335]' :
+                            selectedMine?.status === 'monitor' ? 'bg-[#FFF3E6] text-[#B5601B]' : 'bg-[#E6F2EC] text-[#1B7A46]'
                           }`}>
                             {selectedMine?.status}
                           </span>
                         </div>
-                        <h3 className="text-lg font-bold text-slate-950 mt-1">{selectedMine?.name}</h3>
-                        <p className="text-xs text-slate-500">{selectedMine?.region}, {selectedMine?.state}</p>
+                        <h3 className="text-lg font-bold text-[#1A2810] mt-1">{selectedMine?.name}</h3>
+                        <p className="text-xs text-[#5C6B57]">{selectedMine?.region}, {selectedMine?.state}</p>
                       </div>
 
-                      <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
+                      <div className="p-3 bg-[#FAF8F4] rounded-lg border border-[#DDD8CF]">
                         <div className="flex justify-between items-center text-xs mb-1.5">
-                          <span className="text-slate-500 font-semibold">{t('dashboard.complianceScore')}</span>
+                          <span className="text-[#5C6B57] font-semibold">{t('dashboard.complianceScore')}</span>
                           <span className={`font-mono font-bold ${
-                            (selectedMine?.complianceScore ?? 0) < 80 ? 'text-red-600' :
-                            (selectedMine?.complianceScore ?? 0) < 90 ? 'text-amber-600' : 'text-emerald-600'
+                            (selectedMine?.complianceScore ?? 0) < 80 ? 'text-[#9B2335]' :
+                            (selectedMine?.complianceScore ?? 0) < 90 ? 'text-[#B5601B]' : 'text-[#1B7A46]'
                           }`}>
                             {selectedMine?.complianceScore ?? 0}/100
                           </span>
                         </div>
-                        <div className="h-2 w-full bg-slate-200 rounded-full overflow-hidden">
+                        <div className="h-2 w-full bg-[#EDE9E2] rounded-full overflow-hidden">
                           <div
                             className={`h-full rounded-full ${
-                              (selectedMine?.complianceScore ?? 0) < 80 ? 'bg-red-600' :
-                              (selectedMine?.complianceScore ?? 0) < 90 ? 'bg-amber-500' : 'bg-emerald-500'
+                              (selectedMine?.complianceScore ?? 0) < 80 ? 'bg-[#9B2335]' :
+                              (selectedMine?.complianceScore ?? 0) < 90 ? 'bg-[#B5601B]' : 'bg-[#1B7A46]'
                             }`}
                             style={{ width: `${selectedMine?.complianceScore ?? 0}%` }}
                           />
@@ -1172,57 +1172,57 @@ export default function App() {
                       </div>
 
                       <div>
-                        <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2">
+                        <h4 className="text-[10px] font-bold uppercase tracking-wider text-[#5C6B57] mb-2">
                           {t('dashboard.flags')}
                         </h4>
                         {(selectedMine?.flags?.length || 0) > 0 ? (
                           <div className="space-y-2">
                             {selectedMine?.flags?.map((flag, idx) => (
-                              <div key={idx} className="p-2.5 bg-red-50 border border-red-200 rounded-md flex items-start gap-2.5">
-                                <AlertTriangle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
+                              <div key={idx} className="p-2.5 bg-[#FEF0F2] border border-[#9B2335]/20 rounded-md flex items-start gap-2.5">
+                                <AlertTriangle className="w-4 h-4 text-[#9B2335] shrink-0 mt-0.5" />
                                 <div className="flex-1">
-                                  <div className="font-bold text-red-950">{flag.title}</div>
-                                  <div className="text-slate-600 text-[11px] mt-0.5">{flag.note}</div>
+                                  <div className="font-bold text-[#9B2335]">{flag.title}</div>
+                                  <div className="text-[#5C6B57] text-[11px] mt-0.5">{flag.note}</div>
                                 </div>
-                                <span className="font-mono text-[10px] font-bold bg-red-200/60 text-red-900 px-1.5 py-0.5 rounded">
+                                <span className="font-mono text-[10px] font-bold bg-[#9B2335]/10 text-[#9B2335] px-1.5 py-0.5 rounded">
                                   Sev: {flag.severity}
                                 </span>
                               </div>
                             ))}
                           </div>
                         ) : (
-                          <div className="p-2.5 bg-emerald-50 text-emerald-800 rounded border border-emerald-200 text-xs">
-                            <span className="text-emerald-700 font-semibold">{t('dashboard.noViolations')}</span>
+                          <div className="p-2.5 bg-[#E6F2EC] text-[#1B7A46] rounded border border-[#B5D4C5] text-xs">
+                            <span className="text-[#1B7A46] font-semibold">{t('dashboard.noViolations')}</span>
                           </div>
                         )}
                       </div>
 
                       <div className="grid grid-cols-2 gap-2 text-xs">
-                        <div className="p-2 bg-slate-50 rounded border border-slate-200">
-                          <div className="text-[10px] uppercase text-slate-500 font-semibold">{t('dashboard.operator')}</div>
-                          <div className="font-semibold text-slate-800 truncate">{selectedMine?.operator}</div>
+                        <div className="p-2 bg-[#FAF8F4] rounded border border-[#DDD8CF]">
+                          <div className="text-[10px] uppercase text-[#5C6B57] font-semibold">{t('dashboard.operator')}</div>
+                          <div className="font-semibold text-[#1A2810] truncate">{selectedMine?.operator}</div>
                         </div>
-                        <div className="p-2 bg-slate-50 rounded border border-slate-200">
-                          <div className="text-[10px] uppercase text-slate-500 font-semibold">{t('dashboard.lastInspection')}</div>
-                          <div className="font-semibold text-slate-800">{selectedMine?.lastInspection}</div>
+                        <div className="p-2 bg-[#FAF8F4] rounded border border-[#DDD8CF]">
+                          <div className="text-[10px] uppercase text-[#5C6B57] font-semibold">{t('dashboard.lastInspection')}</div>
+                          <div className="font-semibold text-[#1A2810]">{selectedMine?.lastInspection}</div>
                         </div>
-                        <div className="p-2 bg-slate-50 rounded border border-slate-200">
-                          <div className="text-[10px] uppercase text-slate-500 font-semibold">{t('dashboard.permitExpiry')}</div>
-                          <div className="font-semibold text-slate-800">{selectedMine?.permitExp}</div>
+                        <div className="p-2 bg-[#FAF8F4] rounded border border-[#DDD8CF]">
+                          <div className="text-[10px] uppercase text-[#5C6B57] font-semibold">{t('dashboard.permitExpiry')}</div>
+                          <div className="font-semibold text-[#1A2810]">{selectedMine?.permitExp}</div>
                         </div>
-                        <div className="p-2 bg-slate-50 rounded border border-slate-200">
-                          <span className="block text-[10px] uppercase font-bold text-slate-500 mb-0.5">{t('dashboard.citizenReports')}</span>
-                          <span className="block font-semibold text-slate-800">{selectedMine.activeReports} {t('dashboard.active')}</span>
+                        <div className="p-2 bg-[#FAF8F4] rounded border border-[#DDD8CF]">
+                          <span className="block text-[10px] uppercase font-bold text-[#5C6B57] mb-0.5">{t('dashboard.citizenReports')}</span>
+                          <span className="block font-semibold text-[#1A2810]">{selectedMine.activeReports} {t('dashboard.active')}</span>
                         </div>
                       </div>
 
                     </div>
 
-                    <div className="p-4 border-t border-slate-200 bg-slate-50">
+                    <div className="p-4 border-t border-[#DDD8CF] bg-[#FAF8F4]">
                       <button
                         id="btn-open-virtual-view-drawer"
                         onClick={() => setVirtualViewOpen(true)}
-                        className="mb-2 w-full border border-cyan-700 bg-cyan-50 hover:bg-cyan-100 text-cyan-900 font-semibold py-2.5 px-4 rounded-md transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-wider cursor-pointer"
+                        className="mb-2 w-full border border-[#B5D4C5] bg-[#E6F2EC] hover:bg-[#D0E8DC] text-[#1E3A2F] font-semibold py-2.5 px-4 rounded-md transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-wider cursor-pointer"
                       >
                         <Radio className="w-4 h-4" />
                         <span>{t('dashboard.virtualView')}</span>
@@ -1230,7 +1230,7 @@ export default function App() {
                       <button
                         id="btn-investigate-evidence-drawer"
                         onClick={() => handleInvestigateEvidence(selectedMine)}
-                        className="w-full bg-[#1E40AF] hover:bg-blue-800 text-white font-semibold py-2.5 px-4 rounded-md transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-wider shadow-sm cursor-pointer"
+                        className="w-full bg-[#2A5C45] hover:bg-[#1F4433] text-white font-semibold py-2.5 px-4 rounded-md transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-wider shadow-sm cursor-pointer"
                       >
                         <span>{t('dashboard.investigate')} &rarr;</span>
                         <ArrowRight className="w-4 h-4" />
@@ -1254,18 +1254,18 @@ export default function App() {
           {officerNav === 'telemetry' && (
             <div className="space-y-4">
               {!selectedMine && (
-                <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-                  <h2 className="text-lg font-bold text-slate-900">Select a mine for virtual telemetry</h2>
-                  <p className="mt-1 text-xs text-slate-500">Choose a facility to load its offline synthetic trend records.</p>
+                <div className="rounded-xl border border-[#DDD8CF] bg-white p-5 shadow-sm">
+                  <h2 className="text-lg font-bold text-[#1A2810]">Select a mine for virtual telemetry</h2>
+                  <p className="mt-1 text-xs text-[#5C6B57]">Choose a facility to load its offline synthetic trend records.</p>
                   <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                     {mines.slice(0, 12).map(mine => (
                       <button
                         key={mine.id}
                         onClick={() => handleSelectMine(mine)}
-                        className="rounded-lg border border-slate-200 p-3 text-left transition-colors hover:border-blue-400 hover:bg-blue-50"
+                        className="rounded-lg border border-[#DDD8CF] p-3 text-left transition-colors hover:border-[#2A5C45] hover:bg-[#E6F2EC] cursor-pointer"
                       >
-                        <div className="text-xs font-bold text-slate-900">{mine.name}</div>
-                        <div className="mt-1 text-[10px] text-slate-500">{mine.state} · {mine.subsidiary}</div>
+                        <div className="text-xs font-bold text-[#1A2810]">{mine.name}</div>
+                        <div className="mt-1 text-[10px] text-[#5C6B57]">{mine.state} · {mine.subsidiary}</div>
                       </button>
                     ))}
                   </div>
@@ -1337,35 +1337,35 @@ export default function App() {
 
       {/* MODALS (Settings, Help, Legal Dossier) */}
       {showSettingsModal && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full p-6 border border-slate-200 animate-in fade-in zoom-in-95 duration-200 space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-              <div className="flex items-center gap-2 text-slate-900 font-bold text-base">
-                <Settings className="w-5 h-5 text-[#1E40AF]" />
+        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full p-6 border border-[#DDD8CF] animate-in fade-in zoom-in-95 duration-200 space-y-4">
+            <div className="flex items-center justify-between border-b border-[#DDD8CF] pb-3">
+              <div className="flex items-center gap-2 text-[#1A2810] font-bold text-base">
+                <Settings className="w-5 h-5 text-[#2A5C45]" />
                 <span>Surveillance Sensor Configuration</span>
               </div>
               <button 
                 onClick={() => setShowSettingsModal(false)}
-                className="text-slate-400 hover:text-slate-700 cursor-pointer"
+                className="text-[#8FA08A] hover:text-[#1A2810] cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="space-y-3 text-xs text-slate-600">
-              <div className="p-3 bg-slate-50 rounded-lg border border-slate-200 space-y-1">
-                <div className="font-bold text-slate-800">Satellite Cadence Pipeline</div>
-                <div className="text-slate-500">Sentinel-2 constellation automated 5-day cycle. Ground resolution: 10m multispectral.</div>
+            <div className="space-y-3 text-xs text-[#5C6B57]">
+              <div className="p-3 bg-[#FAF8F4] rounded-lg border border-[#DDD8CF] space-y-1">
+                <div className="font-bold text-[#1A2810]">Satellite Cadence Pipeline</div>
+                <div className="text-[#5C6B57]">Sentinel-2 constellation automated 5-day cycle. Ground resolution: 10m multispectral.</div>
               </div>
 
-              <div className="p-3 bg-slate-50 rounded-lg border border-slate-200 space-y-1">
-                <div className="font-bold text-slate-800">InSAR Surface Displacement Threshold</div>
-                <div className="text-slate-500">Sentinel-1 SAR deformation alerts trigger automatically when bench displacement &gt; 2.5 cm/week.</div>
+              <div className="p-3 bg-[#FAF8F4] rounded-lg border border-[#DDD8CF] space-y-1">
+                <div className="font-bold text-[#1A2810]">InSAR Surface Displacement Threshold</div>
+                <div className="text-[#5C6B57]">Sentinel-1 SAR deformation alerts trigger automatically when bench displacement &gt; 2.5 cm/week.</div>
               </div>
 
-              <div className="p-3 bg-slate-50 rounded-lg border border-slate-200 space-y-1">
-                <div className="font-bold text-slate-800">Gazetted Lease Boundary Layer</div>
-                <div className="text-slate-500">Synchronized with Survey of India &amp; Ministry of Coal cadastre shapefiles.</div>
+              <div className="p-3 bg-[#FAF8F4] rounded-lg border border-[#DDD8CF] space-y-1">
+                <div className="font-bold text-[#1A2810]">Gazetted Lease Boundary Layer</div>
+                <div className="text-[#5C6B57]">Synchronized with Survey of India &amp; Ministry of Coal cadastre shapefiles.</div>
               </div>
             </div>
 
@@ -1375,7 +1375,7 @@ export default function App() {
                   triggerToast('Surveillance telemetry parameters verified & active.');
                   setShowSettingsModal(false);
                 }}
-                className="px-4 py-2 bg-[#1E40AF] hover:bg-blue-800 text-white font-semibold text-xs rounded cursor-pointer"
+                className="px-4 py-2 bg-[#2A5C45] hover:bg-[#1F4433] text-white font-semibold text-xs rounded cursor-pointer"
               >
                 Save &amp; Close
               </button>
@@ -1385,25 +1385,25 @@ export default function App() {
       )}
 
       {showHelpModal && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full p-6 border border-slate-200 animate-in fade-in zoom-in-95 duration-200 space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-              <div className="flex items-center gap-2 text-slate-900 font-bold text-base">
-                <HelpCircle className="w-5 h-5 text-[#1E40AF]" />
+        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full p-6 border border-[#DDD8CF] animate-in fade-in zoom-in-95 duration-200 space-y-4">
+            <div className="flex items-center justify-between border-b border-[#DDD8CF] pb-3">
+              <div className="flex items-center gap-2 text-[#1A2810] font-bold text-base">
+                <HelpCircle className="w-5 h-5 text-[#2A5C45]" />
                 <span>Statutory Mining Vigilance Protocols</span>
               </div>
               <button 
                 onClick={() => setShowHelpModal(false)}
-                className="text-slate-400 hover:text-slate-700 cursor-pointer"
+                className="text-[#8FA08A] hover:text-[#1A2810] cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="space-y-3 text-xs text-slate-700 leading-relaxed">
-              <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg text-blue-950">
+            <div className="space-y-3 text-xs text-[#5C6B57] leading-relaxed">
+              <div className="p-3 bg-[#E6F2EC] border border-[#B5D4C5] rounded-lg text-[#1E3A2F]">
                 <strong>Standard Operating Procedure for Boundary Breaches:</strong>
-                <ol className="list-decimal pl-4 mt-1.5 space-y-1 text-slate-700">
+                <ol className="list-decimal pl-4 mt-1.5 space-y-1 text-[#2A5C45]">
                   <li>Automated satellite multi-temporal delta detects unauthorized excavation (&gt;1.0 Ha).</li>
                   <li>Evidence Dossier generated with Cartosat-3 and Sentinel-2 NDVI overlay.</li>
                   <li>Statutory Show-Cause Notice issued under Regulation 109 of Coal Mines Regulations 2017 with 48-hour deadline.</li>
@@ -1411,7 +1411,7 @@ export default function App() {
                 </ol>
               </div>
 
-              <div className="text-slate-500 text-[11px]">
+              <div className="text-[#8FA08A] text-[11px]">
                 Direct technical queries to Directorate General of Mines Safety (DGMS), Dhanbad, Jharkhand.
               </div>
             </div>
@@ -1419,7 +1419,7 @@ export default function App() {
             <div className="flex justify-end pt-2">
               <button
                 onClick={() => setShowHelpModal(false)}
-                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded border border-slate-300 cursor-pointer"
+                className="px-4 py-2 bg-[#FAF8F4] hover:bg-[#EDE9E2] text-[#1A2810] font-semibold text-xs rounded border border-[#DDD8CF] cursor-pointer"
               >
                 Close
               </button>

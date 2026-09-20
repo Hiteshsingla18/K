@@ -343,6 +343,7 @@ export default function LabourGovernmentBenefits({
 
 // Sub-component: Individual Scheme Card
 interface SchemeCardProps {
+  key?: React.Key;
   scheme: GovernmentBenefitScheme;
   enrollment?: GovernmentBenefitEnrollment;
   onOpenDetails: () => void;

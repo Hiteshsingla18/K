@@ -3,7 +3,7 @@ import { ActiveRole } from '../types';
 
 export default function MineOfficerServiceLogin({ onAuthenticate, onBack }: { onAuthenticate: (role: ActiveRole) => void; onBack: () => void }) {
   return <RoleLoginShell
-    role="MINE_OFFICER"
+    role="officer"
     eyebrow="Coal India subsidiary operational theme"
     title="Mine Safety Officer Operations Desk"
     subtitle="DGMS Rule 29 field access for inspections, gas telemetry, PPE verification, and CAPA dispatch."

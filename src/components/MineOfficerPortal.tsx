@@ -189,9 +189,9 @@ export default function MineOfficerPortal({
   });
 
   return (
-    <div className="min-h-screen bg-[#F4F6F9] text-slate-900 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#F4F1EB] text-[#1A2810] flex flex-col font-sans">
       {/* 1. TOP HEADER & NAVIGATION BAR */}
-      <header className="bg-[#0B2545] text-white border-b border-blue-950 sticky top-0 z-30 shadow-md">
+      <header className="bg-[#2A5C45] text-white border-b border-[#1E3A2F] sticky top-0 z-30 shadow-md">
         <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3">
           {/* Brand & Colliery Title */}
           <div className="flex items-center gap-3 min-w-0">
@@ -229,14 +229,14 @@ export default function MineOfficerPortal({
         </div>
 
         {/* Operational Navigation Tabs */}
-        <div className="bg-[#071930] border-t border-slate-800 px-4 sm:px-6">
+        <div className="bg-[#1E3A2F] border-t border-[#152D22] px-4 sm:px-6">
           <div className="max-w-7xl mx-auto flex items-center gap-2 overflow-x-auto py-1.5 scrollbar-none text-xs">
             <button
               onClick={() => setActiveTab('cctv_safety')}
               className={`px-3.5 py-1.5 rounded-md font-semibold whitespace-nowrap transition-colors flex items-center gap-2 cursor-pointer ${
                 activeTab === 'cctv_safety'
-                  ? 'bg-blue-600 text-white shadow-xs'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800/80'
+                  ? 'bg-[#8B5E00] text-white shadow-xs'
+                  : 'text-[#A8C4B0] hover:text-white hover:bg-[#152D22]'
               }`}
             >
               <Video className="w-3.5 h-3.5" />
@@ -250,8 +250,8 @@ export default function MineOfficerPortal({
               onClick={() => setActiveTab('capa_registry')}
               className={`px-3.5 py-1.5 rounded-md font-semibold whitespace-nowrap transition-colors flex items-center gap-2 cursor-pointer ${
                 activeTab === 'capa_registry'
-                  ? 'bg-blue-600 text-white shadow-xs'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800/80'
+                  ? 'bg-[#8B5E00] text-white shadow-xs'
+                  : 'text-[#A8C4B0] hover:text-white hover:bg-[#152D22]'
               }`}
             >
               <FileText className="w-3.5 h-3.5" />
@@ -265,8 +265,8 @@ export default function MineOfficerPortal({
               onClick={() => setActiveTab('gas_telemetry')}
               className={`px-3.5 py-1.5 rounded-md font-semibold whitespace-nowrap transition-colors flex items-center gap-2 cursor-pointer ${
                 activeTab === 'gas_telemetry'
-                  ? 'bg-blue-600 text-white shadow-xs'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800/80'
+                  ? 'bg-[#8B5E00] text-white shadow-xs'
+                  : 'text-[#A8C4B0] hover:text-white hover:bg-[#152D22]'
               }`}
             >
               <Activity className="w-3.5 h-3.5" />
@@ -281,8 +281,8 @@ export default function MineOfficerPortal({
               onClick={() => setActiveTab('workforce_attendance')}
               className={`px-3.5 py-1.5 rounded-md font-semibold whitespace-nowrap transition-colors flex items-center gap-2 cursor-pointer ${
                 activeTab === 'workforce_attendance'
-                  ? 'bg-blue-600 text-white shadow-xs'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800/80'
+                  ? 'bg-[#8B5E00] text-white shadow-xs'
+                  : 'text-[#A8C4B0] hover:text-white hover:bg-[#152D22]'
               }`}
             >
               <Users className="w-3.5 h-3.5" />
@@ -296,12 +296,12 @@ export default function MineOfficerPortal({
       </header>
 
       {/* 2. SHIFT OPERATIONS & TELEMETRY DASHBOARD STRIP */}
-      <section className="bg-white border-b border-slate-200 shadow-2xs py-4 px-4 sm:px-6">
+      <section className="bg-white border-b border-[#DDD8CF] shadow-sm py-4 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
           {/* Shift & Workforce Metric */}
           <div 
             onClick={() => setActiveTab('workforce_attendance')}
-            className="bg-slate-50 hover:bg-blue-50/50 border border-slate-200 hover:border-blue-300 transition-colors rounded-xl p-3.5 flex items-center justify-between cursor-pointer group"
+            className="bg-[#FAF8F4] hover:bg-[#E6F2EC] border border-[#DDD8CF] hover:border-[#B5D4C5] transition-colors rounded-xl p-3.5 flex items-center justify-between cursor-pointer group"
             title="Click to view Labour Attendance & Workforce Composition Roster"
           >
             <div>
@@ -323,7 +323,7 @@ export default function MineOfficerPortal({
           </div>
 
           {/* Environmental Methane Gas Gauge */}
-          <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 flex items-center justify-between">
+          <div className="bg-[#FAF8F4] border border-[#DDD8CF] rounded-xl p-3.5 flex items-center justify-between">
             <div>
               <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
                 <Flame className="w-3.5 h-3.5 text-emerald-600" />
@@ -345,7 +345,7 @@ export default function MineOfficerPortal({
           </div>
 
           {/* Environmental Carbon Monoxide Gauge */}
-          <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 flex items-center justify-between">
+          <div className="bg-[#FAF8F4] border border-[#DDD8CF] rounded-xl p-3.5 flex items-center justify-between">
             <div>
               <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
                 <Wind className="w-3.5 h-3.5 text-blue-600" />
@@ -398,7 +398,7 @@ export default function MineOfficerPortal({
         {activeTab === 'cctv_safety' && (
           <div className="space-y-6">
             {/* Header & Camera Channel Selectors */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-2xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-xl border border-[#DDD8CF] shadow-sm">
               <div className="space-y-0.5">
                 <div className="flex items-center gap-2">
                   <h2 className="text-base font-bold text-slate-900">
@@ -415,7 +415,7 @@ export default function MineOfficerPortal({
               </div>
 
               {/* Camera Channel Tabs */}
-              <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-lg border border-slate-200 text-xs">
+              <div className="flex items-center gap-1.5 bg-[#FAF8F4] p-1 rounded-lg border border-[#DDD8CF] text-xs">
                 {(['CAM-PIT-04', 'CAM-CONV-02', 'CAM-DUMP-01'] as const).map((cam) => (
                   <button
                     key={cam}
@@ -562,7 +562,7 @@ export default function MineOfficerPortal({
             {/* HUMAN-IN-THE-LOOP (HITL) REVIEW CONTROLS CARD */}
             <div className={`rounded-xl p-5 border shadow-sm transition-all ${
               activeAlertReviewed
-                ? 'bg-slate-50 border-slate-300'
+                ? 'bg-[#FAF8F4] border-[#DDD8CF]'
                 : 'bg-white border-red-200 ring-2 ring-red-500/20'
             }`}>
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
@@ -649,7 +649,7 @@ export default function MineOfficerPortal({
         {/* ========================================================================= */}
         {activeTab === 'capa_registry' && (
           <div className="space-y-4">
-            <div className="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="bg-white p-4 sm:p-5 rounded-xl border border-[#DDD8CF] shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <h2 className="text-base font-bold text-slate-900">
                   Corrective and Preventive Action (CAPA) Safety Registry
@@ -667,8 +667,8 @@ export default function MineOfficerPortal({
                     onClick={() => setCapaFilter(filter)}
                     className={`px-3 py-1.5 rounded-md font-semibold transition-colors cursor-pointer ${
                       capaFilter === filter
-                        ? 'bg-[#0B2545] text-white'
-                        : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                        ? 'bg-[#2A5C45] text-white'
+                        : 'bg-[#FAF8F4] text-[#5C6B57] hover:bg-[#EDE9E2]'
                     }`}
                   >
                     {filter === 'all' ? 'All Records' : filter.replace('_', ' ')}
@@ -682,7 +682,7 @@ export default function MineOfficerPortal({
               {filteredCapas.map((capa) => (
                 <div 
                   key={capa.id}
-                  className="bg-white border border-slate-200 rounded-xl p-4 sm:p-5 shadow-2xs hover:border-blue-300 transition-all space-y-3"
+                  className="bg-white border border-[#DDD8CF] rounded-xl p-4 sm:p-5 shadow-sm hover:border-[#B5D4C5] transition-all space-y-3"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div className="flex items-center gap-2.5 flex-wrap">
@@ -732,7 +732,7 @@ export default function MineOfficerPortal({
                     {capa.violationTitle}
                   </div>
 
-                  <div className="bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs text-slate-600 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div className="bg-[#FAF8F4] p-3 rounded-lg border border-[#DDD8CF] text-xs text-[#5C6B57] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div>
                       <strong className="text-slate-700">Assigned Overman:</strong> {capa.assignedTo}
                       {capa.actionSummary && (
@@ -753,7 +753,7 @@ export default function MineOfficerPortal({
         {/* VIEW 3: GAS & DUST TELEMETRY TELE-LOG                                     */}
         {/* ========================================================================= */}
         {activeTab === 'gas_telemetry' && (
-          <div className="bg-white p-5 sm:p-6 rounded-xl border border-slate-200 shadow-2xs space-y-5">
+          <div className="bg-white p-5 sm:p-6 rounded-xl border border-[#DDD8CF] shadow-sm space-y-5">
             <div>
               <h2 className="text-base font-bold text-slate-900">
                 Subterranean &amp; Surface Environmental Sensor Tele-Log
@@ -798,7 +798,7 @@ export default function MineOfficerPortal({
               </div>
             </div>
 
-            <div className="p-4 bg-slate-50 rounded-lg border border-slate-200 text-xs text-slate-600 space-y-2">
+            <div className="p-4 bg-[#FAF8F4] rounded-lg border border-[#DDD8CF] text-xs text-[#5C6B57] space-y-2">
               <div className="font-semibold text-slate-800">DGMS Automated Safety Threshold Protocol:</div>
               <ul className="list-disc list-inside space-y-1 text-slate-600">
                 <li>If CH4 exceeds 0.75%, electrical power to Pit 4 machinery automatically trips via telemetry relay.</li>
@@ -813,7 +813,7 @@ export default function MineOfficerPortal({
         {/* ========================================================================= */}
         {activeTab === 'workforce_attendance' && (
           <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-2xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-xl border border-[#DDD8CF] shadow-sm">
               <div className="space-y-0.5">
                 <div className="flex items-center gap-2">
                   <h2 className="text-base font-bold text-slate-900">

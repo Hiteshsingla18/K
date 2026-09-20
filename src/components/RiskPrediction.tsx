@@ -85,7 +85,7 @@ export default function RiskPrediction({ mines, onInvestigateEvidence }: RiskPre
   return (
     <div className="space-y-6">
       {/* Risk Forecast Header */}
-      <div className="bg-white border border-slate-200 rounded-lg p-5 shadow-2xs">
+      <div className="bg-white border border-[#DDD8CF] rounded-lg p-5 shadow-sm">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
@@ -93,23 +93,23 @@ export default function RiskPrediction({ mines, onInvestigateEvidence }: RiskPre
                 <Brain className="w-3.5 h-3.5 text-purple-600" />
                 AI Predictive Geospatial Model
               </span>
-              <span className="text-xs text-slate-400">&bull;</span>
-              <span className="text-xs text-slate-500 font-mono">Ensemble Random Forest + InSAR Velocimetry</span>
+              <span className="text-xs text-[#8FA08A]">&bull;</span>
+              <span className="text-xs text-[#5C6B57] font-mono">Ensemble Random Forest + InSAR Velocimetry</span>
             </div>
-            <h1 className="text-xl lg:text-2xl font-bold text-slate-900">
+            <h1 className="text-xl lg:text-2xl font-bold text-[#1A2810]">
               Q4 2026 Coalfield Breach Risk &amp; Encroachment Analytics Forecast
             </h1>
-            <p className="text-xs text-slate-500 mt-1">
+            <p className="text-xs text-[#5C6B57] mt-1">
               Predictive risk simulation correlating Sentinel-1 SAR deformation velocities, historical boundary clearances, satellite biomass degradation, and real-time production quotas.
             </p>
           </div>
-
+ 
           <div className="flex items-center gap-3 shrink-0">
-            <div className="bg-slate-100 p-1 rounded-lg border border-slate-200 flex items-center text-xs">
+            <div className="bg-[#FAF8F4] p-1 rounded-lg border border-[#DDD8CF] flex items-center text-xs">
               <button
                 onClick={() => setSelectedQuarter('Q4-2026')}
                 className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
-                  selectedQuarter === 'Q4-2026' ? 'bg-[#0A192F] text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                  selectedQuarter === 'Q4-2026' ? 'bg-[#1A2810] text-[#F4F1EB] shadow-xs' : 'text-[#5C6B57] hover:text-[#1A2810]'
                 }`}
               >
                 Q4 2026 (Immediate)
@@ -117,7 +117,7 @@ export default function RiskPrediction({ mines, onInvestigateEvidence }: RiskPre
               <button
                 onClick={() => setSelectedQuarter('Q1-2027')}
                 className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
-                  selectedQuarter === 'Q1-2027' ? 'bg-[#0A192F] text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                  selectedQuarter === 'Q1-2027' ? 'bg-[#1A2810] text-[#F4F1EB] shadow-xs' : 'text-[#5C6B57] hover:text-[#1A2810]'
                 }`}
               >
                 Q1 2027 (Outlook)
@@ -129,54 +129,54 @@ export default function RiskPrediction({ mines, onInvestigateEvidence }: RiskPre
 
       {/* Model Overview Metrics */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white border border-slate-200 rounded-lg p-4 shadow-2xs">
-          <div className="text-[10px] uppercase font-bold text-slate-500">Predicted High-Risk Blocks</div>
+        <div className="bg-white border border-[#DDD8CF] rounded-lg p-4 shadow-sm">
+          <div className="text-[10px] uppercase font-bold text-[#5C6B57]">Predicted High-Risk Blocks</div>
           <div className="text-2xl font-bold text-red-600 mt-1 flex items-center gap-2">
             <span>2 Colleries</span>
             <span className="text-[10px] font-bold bg-red-100 text-red-700 px-1.5 py-0.5 rounded">Risk &gt; 80%</span>
           </div>
-          <div className="text-[11px] text-slate-500 mt-0.5">Preemptive audit required</div>
+          <div className="text-[11px] text-[#5C6B57] mt-0.5">Preemptive audit required</div>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-lg p-4 shadow-2xs">
-          <div className="text-[10px] uppercase font-bold text-slate-500">Model Predictive Accuracy</div>
+        <div className="bg-white border border-[#DDD8CF] rounded-lg p-4 shadow-sm">
+          <div className="text-[10px] uppercase font-bold text-[#5C6B57]">Model Predictive Accuracy</div>
           <div className="text-2xl font-bold text-emerald-700 mt-1">94.3%</div>
           <div className="text-[11px] text-emerald-600 mt-0.5">Validated against 2024-2025 ground surveys</div>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-lg p-4 shadow-2xs">
-          <div className="text-[10px] uppercase font-bold text-slate-500">Early Warning Trigger Lead Time</div>
+        <div className="bg-white border border-[#DDD8CF] rounded-lg p-4 shadow-sm">
+          <div className="text-[10px] uppercase font-bold text-[#5C6B57]">Early Warning Trigger Lead Time</div>
           <div className="text-2xl font-bold text-blue-700 mt-1">38 Days</div>
-          <div className="text-[11px] text-slate-500 mt-0.5">Before permanent forest biomass loss</div>
+          <div className="text-[11px] text-[#5C6B57] mt-0.5">Before permanent forest biomass loss</div>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-lg p-4 shadow-2xs">
-          <div className="text-[10px] uppercase font-bold text-slate-500">Preemptive Notices Dispatched</div>
+        <div className="bg-white border border-[#DDD8CF] rounded-lg p-4 shadow-sm">
+          <div className="text-[10px] uppercase font-bold text-[#5C6B57]">Preemptive Notices Dispatched</div>
           <div className="text-2xl font-bold text-purple-700 mt-1">1 Dispatched</div>
-          <div className="text-[11px] text-slate-500 mt-0.5">SCN-2026-082 (Rajmahal OCP)</div>
+          <div className="text-[11px] text-[#5C6B57] mt-0.5">SCN-2026-082 (Rajmahal OCP)</div>
         </div>
       </div>
 
       {/* Forecast Matrix Table */}
-      <div className="bg-white border border-slate-200 rounded-lg shadow-2xs overflow-hidden">
-        <div className="p-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+      <div className="bg-white border border-[#DDD8CF] rounded-lg shadow-sm overflow-hidden">
+        <div className="p-4 border-b border-[#DDD8CF] bg-[#FAF8F4] flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Activity className="w-4 h-4 text-purple-600" />
-            <h2 className="text-sm font-bold text-slate-900">National Priority Risk Matrix ({selectedQuarter})</h2>
+            <h2 className="text-sm font-bold text-[#1A2810]">National Priority Risk Matrix ({selectedQuarter})</h2>
           </div>
-          <span className="text-xs text-slate-500 font-mono">Ranked by Composite Threat Score</span>
+          <span className="text-xs text-[#5C6B57] font-mono">Ranked by Composite Threat Score</span>
         </div>
 
-        <div className="divide-y divide-slate-100">
+        <div className="divide-y divide-[#DDD8CF]">
           {forecastData.map((item) => (
-            <div key={item.id} className="p-5 hover:bg-slate-50/70 transition-colors space-y-3">
+            <div key={item.id} className="p-5 hover:bg-[#FAF8F4]/80 transition-colors space-y-3">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="space-y-0.5">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-xs font-bold text-slate-500">{item.id}</span>
-                    <span className="font-bold text-slate-900 text-sm">{item.mineName}</span>
-                    <span className="text-xs text-slate-400">&bull;</span>
-                    <span className="text-xs text-slate-600">{item.operator} ({item.state})</span>
+                    <span className="font-mono text-xs font-bold text-[#5C6B57]">{item.id}</span>
+                    <span className="font-bold text-[#1A2810] text-sm">{item.mineName}</span>
+                    <span className="text-xs text-[#8FA08A]">&bull;</span>
+                    <span className="text-xs text-[#5C6B57]">{item.operator} ({item.state})</span>
                   </div>
                   <div className="text-xs font-semibold text-red-700 flex items-center gap-1.5">
                     <AlertTriangle className="w-3.5 h-3.5 text-red-600" />
@@ -186,7 +186,7 @@ export default function RiskPrediction({ mines, onInvestigateEvidence }: RiskPre
 
                 <div className="flex items-center gap-3 shrink-0">
                   <div className="text-right">
-                    <div className="text-[10px] uppercase text-slate-500 font-bold">Predictive Risk Score</div>
+                    <div className="text-[10px] uppercase text-[#5C6B57] font-bold">Predictive Risk Score</div>
                     <div className="text-lg font-black font-mono text-red-600">{item.riskScore} / 100</div>
                   </div>
 
@@ -196,7 +196,7 @@ export default function RiskPrediction({ mines, onInvestigateEvidence }: RiskPre
                         const targetMine = mines.find(m => m.id === item.id) || mines[0];
                         onInvestigateEvidence(targetMine);
                       }}
-                      className="px-3.5 py-1.5 bg-[#1E40AF] hover:bg-blue-800 text-white rounded text-xs font-semibold flex items-center gap-1.5 shadow-2xs transition-colors cursor-pointer"
+                      className="px-3.5 py-1.5 bg-[#2A5C45] hover:bg-[#1E3A2F] text-white rounded text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-colors cursor-pointer"
                     >
                       <span>Investigate Evidence</span>
                       <ArrowUpRight className="w-3.5 h-3.5" />
@@ -204,7 +204,7 @@ export default function RiskPrediction({ mines, onInvestigateEvidence }: RiskPre
                   ) : (
                     <button
                       disabled
-                      className="px-3.5 py-1.5 bg-slate-100 text-slate-500 border border-slate-200 rounded text-xs font-semibold cursor-not-allowed"
+                      className="px-3.5 py-1.5 bg-[#FAF8F4] text-[#8FA08A] border border-[#DDD8CF] rounded text-xs font-semibold cursor-not-allowed"
                     >
                       Continuous Telemetry Active
                     </button>
@@ -212,15 +212,15 @@ export default function RiskPrediction({ mines, onInvestigateEvidence }: RiskPre
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 text-xs bg-slate-50/70 p-3 rounded-md border border-slate-200/80">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 text-xs bg-[#FAF8F4] p-3 rounded-md border border-[#DDD8CF]">
                 <div>
-                  <span className="text-[10px] uppercase font-bold text-slate-500 block">AI Root Cause Driver:</span>
-                  <p className="text-slate-700 mt-0.5 leading-relaxed">{item.keyDriver}</p>
+                  <span className="text-[10px] uppercase font-bold text-[#5C6B57] block">AI Root Cause Driver:</span>
+                  <p className="text-[#1A2810] mt-0.5 leading-relaxed">{item.keyDriver}</p>
                 </div>
                 <div>
-                  <span className="text-[10px] uppercase font-bold text-slate-500 block">Quarterly Projection:</span>
-                  <p className="text-slate-700 mt-0.5 font-medium">{item.projectedDisplacement}</p>
-                  <div className="text-[10px] text-slate-500 mt-1 font-mono">Model Confidence: {item.confidence}%</div>
+                  <span className="text-[10px] uppercase font-bold text-[#5C6B57] block">Quarterly Projection:</span>
+                  <p className="text-[#1A2810] mt-0.5 font-medium">{item.projectedDisplacement}</p>
+                  <div className="text-[10px] text-[#5C6B57] mt-1 font-mono">Model Confidence: {item.confidence}%</div>
                 </div>
               </div>
             </div>

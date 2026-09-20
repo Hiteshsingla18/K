@@ -349,9 +349,9 @@ export default function LabourMobileApp({
   };
 
   return (
-    <div className="min-h-screen bg-[#0F172A] text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#F4F1EB] text-slate-100 flex flex-col font-sans">
       {/* 1. TOP GLOBAL STATUS BAR (Outside the phone bezel) */}
-      <header className="bg-[#0B1528] text-white border-b border-slate-800 sticky top-0 z-30 shadow-md">
+      <header className="bg-[#162B22] text-white border-b border-[#152D22] sticky top-0 z-30 shadow-md">
         <div className="max-w-6xl w-full mx-auto px-4 h-14 flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
             <div className="relative inline-flex items-center justify-center shrink-0">
@@ -371,11 +371,11 @@ export default function LabourMobileApp({
                 <span className="font-bold text-sm sm:text-base text-white">
                   KhananRakshak AI &bull; Labour Desk
                 </span>
-                <span className="text-[10px] bg-emerald-500/20 text-emerald-300 font-bold px-2 py-0.5 rounded-full border border-emerald-500/30 uppercase">
+                <span className="text-[10px] bg-emerald-500/20 text-[#A8C4B0] font-bold px-2 py-0.5 rounded-full border border-emerald-500/30 uppercase">
                   Mobile Sim
                 </span>
               </div>
-              <span className="text-xs text-slate-400 hidden sm:block">
+              <span className="text-xs text-[#A8C4B0] hidden sm:block">
                 Authentic Smartphone Bezel &bull; Bilingual &bull; Offline Subterranean Sync
               </span>
             </div>
@@ -414,14 +414,14 @@ export default function LabourMobileApp({
         {/* Smartphone Chassis Container */}
         <div className={`w-full transition-all duration-300 ${
           phoneFrameMode 
-            ? 'max-w-[420px] rounded-[42px] border-[10px] border-slate-800 bg-slate-900 shadow-2xl p-2.5 ring-1 ring-slate-700' 
-            : 'max-w-3xl rounded-2xl border border-slate-800 bg-slate-900 shadow-xl p-4'
+            ? 'max-w-[420px] rounded-[42px] border-[10px] border-[#152D22] bg-[#1E3A2F] shadow-2xl p-2.5 ring-1 ring-[#152D22]' 
+            : 'max-w-3xl rounded-2xl border border-[#152D22] bg-[#1E3A2F] shadow-xl p-4'
         }`}>
           {/* Inner Phone Screen */}
-          <div className="bg-[#F8FAFC] text-slate-900 rounded-[32px] overflow-hidden flex flex-col min-h-[720px] max-h-[820px] shadow-inner relative border border-slate-200">
+          <div className="bg-[#F4F1EB] text-[#1A2810] rounded-[32px] overflow-hidden flex flex-col min-h-[720px] max-h-[820px] shadow-inner relative border border-[#DDD8CF]">
             
             {/* Smartphone Top Notch & Status Bar */}
-            <div className="bg-[#0B2545] text-white px-5 pt-2.5 pb-2 flex items-center justify-between text-[11px] font-mono select-none">
+            <div className="bg-[#1E3A2F] text-white px-5 pt-2.5 pb-2 flex items-center justify-between text-[11px] font-mono select-none">
               <span>09:41</span>
               {/* Speaker / Camera Notch */}
               <div className="w-20 h-4 bg-slate-950 rounded-full flex items-center justify-center">
@@ -444,7 +444,7 @@ export default function LabourMobileApp({
             </div>
 
             {/* Mobile App Top Brand Bar with Bilingual Toggle */}
-            <div className="bg-[#0B2545] text-white px-4 py-3 border-b border-blue-950">
+            <div className="bg-[#1E3A2F] text-white px-4 py-3 border-b border-[#152D22]">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5 min-w-0">
                   <div className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs shrink-0 ring-2 ${
@@ -501,8 +501,8 @@ export default function LabourMobileApp({
                 </div>
 
                 {/* Quick Persona Toggle Banner */}
-                <div className="bg-blue-950/80 border border-blue-800/60 rounded-md px-2 py-1 text-[10px] flex items-center justify-between">
-                  <span className="text-blue-300 font-medium">Switch Test Persona:</span>
+                <div className="bg-[#152D22]/80 border border-[#152D22] rounded-md px-2 py-1 text-[10px] flex items-center justify-between">
+                  <span className="text-[#A8C4B0] font-medium">Switch Test Persona:</span>
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={() => setActiveProfileId('WKR-8812')}
@@ -539,9 +539,9 @@ export default function LabourMobileApp({
               {mobileTab === 'attendance' && (
                 <div className="space-y-4">
                   {/* Attendance Card */}
-                  <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-xs text-center space-y-3.5">
+                  <div className="bg-white rounded-2xl border border-[#DDD8CF] p-4 shadow-sm text-center space-y-3.5">
                     <div className="space-y-0.5">
-                      <h3 className="font-bold text-sm text-slate-900">
+                      <h3 className="font-bold text-sm text-[#1A2810]">
                         {t.punchHeader}
                       </h3>
                       <p className="text-[11px] text-slate-500">
@@ -556,8 +556,8 @@ export default function LabourMobileApp({
                       disabled={isPunchingShift}
                       className={`w-full py-5 px-4 rounded-2xl font-bold text-xs flex flex-col items-center justify-center gap-2 transition-all shadow-md cursor-pointer ${
                         isPunchingShift
-                          ? 'bg-blue-600 text-white animate-pulse'
-                          : 'bg-gradient-to-b from-[#138808] to-[#0f6b06] hover:from-[#169d0a] hover:to-[#138808] text-white active:scale-98'
+                          ? 'bg-[#5C6B57] text-white animate-pulse'
+                          : 'bg-gradient-to-b from-[#2A5C45] to-[#1E3A2F] hover:from-[#357556] hover:to-[#2A5C45] text-white active:scale-98'
                       }`}
                     >
                       <div className="w-14 h-14 rounded-full bg-white/20 border-2 border-white/40 flex items-center justify-center shadow-inner">
@@ -602,18 +602,18 @@ export default function LabourMobileApp({
                   </div>
 
                   {/* Attendance Log History */}
-                  <div className="bg-white rounded-2xl border border-slate-200 p-3.5 shadow-xs space-y-2.5">
-                    <div className="flex items-center justify-between text-xs font-bold text-slate-800">
+                  <div className="bg-white rounded-2xl border border-[#DDD8CF] p-3.5 shadow-sm space-y-2.5">
+                    <div className="flex items-center justify-between text-xs font-bold text-[#1A2810]">
                       <span>{t.recentPunches}</span>
-                      <span className="text-[10px] text-slate-400">Shift Log</span>
+                      <span className="text-[10px] text-[#5C6B57]">Shift Log</span>
                     </div>
 
                     <div className="space-y-2">
                       {attendanceRecords.map((att) => (
-                        <div key={att.id} className="p-2.5 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between text-xs">
+                        <div key={att.id} className="p-2.5 bg-[#FAF8F4] rounded-xl border border-[#DDD8CF] flex items-center justify-between text-xs">
                           <div>
-                            <div className="font-bold text-slate-800">{att.shift} &bull; {att.checkInTime}</div>
-                            <div className="text-[10px] text-slate-500">{att.date} &bull; {att.geofenceStatus}</div>
+                            <div className="font-bold text-[#1A2810]">{att.shift} &bull; {att.checkInTime}</div>
+                            <div className="text-[10px] text-[#5C6B57]">{att.date} &bull; {att.geofenceStatus}</div>
                           </div>
                           <div className="text-right">
                             {att.syncStatus === 'pending' ? (
@@ -638,9 +638,9 @@ export default function LabourMobileApp({
               {/* ========================================================================= */}
               {mobileTab === 'near_miss' && (
                 <div className="space-y-3.5">
-                  <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-xs space-y-3">
+                  <div className="bg-white rounded-2xl border border-[#DDD8CF] p-4 shadow-sm space-y-3">
                     <div className="space-y-0.5">
-                      <h3 className="font-bold text-sm text-slate-900">
+                      <h3 className="font-bold text-sm text-[#1A2810]">
                         {t.nearMissTitle}
                       </h3>
                       <p className="text-[11px] text-slate-500">
@@ -714,10 +714,10 @@ export default function LabourMobileApp({
                         </div>
 
                         {/* 2. Audio Memo Simulator */}
-                        <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
-                          <div className="flex items-center justify-between text-xs font-bold text-slate-800">
+                        <div className="bg-[#FAF8F4] p-3 rounded-xl border border-[#DDD8CF] space-y-2">
+                          <div className="flex items-center justify-between text-xs font-bold text-[#1A2810]">
                             <span className="flex items-center gap-1.5">
-                              <Mic className="w-3.5 h-3.5 text-blue-600" />
+                              <Mic className="w-3.5 h-3.5 text-[#2A5C45]" />
                               <span>{t.voiceReport}</span>
                             </span>
                             {audioRecorded && (
@@ -768,8 +768,8 @@ export default function LabourMobileApp({
                         </div>
 
                         {/* 3. Photo Attachment Slot */}
-                        <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
-                          <div className="flex items-center justify-between text-xs font-bold text-slate-800">
+                        <div className="bg-[#FAF8F4] p-3 rounded-xl border border-[#DDD8CF] space-y-2">
+                          <div className="flex items-center justify-between text-xs font-bold text-[#1A2810]">
                             <span className="flex items-center gap-1.5">
                               <Camera className="w-3.5 h-3.5 text-emerald-600" />
                               <span>{t.photoSlot}</span>
@@ -806,7 +806,7 @@ export default function LabourMobileApp({
 
                         <button
                           type="submit"
-                          className="w-full py-3 bg-[#0B2545] hover:bg-[#133A6B] text-white font-bold text-xs rounded-xl shadow-xs transition-colors cursor-pointer"
+                          className="w-full py-3 bg-[#2A5C45] hover:bg-[#1E3A2F] text-white font-bold text-xs rounded-xl shadow-xs transition-colors cursor-pointer"
                         >
                           {t.submitReport}
                         </button>
@@ -882,11 +882,11 @@ export default function LabourMobileApp({
             </div>
 
             {/* Mobile Bottom Navigation Bar inside Phone Screen */}
-            <div className="bg-white border-t border-slate-200 px-2 py-2 flex items-center justify-around text-xs shrink-0 select-none">
+            <div className="bg-white border-t border-[#DDD8CF] px-2 py-2 flex items-center justify-around text-xs shrink-0 select-none">
               <button
                 onClick={() => setMobileTab('attendance')}
                 className={`flex flex-col items-center gap-1 cursor-pointer transition-colors ${
-                  mobileTab === 'attendance' ? 'text-[#0B2545] font-bold' : 'text-slate-400 hover:text-slate-700'
+                  mobileTab === 'attendance' ? 'text-[#2A5C45] font-bold' : 'text-[#8FA08A] hover:text-[#5C6B57]'
                 }`}
               >
                 <QrCode className="w-5 h-5" />
@@ -896,7 +896,7 @@ export default function LabourMobileApp({
               <button
                 onClick={() => setMobileTab('near_miss')}
                 className={`flex flex-col items-center gap-1 cursor-pointer transition-colors ${
-                  mobileTab === 'near_miss' ? 'text-[#0B2545] font-bold' : 'text-slate-400 hover:text-slate-700'
+                  mobileTab === 'near_miss' ? 'text-[#2A5C45] font-bold' : 'text-[#8FA08A] hover:text-[#5C6B57]'
                 }`}
               >
                 <AlertTriangle className="w-5 h-5" />
@@ -906,7 +906,7 @@ export default function LabourMobileApp({
               <button
                 onClick={() => setMobileTab('safety_vault')}
                 className={`flex flex-col items-center gap-1 cursor-pointer transition-colors ${
-                  mobileTab === 'safety_vault' ? 'text-[#0B2545] font-bold' : 'text-slate-400 hover:text-slate-700'
+                  mobileTab === 'safety_vault' ? 'text-[#2A5C45] font-bold' : 'text-[#8FA08A] hover:text-[#5C6B57]'
                 }`}
               >
                 <Shield className="w-5 h-5" />
@@ -916,7 +916,7 @@ export default function LabourMobileApp({
               <button
                 onClick={() => setMobileTab('govt_benefits')}
                 className={`flex flex-col items-center gap-1 cursor-pointer transition-colors ${
-                  mobileTab === 'govt_benefits' ? 'text-[#0B2545] font-bold' : 'text-slate-400 hover:text-slate-700'
+                  mobileTab === 'govt_benefits' ? 'text-[#2A5C45] font-bold' : 'text-[#8FA08A] hover:text-[#5C6B57]'
                 }`}
               >
                 <ShieldCheck className="w-5 h-5" />

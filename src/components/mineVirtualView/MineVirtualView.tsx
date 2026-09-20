@@ -46,13 +46,13 @@ function GenericGraph({ values, color, title, legendLabel, limitValue }: { value
   const limitY = limitValue ? height - paddingY - ((limitValue - yMin) / yRange) * graphHeight : null;
 
   return (
-    <div className="mt-4 rounded border border-slate-700 bg-slate-900/40 p-3">
+    <div className="mt-4 rounded border border-[#F4F1EB]/20 bg-[#F4F1EB]/5 p-3">
       <div className="mb-4 flex items-start justify-between">
-        <h4 className="w-2/3 text-[10px] font-bold leading-tight text-slate-200">
+        <h4 className="w-2/3 text-[10px] font-bold leading-tight text-[#F4F1EB]">
           {title || "90-Day Trend History"}
         </h4>
-        <div className="flex flex-col items-end gap-1 text-[8px] font-bold uppercase tracking-wider text-slate-400">
-           <span className="rounded bg-slate-800 px-1.5 py-0.5 text-center">Telemetry</span>
+        <div className="flex flex-col items-end gap-1 text-[8px] font-bold uppercase tracking-wider text-[#A8C4B0]">
+           <span className="rounded bg-[#1A2810] px-1.5 py-0.5 text-center">Telemetry</span>
            <div className="mt-1 flex items-center gap-2">
              <span className="flex items-center gap-1"><span className="h-0.5 w-2" style={{ backgroundColor: color }}></span> {legendLabel}</span>
            </div>
@@ -66,12 +66,12 @@ function GenericGraph({ values, color, title, legendLabel, limitValue }: { value
             <text x={width - paddingX + 2} y={limitY + 8} fontSize="5" fill="#ef4444" opacity="0.8">Target</text>
           </>
         )}
-
+ 
         <polyline points={points} fill="none" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
         
-        <text x={paddingX} y={height - 5} fontSize="6" fill="#64748b">T-90d</text>
-        <text x={width / 2} y={height - 5} fontSize="6" fill="#64748b" textAnchor="middle">T-45d</text>
-        <text x={width - paddingX} y={height - 5} fontSize="6" fill="#64748b" textAnchor="end">Today</text>
+        <text x={paddingX} y={height - 5} fontSize="6" fill="#A8C4B0">T-90d</text>
+        <text x={width / 2} y={height - 5} fontSize="6" fill="#A8C4B0" textAnchor="middle">T-45d</text>
+        <text x={width - paddingX} y={height - 5} fontSize="6" fill="#A8C4B0" textAnchor="end">Today</text>
       </svg>
     </div>
   );
@@ -104,13 +104,13 @@ function PollutionGraph({ rows }: { rows: MineTelemetryRow[] }) {
   const limit60Y = height - paddingY - (60 / maxY) * graphHeight;
 
   return (
-    <div className="mt-4 rounded border border-slate-700 bg-slate-900/40 p-3">
+    <div className="mt-4 rounded border border-[#F4F1EB]/20 bg-[#F4F1EB]/5 p-3">
       <div className="mb-4 flex items-start justify-between">
-        <h4 className="w-2/3 text-[10px] font-bold leading-tight text-slate-200">
+        <h4 className="w-2/3 text-[10px] font-bold leading-tight text-[#F4F1EB]">
           90-Day Ambient Particulate History vs National Air Quality Standards
         </h4>
-        <div className="flex flex-col items-end gap-1 text-[8px] font-bold uppercase tracking-wider text-slate-400">
-           <span className="rounded bg-slate-800 px-1.5 py-0.5 text-center">CAAQMS<br/>Telemetry</span>
+        <div className="flex flex-col items-end gap-1 text-[8px] font-bold uppercase tracking-wider text-[#A8C4B0]">
+           <span className="rounded bg-[#1A2810] px-1.5 py-0.5 text-center">CAAQMS<br/>Telemetry</span>
            <div className="mt-1 flex items-center gap-2">
              <span className="flex items-center gap-1"><span className="h-0.5 w-2 bg-[#f43f5e]"></span> PM10</span>
              <span className="flex items-center gap-1"><span className="h-0.5 w-2 bg-[#eab308]"></span> PM2.5</span>
@@ -124,15 +124,15 @@ function PollutionGraph({ rows }: { rows: MineTelemetryRow[] }) {
         <text x={width - paddingX + 2} y={limit100Y + 8} fontSize="5" fill="#f43f5e" opacity="0.8">Limits</text>
         
         <line x1={paddingX} y1={limit60Y} x2={width - paddingX} y2={limit60Y} stroke="#eab308" strokeWidth="0.5" strokeDasharray="2 2" opacity="0.4" />
-
+ 
         {/* Data Lines */}
         <polyline points={pointsPM25} fill="none" stroke="#eab308" strokeWidth="1.5" strokeLinejoin="round" />
         <polyline points={pointsPM10} fill="none" stroke="#f43f5e" strokeWidth="1.5" strokeLinejoin="round" />
         
         {/* X Axis labels */}
-        <text x={paddingX} y={height - 5} fontSize="6" fill="#64748b">06-22 (T-90d)</text>
-        <text x={width / 2} y={height - 5} fontSize="6" fill="#64748b" textAnchor="middle">08-05 (T-45d)</text>
-        <text x={width - paddingX} y={height - 5} fontSize="6" fill="#64748b" textAnchor="end">09-18 (Today)</text>
+        <text x={paddingX} y={height - 5} fontSize="6" fill="#A8C4B0">06-22 (T-90d)</text>
+        <text x={width / 2} y={height - 5} fontSize="6" fill="#A8C4B0" textAnchor="middle">08-05 (T-45d)</text>
+        <text x={width - paddingX} y={height - 5} fontSize="6" fill="#A8C4B0" textAnchor="end">09-18 (Today)</text>
       </svg>
     </div>
   )
@@ -162,14 +162,14 @@ function RingDetail({
   }[ring];
 
   return (
-    <aside className="border-l border-slate-700 bg-[#0d1930] p-5 lg:w-[360px]" aria-label={`${config.label} details`}>
+    <aside className="border-l border-[#F4F1EB]/20 bg-[#1E3A2F] p-5 lg:w-[360px]" aria-label={`${config.label} details`}>
       <div className="mb-5 flex items-start justify-between">
         <div>
           <div className="mb-1 flex items-center gap-2 text-xs font-bold" style={{ color: config.color }}>
             <span className="h-4 w-1 rounded-full" style={{ backgroundColor: config.color }} />
             {ring === 'pollution' ? 'Ring 5: Emissions & CAAQMS Air Quality Telemetry' : config.label}
           </div>
-          <div className="text-[10px] text-slate-400">
+          <div className="text-[10px] text-[#A8C4B0]">
             {ring === 'pollution' ? 'Continuous particulate matter, gaseous dispersion & acoustic noise contours' : 'Synthetic telemetry · last 30 days'}
           </div>
         </div>
@@ -186,38 +186,38 @@ function RingDetail({
       {ring === 'pollution' ? (
         <>
           <div className="mt-4 grid grid-cols-2 gap-2">
-            <div className="rounded border border-slate-700 bg-slate-900/50 p-2">
-              <div className="text-[10px] text-slate-400 mb-1">Ambient PM10 (24-hr)</div>
+            <div className="rounded border border-[#F4F1EB]/20 bg-[#F4F1EB]/5 p-2">
+              <div className="text-[10px] text-[#A8C4B0] mb-1">Ambient PM10 (24-hr)</div>
               <div className="flex items-baseline gap-1">
                 <span className="text-xl font-bold text-[#f43f5e]">{Math.round(latest?.dustPpm ?? 0)}</span>
-                <span className="text-[10px] text-slate-300">µg/m³</span>
+                <span className="text-[10px] text-[#A8C4B0]">µg/m³</span>
               </div>
-              <div className="text-[8px] text-slate-500 mt-1">NAAQS Cap: 100 µg/m³</div>
+              <div className="text-[8px] text-[#A8C4B0] mt-1">NAAQS Cap: 100 µg/m³</div>
             </div>
-            <div className="rounded border border-slate-700 bg-slate-900/50 p-2">
-              <div className="text-[10px] text-slate-400 mb-1">Fine Dust PM2.5</div>
+            <div className="rounded border border-[#F4F1EB]/20 bg-[#F4F1EB]/5 p-2">
+              <div className="text-[10px] text-[#A8C4B0] mb-1">Fine Dust PM2.5</div>
               <div className="flex items-baseline gap-1">
                 <span className="text-xl font-bold text-[#eab308]">{Math.round((latest?.dustPpm ?? 0) * 0.45)}</span>
-                <span className="text-[10px] text-slate-300">µg/m³</span>
+                <span className="text-[10px] text-[#A8C4B0]">µg/m³</span>
               </div>
-              <div className="text-[8px] text-slate-500 mt-1">NAAQS Cap: 60 µg/m³</div>
+              <div className="text-[8px] text-[#A8C4B0] mt-1">NAAQS Cap: 60 µg/m³</div>
             </div>
-            <div className="rounded border border-slate-700 bg-slate-900/50 p-2">
-              <div className="text-[10px] text-slate-400 mb-1">Gaseous SO2 / NOx</div>
+            <div className="rounded border border-[#F4F1EB]/20 bg-[#F4F1EB]/5 p-2">
+              <div className="text-[10px] text-[#A8C4B0] mb-1">Gaseous SO2 / NOx</div>
               <div className="flex items-baseline gap-1">
-                <span className="text-lg font-bold text-white">{Math.round((latest?.pollution ?? 0) * 0.5)}</span> <span className="text-[10px] text-slate-400 mr-1">SO2</span>
-                <span className="text-slate-500">/</span>
-                <span className="text-lg font-bold text-white ml-1">{Math.round((latest?.pollution ?? 0) * 0.6)}</span> <span className="text-[10px] text-slate-400">NOx</span>
+                <span className="text-lg font-bold text-[#F4F1EB]">{Math.round((latest?.pollution ?? 0) * 0.5)}</span> <span className="text-[10px] text-[#A8C4B0] mr-1">SO2</span>
+                <span className="text-[#A8C4B0]">/</span>
+                <span className="text-lg font-bold text-[#F4F1EB] ml-1">{Math.round((latest?.pollution ?? 0) * 0.6)}</span> <span className="text-[10px] text-[#A8C4B0]">NOx</span>
               </div>
-              <div className="text-[8px] text-slate-500 mt-1">Standard: 80 µg/m³ safe</div>
+              <div className="text-[8px] text-[#A8C4B0] mt-1">Standard: 80 µg/m³ safe</div>
             </div>
-            <div className="rounded border border-slate-700 bg-slate-900/50 p-2">
-              <div className="text-[10px] text-slate-400 mb-1">Mist Cannons & Noise</div>
+            <div className="rounded border border-[#F4F1EB]/20 bg-[#F4F1EB]/5 p-2">
+              <div className="text-[10px] text-[#A8C4B0] mb-1">Mist Cannons & Noise</div>
               <div className="flex items-baseline gap-1">
                 <span className="text-lg font-bold text-[#eab308]">{Math.round((latest?.waterQuality ?? 0) / 2)}%</span>
-                <span className="text-[10px] text-slate-300">Eff.</span>
+                <span className="text-[10px] text-[#A8C4B0]">Eff.</span>
               </div>
-              <div className="text-[8px] text-slate-500 mt-1">Noise: {latest?.noiseDb?.toFixed(1)} dB(A)</div>
+              <div className="text-[8px] text-[#A8C4B0] mt-1">Noise: {latest?.noiseDb?.toFixed(1)} dB(A)</div>
             </div>
           </div>
           
@@ -225,8 +225,8 @@ function RingDetail({
           
           <div className="mt-4 flex items-start gap-2">
              <div className="mt-1"><AlertTriangle className="h-4 w-4 text-rose-400" /></div>
-             <div className="rounded border border-slate-700/50 bg-slate-800/30 p-3 text-[10px] leading-relaxed text-slate-300">
-               <span className="text-blue-400 font-bold">Central Pollution Control Board (CPCB) CAAQMS Telemetry Diagnostic</span><br/>
+             <div className="rounded border border-rose-900/50 bg-rose-950/30 p-3 text-[10px] leading-relaxed text-[#F4F1EB]">
+               <span className="text-rose-400 font-bold">Central Pollution Control Board (CPCB) CAAQMS Telemetry Diagnostic</span><br/>
                Online CAAQMS Station #1 (Haul Road Alpha) records 24-hr PM10 at <b className="text-[#f43f5e]">{Math.round(latest?.dustPpm ?? 0)} µg/m³</b> (limit 100).
                <span className="text-rose-400"> Fugitive dust plume detected during heavy hauler movement.</span> High-pressure fogging cannons at Coal Handling Plant (CHP) operating at {Math.round((latest?.waterQuality ?? 0) / 2)}% efficiency; automated nozzle descaling recommended.
              </div>
@@ -234,12 +234,12 @@ function RingDetail({
         </>
       ) : (
         <>
-          <div className="space-y-2 text-xs text-slate-200">
-            {summary.map(item => <div key={item} className="rounded border border-slate-700 bg-slate-900/50 p-2">{item}</div>)}
+          <div className="space-y-2 text-xs text-[#F4F1EB]">
+            {summary.map(item => <div key={item} className="rounded border border-[#F4F1EB]/20 bg-[#F4F1EB]/5 p-2">{item}</div>)}
           </div>
           {ring === 'environment' && (
-            <div className="mt-4 grid grid-cols-2 gap-2 text-[10px] text-slate-300">
-              {['N · 34°C', 'E · 31°C', 'S · 33°C', 'W · 30°C'].map(zone => <div key={zone} className="rounded bg-slate-800 p-2">{zone}</div>)}
+            <div className="mt-4 grid grid-cols-2 gap-2 text-[10px] text-[#A8C4B0]">
+              {['N · 34°C', 'E · 31°C', 'S · 33°C', 'W · 30°C'].map(zone => <div key={zone} className="rounded bg-[#1A2810] p-2">{zone}</div>)}
             </div>
           )}
           <GenericGraph 
@@ -249,8 +249,8 @@ function RingDetail({
              legendLabel={config.label.split(' ')[0]} 
              limitValue={ring === 'production' ? forecast.targetYearEndTons / 12 : undefined} 
           />
-          <div className="mt-3 text-[10px] text-slate-400">Last updated {new Date(latest.recordedAt).toLocaleString()}</div>
-          <div className="mt-4 text-[10px] leading-relaxed text-slate-400">
+          <div className="mt-3 text-[10px] text-[#A8C4B0]">Last updated {new Date(latest.recordedAt).toLocaleString()}</div>
+          <div className="mt-4 text-[10px] leading-relaxed text-[#A8C4B0]">
             {mine.name} · Data is synthetic/demo shaped for future sensor and production integrations.
           </div>
         </>
@@ -303,31 +303,29 @@ export default function MineVirtualView({ mine, onClose }: { mine: MineRecord; o
     pollution: `${Math.round(pollution)} composite harm index`
   }), [areaCurrent, forecast, latest, pollution]);
 
-  if (rows.length === 0) return <div className="rounded-xl border border-slate-700 bg-[#091326] p-6 text-sm text-slate-300">Loading mine digital twin telemetry…</div>;
-
+  if (rows.length === 0) return <div className="rounded-xl border border-[#F4F1EB]/20 bg-[#1A2810] p-6 text-sm text-[#A8C4B0]">Loading mine digital twin telemetry…</div>;
+ 
   return (
-    <section className={`${onClose ? 'fixed inset-0 z-[2000] min-h-screen w-screen overflow-y-auto' : 'relative'} bg-[#091326] text-white`} role="dialog" aria-modal={Boolean(onClose)} aria-label="Mine Virtual View">
-      <div className={`${onClose ? 'min-h-screen w-full p-3 sm:p-6' : 'relative overflow-hidden rounded-xl border border-slate-700 p-3'}`}>
+    <section className={`${onClose ? 'fixed inset-0 z-[2000] min-h-screen w-screen overflow-y-auto' : 'relative'} bg-[#1A2810] text-[#F4F1EB]`} role="dialog" aria-modal={Boolean(onClose)} aria-label="Mine Virtual View">
+      <div className={`${onClose ? 'min-h-screen w-full p-3 sm:p-6' : 'relative overflow-hidden rounded-xl border border-[#F4F1EB]/20 p-3'}`}>
         <div className="relative mx-auto flex min-h-[calc(100vh-3rem)] max-w-[1800px] flex-col">
-          <header className="flex flex-wrap items-start justify-between gap-3 border-b border-slate-700 pb-3">
+          <header className="flex flex-wrap items-start justify-between gap-3 border-b border-[#F4F1EB]/20 pb-3">
             <div>
-              {onClose && <button onClick={onClose} className="mb-3 inline-flex items-center gap-1 text-xs font-semibold text-slate-300 hover:text-white"><ArrowLeft className="h-3.5 w-3.5" /> Back to Mine Details</button>}
-              <div className="font-mono text-[10px] uppercase tracking-wider text-blue-300">CoalGuard AI · Mine Virtual View</div>
+              {onClose && <button onClick={onClose} className="mb-3 inline-flex items-center gap-1 text-xs font-semibold text-[#A8C4B0] hover:text-[#F4F1EB]"><ArrowLeft className="h-3.5 w-3.5" /> Back to Mine Details</button>}
+              <div className="font-mono text-[10px] uppercase tracking-wider text-[#A8C4B0]">CoalGuard AI · Mine Virtual View</div>
               <h1 className="mt-1 text-xl font-bold">{mine.name}</h1>
-              <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-slate-300"><MapPin className="h-3.5 w-3.5" /> {mine.subsidiary} · {mine.state} <span className="rounded px-2 py-0.5 font-bold uppercase" style={{ color: riskColor, backgroundColor: `${riskColor}22` }}>{mine.status} risk</span><span>Lease status: {mine.status === 'critical' ? 'Review required' : 'Active'}</span></div>
+              <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-[#A8C4B0]"><MapPin className="h-3.5 w-3.5" /> {mine.subsidiary} · {mine.state} <span className="rounded px-2 py-0.5 font-bold uppercase" style={{ color: riskColor, backgroundColor: `${riskColor}22` }}>{mine.status} risk</span><span>Lease status: {mine.status === 'critical' ? 'Review required' : 'Active'}</span></div>
             </div>
             <div className="flex items-center gap-2">
-              <button onClick={() => setPaused(value => !value)} className="rounded border border-slate-600 p-2 text-slate-300 hover:text-white" aria-label={paused ? 'Resume radar sweep' : 'Pause radar sweep'}>{paused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}</button>
-              {onClose && <button onClick={onClose} className="rounded border border-slate-600 p-2 text-slate-300 hover:text-white" aria-label="Close virtual view"><X className="h-4 w-4" /></button>}
+              <button onClick={() => setPaused(value => !value)} className="rounded border border-[#F4F1EB]/20 p-2 text-[#A8C4B0] hover:text-[#F4F1EB]" aria-label={paused ? 'Resume radar sweep' : 'Pause radar sweep'}>{paused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}</button>
+              {onClose && <button onClick={onClose} className="rounded border border-[#F4F1EB]/20 p-2 text-[#A8C4B0] hover:text-[#F4F1EB]" aria-label="Close virtual view"><X className="h-4 w-4" /></button>}
               <span className="rounded border border-emerald-700 bg-emerald-950/40 px-2 py-1 font-mono text-[10px] text-emerald-300">Offline telemetry · {rows.length} records</span>
             </div>
-          </header>
-
-          <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
+          </header>              <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
             <main className="min-w-0 flex-1">
               <div className="grid gap-4 p-3 lg:grid-cols-[minmax(420px,1fr)_minmax(280px,0.8fr)] lg:p-6">
-                <div className="relative flex min-h-[460px] items-center justify-center overflow-hidden rounded-xl border border-slate-700 bg-[#17243d]">
-                  <div className="pointer-events-none absolute inset-0 opacity-30 [background:linear-gradient(90deg,transparent_49.8%,#64748b_50%,transparent_50.2%),linear-gradient(0deg,transparent_49.8%,#64748b_50%,transparent_50.2%)]" />
+                <div className="relative flex min-h-[460px] items-center justify-center overflow-hidden rounded-xl border border-[#F4F1EB]/20 bg-[#1E3A2F]">
+                  <div className="pointer-events-none absolute inset-0 opacity-10 [background:linear-gradient(90deg,transparent_49.8%,#A8C4B0_50%,transparent_50.2%),linear-gradient(0deg,transparent_49.8%,#A8C4B0_50%,transparent_50.2%)]" />
                   <svg viewBox="0 0 340 340" className="h-[min(78vw,440px)] w-[min(78vw,440px)]" role="img" aria-label="Radial mine digital twin">
                     <defs>
                       <linearGradient id="environmentHeat" x1="0" x2="1"><stop offset="0%" stopColor="#22d3ee" /><stop offset="55%" stopColor="#f59e0b" /><stop offset="100%" stopColor="#ef4444" /></linearGradient>
@@ -359,34 +357,34 @@ export default function MineVirtualView({ mine, onClose }: { mine: MineRecord; o
                           onBlur={() => setHoveredRing(null)}
                           style={{ opacity: visible[ring] ? (dimmed ? 0.18 : 1) : 0, transition: 'opacity 180ms' }}
                         >
-                          <circle cx="170" cy="170" r={config.radius} fill="none" stroke="#334155" strokeWidth="10" strokeOpacity="0.7" />
+                          <circle cx="170" cy="170" r={config.radius} fill="none" stroke="#A8C4B0" strokeWidth="10" strokeOpacity="0.2" />
                           <circle cx="170" cy="170" r={config.radius} fill="none" stroke={ringColor} strokeWidth={selectedRing === ring ? 4 : 2} strokeDasharray={ring === 'forecast' ? '3 6' : dash} strokeDashoffset={ring === 'forecast' ? 0 : dash * (1 - progress)} transform="rotate(-90 170 170)" style={{ transition: ring === 'production' ? 'stroke-dashoffset 1400ms ease-out' : 'stroke-width 180ms' }} />
                           {ring === 'area' && <circle cx="170" cy="170" r="42" fill="none" stroke="#10b981" strokeDasharray="2 5" strokeWidth="2" />}
                           <title>{`${RINGS[ring].label}: ${ringSummary[ring]}. Click to inspect.`}</title>
                         </g>
                       );
                     })}
-                    {pollution > 75 && <g aria-label="Critical pollution warning"><circle cx="300" cy="72" r="8" fill="#dc2626" className="animate-pulse" /><foreignObject x="290" y="62" width="20" height="20"><AlertTriangle className="h-4 w-4 text-white" /></foreignObject></g>}
-                    <circle cx="170" cy="170" r="34" fill="#0b1730" stroke={riskColor} strokeWidth="3" className={mine.status === 'critical' ? 'animate-pulse' : ''} />
+                    {pollution > 75 && <g aria-label="Critical pollution warning"><circle cx="300" cy="72" r="8" fill="#dc2626" className="animate-pulse" /><foreignObject x="290" y="62" width="20" height="20"><AlertTriangle className="h-4 w-4 text-[#F4F1EB]" /></foreignObject></g>}
+                    <circle cx="170" cy="170" r="34" fill="#1A2810" stroke={riskColor} strokeWidth="3" className={mine.status === 'critical' ? 'animate-pulse' : ''} />
                     <circle cx="170" cy="170" r="43" fill="none" stroke={riskColor} strokeOpacity="0.35" strokeDasharray="3 5" />
-                    <text x="170" y="158" textAnchor="middle" fill="white" fontSize={mineNameLines.length > 1 ? '8' : '10'} fontWeight="bold">
+                    <text x="170" y="158" textAnchor="middle" fill="#F4F1EB" fontSize={mineNameLines.length > 1 ? '8' : '10'} fontWeight="bold">
                       {mineNameLines.map((line, index) => <tspan key={line} x="170" dy={index === 0 ? 0 : 10}>{line}</tspan>)}
                     </text>
-                    <text x="170" y={mineNameLines.length > 1 ? '184' : '176'} textAnchor="middle" fill="#cbd5e1" fontSize="7">{mine.subsidiary} · {mine.status.toUpperCase()}</text>
-                    <line key={sweepKey} x1="170" y1="170" x2="170" y2="12" stroke="#67e8f9" strokeWidth="2" opacity="0.8" style={{ transformOrigin: '170px 170px', animation: paused ? 'none' : 'spin 10s linear 1' }} />
+                    <text x="170" y={mineNameLines.length > 1 ? '184' : '176'} textAnchor="middle" fill="#A8C4B0" fontSize="7">{mine.subsidiary} · {mine.status.toUpperCase()}</text>
+                    <line key={sweepKey} x1="170" y1="170" x2="170" y2="12" stroke="#B5601B" strokeWidth="2" opacity="0.8" style={{ transformOrigin: '170px 170px', animation: paused ? 'none' : 'spin 10s linear 1' }} />
                   </svg>
-                  <div className="absolute bottom-2 left-0 right-0 text-center font-mono text-[9px] uppercase text-slate-400">SVG radial digital twin · click or focus a ring for details</div>
+                  <div className="absolute bottom-2 left-0 right-0 text-center font-mono text-[9px] uppercase text-[#A8C4B0]">SVG radial digital twin · click or focus a ring for details</div>
                 </div>
-
-                <div className="rounded-xl border border-slate-700 bg-[#0d1930] p-4">
-                  <div className="mb-3 text-xs font-bold text-slate-200">Layer summary</div>
-                  <div className="space-y-2">{RING_ORDER.map(ring => <button key={ring} onClick={() => openRing(ring)} className={`flex w-full items-center justify-between rounded border p-2 text-left text-[10px] ${selectedRing === ring ? 'border-blue-400 bg-blue-950/50' : 'border-slate-700 bg-slate-900/40'}`}><span className="flex items-center gap-2"><span className="h-2 w-2 rounded-full" style={{ backgroundColor: RINGS[ring].color }} />{RINGS[ring].label}</span><span className="text-slate-400">{ringSummary[ring]}</span></button>)}</div>
-                  <div className="mt-4 rounded border border-slate-700 bg-slate-900/40 p-3 text-[10px] leading-relaxed text-slate-400"><Shield className="mb-1 h-4 w-4 text-emerald-400" /> All values are synthetic/demo telemetry stored offline. Real deployment can plug in validated IoT, DGMS, CPCB, and inspection feeds.</div>
+ 
+                <div className="rounded-xl border border-[#F4F1EB]/20 bg-[#1E3A2F] p-4">
+                  <div className="mb-3 text-xs font-bold text-[#F4F1EB]">Layer summary</div>
+                  <div className="space-y-2">{RING_ORDER.map(ring => <button key={ring} onClick={() => openRing(ring)} className={`flex w-full items-center justify-between rounded border p-2 text-left text-[10px] ${selectedRing === ring ? 'border-[#B5601B] bg-[#B5601B]/20' : 'border-[#F4F1EB]/20 bg-[#F4F1EB]/5'}`}><span className="flex items-center gap-2"><span className="h-2 w-2 rounded-full" style={{ backgroundColor: RINGS[ring].color }} />{RINGS[ring].label}</span><span className="text-[#A8C4B0]">{ringSummary[ring]}</span></button>)}</div>
+                  <div className="mt-4 rounded border border-[#F4F1EB]/20 bg-[#F4F1EB]/5 p-3 text-[10px] leading-relaxed text-[#A8C4B0]"><Shield className="mb-1 h-4 w-4 text-emerald-400" /> All values are synthetic/demo telemetry stored offline. Real deployment can plug in validated IoT, DGMS, CPCB, and inspection feeds.</div>
                 </div>
               </div>
-              <div className="flex flex-wrap items-center gap-2 border-t border-slate-700 px-3 py-3 text-[10px] text-slate-300 lg:px-6">
-                <Radio className="h-3.5 w-3.5 text-cyan-400" /> Legend:
-                {RING_ORDER.map(ring => <label key={ring} className="flex cursor-pointer items-center gap-1 rounded bg-slate-800 px-2 py-1"><input type="checkbox" checked={visible[ring]} onChange={() => setVisible(value => ({ ...value, [ring]: !value[ring] }))} />{RINGS[ring].label}</label>)}
+              <div className="flex flex-wrap items-center gap-2 border-t border-[#F4F1EB]/20 px-3 py-3 text-[10px] text-[#A8C4B0] lg:px-6">
+                <Radio className="h-3.5 w-3.5 text-[#B5601B]" /> Legend:
+                {RING_ORDER.map(ring => <label key={ring} className="flex cursor-pointer items-center gap-1 rounded bg-[#1A2810] px-2 py-1"><input type="checkbox" checked={visible[ring]} onChange={() => setVisible(value => ({ ...value, [ring]: !value[ring] }))} />{RINGS[ring].label}</label>)}
               </div>
             </main>
             <RingDetail ring={selectedRing} rows={rows} mine={mine} forecast={forecast} />

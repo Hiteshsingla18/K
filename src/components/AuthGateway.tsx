@@ -261,10 +261,10 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
       icon: Satellite,
       desc: t('auth.govDesc'),
       persona: 'Dr. A. Sharma · Deputy Director (Surveillance)',
-      accentBorder: 'border-cyan-500/30 hover:border-cyan-400 group-hover:shadow-[0_0_24px_rgba(6,182,212,0.22)]',
-      iconBg: 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30',
-      badgeBg: 'bg-cyan-500/10 text-cyan-300 border border-cyan-500/30',
-      btnBg: 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500'
+      accentBorder: 'border-[#B5D4C5] hover:border-[#2A5C45] group-hover:shadow-md',
+      iconBg: 'bg-[#E6F2EC] text-[#2A5C45] border border-[#B5D4C5]',
+      badgeBg: 'bg-[#E6F2EC] text-[#1B7A46] border border-[#B5D4C5]',
+      btnBg: 'bg-[#2A5C45] hover:bg-[#1F4433]'
     },
     {
       id: 'officer' as ModalType,
@@ -273,10 +273,10 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
       icon: HardHat,
       desc: t('auth.mineOfficerDesc'),
       persona: 'Er. V. Sengupta · Senior Safety Officer (First Class)',
-      accentBorder: 'border-amber-500/30 hover:border-amber-400 group-hover:shadow-[0_0_24px_rgba(245,158,11,0.22)]',
-      iconBg: 'bg-amber-500/10 text-amber-400 border border-amber-500/30',
-      badgeBg: 'bg-amber-500/10 text-amber-300 border border-amber-500/30',
-      btnBg: 'bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500'
+      accentBorder: 'border-[#E5D2A8] hover:border-[#8B5E00] group-hover:shadow-md',
+      iconBg: 'bg-[#FFF8E7] text-[#8B5E00] border border-[#E5D2A8]',
+      badgeBg: 'bg-[#FFF8E7] text-[#8B5E00] border border-[#E5D2A8]',
+      btnBg: 'bg-[#8B5E00] hover:bg-[#6B4800]'
     },
     {
       id: 'labour' as ModalType,
@@ -285,10 +285,10 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
       icon: Smartphone,
       desc: t('auth.labourMobileDesc'),
       persona: 'Ramesh Soren · Excavator Operator (WKR-8812)',
-      accentBorder: 'border-emerald-500/30 hover:border-emerald-400 group-hover:shadow-[0_0_24px_rgba(16,185,129,0.22)]',
-      iconBg: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30',
-      badgeBg: 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/30',
-      btnBg: 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500'
+      accentBorder: 'border-[#A3E0B5] hover:border-[#1B7A46] group-hover:shadow-md',
+      iconBg: 'bg-[#EAFAF1] text-[#1B7A46] border border-[#A3E0B5]',
+      badgeBg: 'bg-[#EAFAF1] text-[#1B7A46] border border-[#A3E0B5]',
+      btnBg: 'bg-[#1B7A46] hover:bg-[#125B34]'
     },
     {
       id: 'operator' as ModalType,
@@ -297,10 +297,10 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
       icon: Building2,
       desc: t('auth.operatorDeskDesc'),
       persona: 'Rajmahal Colliery Office · Eastern Coalfields Ltd',
-      accentBorder: 'border-blue-500/30 hover:border-blue-400 group-hover:shadow-[0_0_24px_rgba(59,130,246,0.22)]',
-      iconBg: 'bg-blue-500/10 text-blue-400 border border-blue-500/30',
-      badgeBg: 'bg-blue-500/10 text-blue-300 border border-blue-500/30',
-      btnBg: 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500'
+      accentBorder: 'border-[#E0BFA3] hover:border-[#B5601B] group-hover:shadow-md',
+      iconBg: 'bg-[#FFF3E6] text-[#B5601B] border border-[#E0BFA3]',
+      badgeBg: 'bg-[#FFF3E6] text-[#B5601B] border border-[#E0BFA3]',
+      btnBg: 'bg-[#B5601B] hover:bg-[#8F4A13]'
     },
     {
       id: 'citizen' as ModalType,
@@ -309,10 +309,10 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
       icon: Eye,
       desc: t('auth.citizenDesc'),
       persona: 'Citizen Environmental Desk · Aadhaar / Mobile',
-      accentBorder: 'border-green-500/30 hover:border-green-400 group-hover:shadow-[0_0_24px_rgba(34,197,94,0.22)]',
-      iconBg: 'bg-green-500/10 text-green-400 border border-green-500/30',
-      badgeBg: 'bg-green-500/10 text-green-300 border border-green-500/30',
-      btnBg: 'bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500'
+      accentBorder: 'border-[#A8C4B0] hover:border-[#3B7A5E] group-hover:shadow-md',
+      iconBg: 'bg-[#F0F7F2] text-[#3B7A5E] border border-[#A8C4B0]',
+      badgeBg: 'bg-[#F0F7F2] text-[#3B7A5E] border border-[#A8C4B0]',
+      btnBg: 'bg-[#3B7A5E] hover:bg-[#2A5C45]'
     }
   ];
 
@@ -568,7 +568,7 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
   };
 
   return (
-    <div className="h-screen w-full bg-gradient-to-b from-[#081225] via-[#060D1A] to-[#03060C] text-slate-100 flex flex-col justify-between p-4 md:p-6 overflow-hidden select-none relative">
+    <div className="h-screen w-full bg-[#F4F1EB] text-[#1A2810] flex flex-col justify-between p-4 md:p-6 overflow-hidden select-none relative" style={{fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif"}}>
       {/* Subtle National Tricolor Accent Bar */}
       <div className="fixed top-0 left-0 right-0 h-1 grid grid-cols-3 z-30">
         <div className="bg-[#FF9933]" />
@@ -577,7 +577,7 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
       </div>
 
       {/* 1. TOP HEADER: Compact official emblem with logo, title & subtle NIC trust banner */}
-      <header className="shrink-0 flex flex-col sm:flex-row items-center justify-between gap-3 pb-3 border-b border-slate-800/80">
+      <header className="shrink-0 flex flex-col sm:flex-row items-center justify-between gap-3 pb-3 border-b border-[#DDD8CF]">
         {/* Left: Emblem & Title */}
         <div className="flex items-center gap-3 min-w-0">
           <div className="relative shrink-0">
@@ -585,13 +585,13 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
-              <h1 className="text-base sm:text-lg font-black tracking-tight text-white truncate">
+              <h1 className="text-base sm:text-lg font-black tracking-tight text-[#1A2810] truncate">
                 {t('auth.title')}
               </h1>
             </div>
-            <div className="text-xs text-slate-400 font-medium truncate flex items-center gap-2">
+            <div className="text-xs text-[#5C6B57] font-medium truncate flex items-center gap-2">
               <span>{t('auth.ministry')}</span>
-              <span className="text-slate-600">&bull;</span>
+              <span className="text-[#8FA08A]">&bull;</span>
               <span>{t('auth.dgms')}</span>
             </div>
           </div>
@@ -600,14 +600,14 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
         {/* Right: Subtle National Informatics Centre / Parichay SSO Trust Banner */}
         <div className="shrink-0 flex items-center gap-3">
           <LanguageToggle />
-          <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800 text-xs text-slate-300">
-            <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-white border border-[#DDD8CF] shadow-sm text-xs text-[#5C6B57]">
+            <div className="w-2 h-2 rounded-full bg-[#1B7A46] animate-pulse" />
             <div className="flex items-center gap-1.5">
-              <Lock className="w-3.5 h-3.5 text-cyan-400" />
-              <span className="font-semibold text-slate-200">National Informatics Centre (NIC)</span>
+              <Lock className="w-3.5 h-3.5 text-[#2A5C45]" />
+              <span className="font-semibold text-[#1A2810]">National Informatics Centre (NIC)</span>
             </div>
-            <span className="text-slate-600 hidden md:inline">|</span>
-            <span className="text-slate-400 hidden md:inline">Parichay 2.0 SSO Verified &bull; TLS 1.3</span>
+            <span className="text-[#DDD8CF] hidden md:inline">|</span>
+            <span className="hidden md:inline">Parichay 2.0 SSO Verified &bull; TLS 1.3</span>
           </div>
         </div>
       </header>
@@ -616,14 +616,14 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
       <main className="flex-1 flex flex-col justify-center my-auto py-2 min-h-0 relative z-10">
         <div className="mb-2.5 text-center md:text-left flex items-center justify-between">
           <div>
-            <h2 className="text-sm sm:text-base font-bold text-white tracking-tight">
+            <h2 className="text-sm sm:text-base font-bold text-[#1A2810] tracking-tight">
               {t('auth.selectTier')}
             </h2>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-[#5C6B57]">
               {t('auth.ssoDesc')}
             </p>
           </div>
-          <span className="hidden lg:inline-block text-[11px] text-slate-400 font-mono bg-slate-900/80 border border-slate-800 px-2.5 py-1 rounded">
+          <span className="hidden lg:inline-block text-[11px] text-[#5C6B57] font-mono bg-white border border-[#DDD8CF] shadow-sm px-2.5 py-1 rounded">
             Node: NIC-DEL-CLUST-04 &bull; MeghRaj Cloud
           </span>
         </div>
@@ -635,7 +635,7 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
             return (
               <div
                 key={portal.id}
-                className={`group relative bg-[#0C192E]/90 hover:bg-[#0F213E] border rounded-xl p-4 flex flex-col justify-between transition-all duration-300 shadow-lg ${portal.accentBorder}`}
+                className={`group relative bg-white border-[#DDD8CF] border rounded-xl p-4 flex flex-col justify-between transition-all duration-300 shadow-sm ${portal.accentBorder}`}
               >
                 {/* Top: Icon & Badge */}
                 <div>
@@ -649,21 +649,21 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-sm lg:text-base font-bold text-white tracking-tight leading-snug group-hover:text-cyan-200 transition-colors">
+                  <h3 className="text-sm lg:text-base font-bold text-[#1A2810] tracking-tight leading-snug group-hover:text-[#2A5C45] transition-colors">
                     {portal.title}
                   </h3>
 
                   {/* 1-Line Description */}
-                  <p className="text-xs text-slate-400 leading-relaxed mt-1.5 line-clamp-3">
+                  <p className="text-xs text-[#5C6B57] leading-relaxed mt-1.5 line-clamp-3">
                     {portal.desc}
                   </p>
                 </div>
 
                 {/* Bottom: Persona preview & CTA button */}
-                <div className="pt-2 border-t border-slate-800/70 space-y-2.5">
-                  <div className="text-[10px] text-slate-400 bg-slate-900/80 border border-slate-800/90 rounded px-2 py-1 truncate">
-                    <span className="text-slate-500 font-mono mr-1">Auth:</span>
-                    <span className="text-slate-300 font-medium">{portal.persona}</span>
+                <div className="pt-2 border-t border-[#EDE9E2] space-y-2.5">
+                  <div className="text-[10px] text-[#5C6B57] bg-[#FAF8F4] border border-[#DDD8CF] rounded px-2 py-1 truncate">
+                    <span className="text-[#8FA08A] font-mono mr-1">Auth:</span>
+                    <span className="font-medium text-[#1A2810]">{portal.persona}</span>
                   </div>
 
                   <button
@@ -687,14 +687,14 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
       </main>
 
       {/* 3. MINIMALIST SINGLE-LINE COMPACT FOOTER */}
-      <footer className="shrink-0 pt-2.5 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-400 relative z-10">
+      <footer className="shrink-0 pt-2.5 border-t border-[#DDD8CF] flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-[#5C6B57] relative z-10">
         <div className="flex items-center gap-2">
-          <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-          <span className="text-slate-300 font-medium">
+          <CheckCircle2 className="w-3.5 h-3.5 text-[#2A5C45] shrink-0" />
+          <span className="text-[#1A2810] font-medium">
             Ministry of Coal &bull; Directorate General of Mines Safety (DGMS) &bull; Compliance Architecture
           </span>
         </div>
-        <div className="flex items-center gap-3 text-slate-500 text-[10px]">
+        <div className="flex items-center gap-3 text-[#5C6B57] text-[10px]">
           <span>GIGW 2.0 &bull; STQC Audited</span>
           <span>&bull;</span>
           <span>&copy; {new Date().getFullYear()} Govt. of India</span>
@@ -703,8 +703,8 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
 
       {/* Interactive Login Modal */}
       {activeModal && (
-        <div className="fixed inset-0 z-50 bg-[#06101E]/80 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white border-2 border-[#0B2545] rounded-xl shadow-2xl max-w-md w-full overflow-hidden animate-in zoom-in-95 duration-200 relative">
+        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-white border border-[#DDD8CF] rounded-xl shadow-2xl max-w-md w-full overflow-hidden animate-in zoom-in-95 duration-200 relative">
             {/* Top Tricolor Strip */}
             <div className="h-1.5 w-full grid grid-cols-3">
               <div className="bg-[#FF9933]" />
@@ -715,7 +715,7 @@ export default function AuthGateway({ onSelectRole, onSupabaseSignIn }: AuthGate
             {!isVerifying && (
               <button 
                 onClick={() => setActiveModal(null)}
-                className="absolute top-4 right-4 text-slate-400 hover:text-slate-800 transition-colors z-10 cursor-pointer bg-slate-100 hover:bg-slate-200 p-1.5 rounded-full"
+                className="absolute top-4 right-4 text-[#8FA08A] hover:text-[#1A2810] transition-colors z-10 cursor-pointer bg-[#FAF8F4] hover:bg-[#EDE9E2] p-1.5 rounded-full"
               >
                 <X className="w-4 h-4" />
               </button>

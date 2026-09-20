@@ -139,37 +139,37 @@ export default function RegulatoryCopilot({
 
   return (
     <div className="fixed inset-0 z-50 flex justify-end bg-black/40 backdrop-blur-2xs transition-opacity animate-in fade-in duration-200">
-      <div className="w-full max-w-md bg-white h-full shadow-2xl flex flex-col border-l border-slate-200 animate-in slide-in-from-right duration-250">
+      <div className="w-full max-w-md bg-white h-full shadow-2xl flex flex-col border-l border-[#DDD8CF] animate-in slide-in-from-right duration-250">
         {/* Drawer Header */}
-        <div className="p-4 bg-[#0A192F] text-white flex items-center justify-between border-b border-slate-800 shrink-0">
+        <div className="p-4 bg-[#1A2810] text-[#F4F1EB] flex items-center justify-between border-b border-[#152D22] shrink-0">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded bg-[#1E40AF] flex items-center justify-center text-white">
-              <Sparkles className="w-4 h-4 text-blue-300" />
+            <div className="w-7 h-7 rounded bg-[#2A5C45] flex items-center justify-center text-white">
+              <Sparkles className="w-4 h-4 text-[#A8C4B0]" />
             </div>
             <div>
               <div className="font-bold text-sm tracking-tight flex items-center gap-1.5">
                 <span>Regulatory AI Copilot</span>
-                <span className="text-[10px] bg-blue-500/30 text-blue-300 px-1.5 py-0.2 rounded font-mono">v3.4</span>
+                <span className="text-[10px] bg-[#A8C4B0]/30 text-[#A8C4B0] px-1.5 py-0.2 rounded font-mono">v3.4</span>
               </div>
-              <div className="text-[10px] text-slate-400">DGMS &bull; MoEFCC &bull; Spatial Rule Engine</div>
+              <div className="text-[10px] text-[#8FA08A]">DGMS &bull; MoEFCC &bull; Spatial Rule Engine</div>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-white p-1 rounded-md transition-colors cursor-pointer"
+            className="text-[#8FA08A] hover:text-[#F4F1EB] p-1 rounded-md transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Selected Mine Context Indicator */}
-        <div className="bg-slate-100 px-4 py-2 border-b border-slate-200 text-xs flex items-center justify-between shrink-0">
-          <div className="flex items-center gap-1.5 text-slate-700">
-            <Shield className="w-3.5 h-3.5 text-[#1E40AF]" />
+        <div className="bg-[#FAF8F4] px-4 py-2 border-b border-[#DDD8CF] text-xs flex items-center justify-between shrink-0">
+          <div className="flex items-center gap-1.5 text-[#1A2810]">
+            <Shield className="w-3.5 h-3.5 text-[#2A5C45]" />
             <span>Active Context: <strong>{selectedMine?.name || 'Rajmahal OCP'}</strong></span>
           </div>
-          <span className="text-[10px] font-mono text-slate-500">{selectedMine?.id || 'MIN-4492-R'}</span>
+          <span className="text-[10px] font-mono text-[#5C6B57]">{selectedMine?.id || 'MIN-4492-R'}</span>
         </div>
 
         {/* Messages Stream */}
@@ -180,29 +180,29 @@ export default function RegulatoryCopilot({
               className={`flex gap-2.5 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               {msg.sender === 'assistant' && (
-                <div className="w-6 h-6 rounded-full bg-[#0A192F] text-white flex items-center justify-center shrink-0 mt-0.5">
-                  <Bot className="w-3.5 h-3.5 text-blue-400" />
+                <div className="w-6 h-6 rounded-full bg-[#1A2810] text-[#F4F1EB] flex items-center justify-center shrink-0 mt-0.5">
+                  <Bot className="w-3.5 h-3.5 text-[#A8C4B0]" />
                 </div>
               )}
 
               <div
                 className={`max-w-[85%] rounded-lg p-3 space-y-2 ${
                   msg.sender === 'user'
-                    ? 'bg-[#1E40AF] text-white rounded-tr-none'
-                    : 'bg-slate-50 text-slate-800 border border-slate-200 rounded-tl-none'
+                    ? 'bg-[#2A5C45] text-white rounded-tr-none'
+                    : 'bg-[#FAF8F4] text-[#1A2810] border border-[#DDD8CF] rounded-tl-none'
                 }`}
               >
                 <div className="whitespace-pre-line leading-relaxed">{msg.text}</div>
 
                 {msg.statutoryReference && (
-                  <div className="pt-2 border-t border-slate-200/60 flex items-center justify-between text-[10px] text-slate-500 font-mono">
+                  <div className="pt-2 border-t border-[#DDD8CF] flex items-center justify-between text-[10px] text-[#5C6B57] font-mono">
                     <span className="flex items-center gap-1">
-                      <Scale className="w-3 h-3 text-[#1E40AF]" />
+                      <Scale className="w-3 h-3 text-[#2A5C45]" />
                       {msg.statutoryReference}
                     </span>
                     <button
                       onClick={() => copyToClipboard(msg.text, msg.id)}
-                      className="hover:text-slate-800 transition-colors flex items-center gap-0.5 cursor-pointer"
+                      className="hover:text-[#1A2810] transition-colors flex items-center gap-0.5 cursor-pointer"
                       title="Copy response"
                     >
                       {copiedId === msg.id ? (
@@ -221,7 +221,7 @@ export default function RegulatoryCopilot({
                         msg.actionButton?.onClick();
                         onClose();
                       }}
-                      className="w-full bg-[#1E40AF] hover:bg-blue-800 text-white font-semibold py-1.5 px-3 rounded text-[11px] flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                      className="w-full bg-[#2A5C45] hover:bg-[#1E3A2F] text-white font-semibold py-1.5 px-3 rounded text-[11px] flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                     >
                       <span>{msg.actionButton.label}</span>
                       <ExternalLink className="w-3 h-3" />
@@ -231,7 +231,7 @@ export default function RegulatoryCopilot({
               </div>
 
               {msg.sender === 'user' && (
-                <div className="w-6 h-6 rounded-full bg-slate-300 text-slate-700 flex items-center justify-center shrink-0 mt-0.5">
+                <div className="w-6 h-6 rounded-full bg-[#DDD8CF] text-[#1A2810] flex items-center justify-center shrink-0 mt-0.5">
                   <User className="w-3.5 h-3.5" />
                 </div>
               )}
@@ -239,14 +239,14 @@ export default function RegulatoryCopilot({
           ))}
 
           {isTyping && (
-            <div className="flex gap-2.5 items-center text-slate-500 text-xs">
-              <div className="w-6 h-6 rounded-full bg-[#0A192F] text-white flex items-center justify-center shrink-0">
-                <Bot className="w-3.5 h-3.5 text-blue-400" />
+            <div className="flex gap-2.5 items-center text-[#5C6B57] text-xs">
+              <div className="w-6 h-6 rounded-full bg-[#1A2810] text-white flex items-center justify-center shrink-0">
+                <Bot className="w-3.5 h-3.5 text-[#A8C4B0]" />
               </div>
-              <div className="bg-slate-100 border border-slate-200 rounded-lg px-3 py-2 flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce"></span>
-                <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce [animation-delay:0.2s]"></span>
-                <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce [animation-delay:0.4s]"></span>
+              <div className="bg-[#FAF8F4] border border-[#DDD8CF] rounded-lg px-3 py-2 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#8FA08A] animate-bounce"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#8FA08A] animate-bounce [animation-delay:0.2s]"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#8FA08A] animate-bounce [animation-delay:0.4s]"></span>
               </div>
             </div>
           )}
@@ -255,8 +255,8 @@ export default function RegulatoryCopilot({
         </div>
 
         {/* Quick Suggestion Chips */}
-        <div className="p-3 bg-slate-50 border-t border-slate-200 shrink-0">
-          <div className="text-[10px] uppercase font-bold text-slate-500 mb-1.5 flex items-center gap-1">
+        <div className="p-3 bg-[#FAF8F4] border-t border-[#DDD8CF] shrink-0">
+          <div className="text-[10px] uppercase font-bold text-[#5C6B57] mb-1.5 flex items-center gap-1">
             <Sparkles className="w-3 h-3 text-purple-600" />
             <span>Recommended Regulatory Queries:</span>
           </div>
@@ -265,7 +265,7 @@ export default function RegulatoryCopilot({
               <button
                 key={idx}
                 onClick={() => handleSend(prompt)}
-                className="text-[11px] bg-white hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-blue-800 px-2 py-1 rounded text-left transition-colors cursor-pointer"
+                className="text-[11px] bg-white hover:bg-[#EDE9E2] border border-[#DDD8CF] hover:border-[#A8C4B0] text-[#1A2810] hover:text-[#2A5C45] px-2 py-1 rounded text-left transition-colors cursor-pointer"
               >
                 {prompt}
               </button>
@@ -274,7 +274,7 @@ export default function RegulatoryCopilot({
         </div>
 
         {/* Chat Input Bar */}
-        <div className="p-3 bg-white border-t border-slate-200 shrink-0">
+        <div className="p-3 bg-white border-t border-[#DDD8CF] shrink-0">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -287,17 +287,17 @@ export default function RegulatoryCopilot({
               value={inputQuery}
               onChange={(e) => setInputQuery(e.target.value)}
               placeholder="Ask about mining regulations, lease breaches, or SCN..."
-              className="flex-1 bg-slate-50 border border-slate-300 rounded-md px-3 py-2 text-xs text-slate-900 focus:outline-hidden focus:ring-1 focus:ring-[#1E40AF]"
+              className="flex-1 bg-[#FAF8F4] border border-[#DDD8CF] rounded-md px-3 py-2 text-xs text-[#1A2810] focus:outline-hidden focus:ring-1 focus:ring-[#2A5C45]"
             />
             <button
               type="submit"
               disabled={!inputQuery.trim()}
-              className="bg-[#1E40AF] hover:bg-blue-800 disabled:opacity-40 text-white p-2 rounded-md transition-colors cursor-pointer"
+              className="bg-[#2A5C45] hover:bg-[#1E3A2F] disabled:opacity-40 text-white p-2 rounded-md transition-colors cursor-pointer"
             >
               <Send className="w-4 h-4" />
             </button>
           </form>
-          <div className="text-[10px] text-slate-400 text-center mt-1.5">
+          <div className="text-[10px] text-[#8FA08A] text-center mt-1.5">
             AI grounded in Ministry of Coal statutory acts. Not legal advice.
           </div>
         </div>

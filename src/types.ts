@@ -205,3 +205,5 @@ export interface GovernmentBenefitEnrollment {
   source: string;
 }
 
+export type ActiveRole = UserRole;
+

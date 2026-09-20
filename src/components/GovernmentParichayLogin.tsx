@@ -3,7 +3,7 @@ import { ActiveRole } from '../types';
 
 export default function GovernmentParichayLogin({ onAuthenticate, onBack }: { onAuthenticate: (role: ActiveRole) => void; onBack: () => void }) {
   return <RoleLoginShell
-    role="GOVT"
+    role="gov"
     eyebrow="Parichay Government SSO · Ministry of Coal & DGMS Access Gateway"
     title="National regulatory command, secured by identity."
     subtitle="A high-security access gateway for DGMS surveillance, statutory enforcement, and national mine oversight."

@@ -95,11 +95,11 @@ export default function OperatorPortal({
   const rajmahalMine = mines.find(m => m.id === 'MIN-4492-R') || mines[0];
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex font-sans antialiased overflow-x-hidden">
-      {/* 1. OPERATOR PERSISTENT DARK SIDEBAR (Width: 260px, Background: #0A192F) */}
+    <div className="min-h-screen bg-[#F4F1EB] text-[#1A2810] flex font-sans antialiased overflow-x-hidden">
+      {/* 1. OPERATOR PERSISTENT DARK SIDEBAR (Width: 260px, Background: #1E3A2F) */}
       <aside 
         id="operator-sidebar"
-        className="w-[260px] bg-[#0A192F] text-white flex flex-col shrink-0 min-h-screen border-r border-slate-800 sticky top-0 h-screen z-30 select-none shadow-xl"
+        className="w-[260px] bg-[#1E3A2F] text-white flex flex-col shrink-0 min-h-screen border-r border-[#152D22] sticky top-0 h-screen z-30 select-none shadow-xl"
       >
         {/* Branding & Active Profile */}
         <div className="p-4 border-b border-slate-800/80 shrink-0 space-y-3">
@@ -130,7 +130,7 @@ export default function OperatorPortal({
           </div>
 
           {/* Active Operator Profile Card */}
-          <div className="p-2.5 bg-slate-900/90 rounded-lg border border-slate-800 text-xs space-y-1 relative">
+          <div className="p-2.5 bg-[#152D22]/90 rounded-lg border border-[#152D22] text-xs space-y-1 relative">
             <div className="absolute top-2 right-2">
               <LanguageToggle />
             </div>
@@ -158,12 +158,12 @@ export default function OperatorPortal({
             onClick={() => setActiveTab('notice_response')}
             className={`w-full px-3 py-2.5 rounded-lg text-xs font-semibold flex items-center justify-between transition-all cursor-pointer ${
               activeTab === 'notice_response'
-                ? 'bg-amber-600 text-white shadow-sm'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/70'
+                ? 'bg-[#B5601B] text-white shadow-sm'
+                : 'text-[#A8C4B0] hover:text-white hover:bg-[#152D22]'
             }`}
           >
             <div className="flex items-center gap-3 min-w-0">
-              <FileText className={`w-4 h-4 ${activeTab === 'notice_response' ? 'text-white' : 'text-slate-400'}`} />
+              <FileText className={`w-4 h-4 ${activeTab === 'notice_response' ? 'text-white' : 'text-[#A8C4B0]'}`} />
               <span className="truncate">{t('operatorNav.notice')}</span>
             </div>
             <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded font-mono shrink-0 ${
@@ -181,11 +181,11 @@ export default function OperatorPortal({
             onClick={() => setActiveTab('lease_map')}
             className={`w-full px-3 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-3 transition-all cursor-pointer ${
               activeTab === 'lease_map'
-                ? 'bg-amber-600 text-white shadow-sm'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/70'
+                ? 'bg-[#B5601B] text-white shadow-sm'
+                : 'text-[#A8C4B0] hover:text-white hover:bg-[#152D22]'
             }`}
           >
-            <Satellite className={`w-4 h-4 ${activeTab === 'lease_map' ? 'text-white' : 'text-slate-400'}`} />
+            <Satellite className={`w-4 h-4 ${activeTab === 'lease_map' ? 'text-white' : 'text-[#A8C4B0]'}`} />
             <span className="truncate">{t('operatorNav.radar')}</span>
           </button>
 
@@ -195,11 +195,11 @@ export default function OperatorPortal({
             onClick={() => setActiveTab('compliance_history')}
             className={`w-full px-3 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-3 transition-all cursor-pointer ${
               activeTab === 'compliance_history'
-                ? 'bg-amber-600 text-white shadow-sm'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/70'
+                ? 'bg-[#B5601B] text-white shadow-sm'
+                : 'text-[#A8C4B0] hover:text-white hover:bg-[#152D22]'
             }`}
           >
-            <FileCheck className={`w-4 h-4 ${activeTab === 'compliance_history' ? 'text-white' : 'text-slate-400'}`} />
+            <FileCheck className={`w-4 h-4 ${activeTab === 'compliance_history' ? 'text-white' : 'text-[#A8C4B0]'}`} />
             <span className="truncate">{t('operatorNav.clearances')}</span>
           </button>
 
@@ -209,12 +209,12 @@ export default function OperatorPortal({
             onClick={() => setActiveTab('workforce_attendance')}
             className={`w-full px-3 py-2.5 rounded-lg text-xs font-semibold flex items-center justify-between transition-all cursor-pointer ${
               activeTab === 'workforce_attendance'
-                ? 'bg-amber-600 text-white shadow-sm'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/70'
+                ? 'bg-[#B5601B] text-white shadow-sm'
+                : 'text-[#A8C4B0] hover:text-white hover:bg-[#152D22]'
             }`}
           >
             <div className="flex items-center gap-3 min-w-0">
-              <Users className={`w-4 h-4 ${activeTab === 'workforce_attendance' ? 'text-white' : 'text-slate-400'}`} />
+              <Users className={`w-4 h-4 ${activeTab === 'workforce_attendance' ? 'text-white' : 'text-[#A8C4B0]'}`} />
               <span className="truncate">{t('operatorNav.workforce')}</span>
             </div>
             <span className="text-[10px] font-bold px-1.5 py-0.5 rounded font-mono shrink-0 bg-amber-900/60 text-amber-200 border border-amber-600/40">
@@ -224,14 +224,14 @@ export default function OperatorPortal({
         </div>
 
         {/* Bottom Sidebar: AI Regulatory Copilot & Sign Out */}
-        <div className="p-3 space-y-2.5 border-t border-slate-800 bg-[#071324] shrink-0">
+        <div className="p-3 space-y-2.5 border-t border-[#152D22] bg-[#162B22] shrink-0">
           <button
             id="btn-operator-copilot"
             onClick={() => setIsCopilotOpen(true)}
-            className="w-full bg-gradient-to-r from-amber-900/40 to-slate-900 border border-amber-500/30 text-white rounded-lg p-2.5 flex items-center justify-between shadow-xs transition-all text-xs font-semibold cursor-pointer group hover:border-amber-400/50"
+            className="w-full bg-gradient-to-r from-[#B5601B]/40 to-[#1E3A2F] border border-[#B5601B]/30 text-white rounded-lg p-2.5 flex items-center justify-between shadow-xs transition-all text-xs font-semibold cursor-pointer group hover:border-[#B5601B]/50"
           >
             <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded bg-amber-600 flex items-center justify-center text-white group-hover:scale-105 transition-transform shadow-2xs">
+              <div className="w-7 h-7 rounded bg-[#B5601B] flex items-center justify-center text-white group-hover:scale-105 transition-transform shadow-2xs">
                 <Sparkles className="w-4 h-4" />
               </div>
               <div className="text-left">
@@ -260,7 +260,7 @@ export default function OperatorPortal({
       {/* 2. MAIN OPERATOR WORKSPACE */}
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
         {/* TOP STATUS HEADER */}
-        <header className="bg-white border-b border-slate-200 sticky top-0 z-20 shrink-0 shadow-2xs">
+        <header className="bg-white border-b border-[#DDD8CF] sticky top-0 z-20 shrink-0 shadow-sm">
           <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3">
             {/* Breadcrumb & K Logo in Header */}
             <div className="flex items-center gap-2.5 min-w-0">
@@ -276,13 +276,13 @@ export default function OperatorPortal({
                   }}
                 />
               </div>
-              <span className="font-bold text-sm text-slate-900 truncate">KhananRakshak AI</span>
-              <span className="text-slate-300">/</span>
-              <span className="text-xs font-bold text-amber-700 uppercase tracking-wider truncate">
+              <span className="font-bold text-sm text-[#1A2810] truncate">KhananRakshak AI</span>
+              <span className="text-[#8FA08A]">/</span>
+              <span className="text-xs font-bold text-[#B5601B] uppercase tracking-wider truncate">
                 Colliery Operator Desk
               </span>
-              <span className="text-slate-300">/</span>
-              <span className="font-semibold text-xs text-slate-700 truncate hidden md:inline">
+              <span className="text-[#8FA08A]">/</span>
+              <span className="font-semibold text-xs text-[#5C6B57] truncate hidden md:inline">
                 {activeTab === 'notice_response' && 'Show-Cause Notice SCN-2026-082 Clarification'}
                 {activeTab === 'lease_map' && 'Rajmahal OCP Lease Boundary & Sentinel Radar'}
                 {activeTab === 'compliance_history' && 'Statutory Clearances & Audit History'}
@@ -373,10 +373,10 @@ export default function OperatorPortal({
               {/* Two-Column Workspace */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* LEFT: Government Allegation Dossier */}
-                <div className="bg-white border border-slate-200 rounded-lg p-5 lg:p-6 space-y-5 shadow-2xs">
-                  <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
-                    <FileText className="w-5 h-5 text-slate-700" />
-                    <h2 className="text-base font-bold text-slate-900">{t('operatorPortal.dossier')}</h2>
+                <div className="bg-white border border-[#DDD8CF] rounded-lg p-5 lg:p-6 space-y-5 shadow-sm">
+                  <div className="flex items-center gap-2 border-b border-[#EDE9E2] pb-3">
+                    <FileText className="w-5 h-5 text-[#5C6B57]" />
+                    <h2 className="text-base font-bold text-[#1A2810]">{t('operatorPortal.dossier')}</h2>
                   </div>
 
                   <ul className="space-y-3.5 text-xs">
@@ -450,11 +450,11 @@ export default function OperatorPortal({
                 </div>
 
                 {/* RIGHT: Operator Formal Clarification Form */}
-                <div className="bg-white border border-slate-200 rounded-lg p-5 lg:p-6 shadow-2xs space-y-5">
-                  <div className="border-b border-slate-200 pb-3 flex items-center justify-between">
+                <div className="bg-white border border-[#DDD8CF] rounded-lg p-5 lg:p-6 shadow-sm space-y-5">
+                  <div className="border-b border-[#EDE9E2] pb-3 flex items-center justify-between">
                     <div>
-                      <h2 className="text-base font-bold text-slate-900">{t('operatorPortal.filing')}</h2>
-                      <p className="text-xs text-slate-500">{t('operatorPortal.filingDesc')}</p>
+                      <h2 className="text-base font-bold text-[#1A2810]">{t('operatorPortal.filing')}</h2>
+                      <p className="text-xs text-[#5C6B57]">{t('operatorPortal.filingDesc')}</p>
                     </div>
                   </div>
 
@@ -484,7 +484,7 @@ export default function OperatorPortal({
                         <textarea
                           value={operatorExplanation}
                           onChange={(e) => setOperatorExplanation(e.target.value)}
-                          className="w-full border border-slate-300 rounded-md shadow-2xs focus:border-amber-600 focus:ring-1 focus:ring-amber-600 text-xs p-3 h-32 bg-white text-slate-800 outline-hidden font-normal leading-relaxed"
+                          className="w-full border border-[#DDD8CF] rounded-md shadow-sm focus:border-[#B5601B] focus:ring-1 focus:ring-[#B5601B] text-xs p-3 h-32 bg-[#FAF8F4] text-[#1A2810] outline-hidden font-normal leading-relaxed"
                           placeholder="Provide clear technical, statutory, and survey reasons for the flagged boundary deviation..."
                           required
                         />
@@ -500,7 +500,7 @@ export default function OperatorPortal({
                         
                         <div className="space-y-2">
                           {attachedFiles.map((filename, i) => (
-                            <div key={i} className="border border-slate-200 rounded-md p-3 bg-slate-50 flex items-center justify-between shadow-2xs">
+                            <div key={i} className="border border-[#DDD8CF] rounded-md p-3 bg-[#FAF8F4] flex items-center justify-between shadow-sm">
                               <div className="flex items-center gap-2.5">
                                 <FileText className="w-4 h-4 text-amber-700" />
                                 <div>
@@ -538,7 +538,7 @@ export default function OperatorPortal({
                         <select
                           value={authorizedOfficer}
                           onChange={(e) => setAuthorizedOfficer(e.target.value)}
-                          className="w-full border border-slate-300 rounded-md shadow-2xs focus:border-amber-600 focus:ring-1 focus:ring-amber-600 text-xs p-2.5 bg-white text-slate-800 outline-hidden font-medium"
+                          className="w-full border border-[#DDD8CF] rounded-md shadow-sm focus:border-[#B5601B] focus:ring-1 focus:ring-[#B5601B] text-xs p-2.5 bg-[#FAF8F4] text-[#1A2810] outline-hidden font-medium"
                         >
                           <option value="Chief Mine Surveyor - ECL Rajmahal Area">Chief Mine Surveyor - ECL Rajmahal Area</option>
                           <option value="Agent & General Manager - Rajmahal OCP">Agent & General Manager - Rajmahal OCP</option>
@@ -546,11 +546,11 @@ export default function OperatorPortal({
                         </select>
                       </div>
 
-                      <div className="border-t border-slate-200 pt-4 mt-4 space-y-2">
+                      <div className="border-t border-[#EDE9E2] pt-4 mt-4 space-y-2">
                         <button
                           id="btn-submit-formal-response"
                           type="submit"
-                          className="w-full bg-amber-600 hover:bg-amber-700 active:bg-amber-800 text-white py-3 px-4 rounded-md text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
+                          className="w-full bg-[#B5601B] hover:bg-[#8F4A13] active:bg-[#6B370E] text-white py-3 px-4 rounded-md text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
                         >
                           <span>{t('operatorPortal.submit')}</span>
                           <Send className="w-4 h-4" />
@@ -570,7 +570,7 @@ export default function OperatorPortal({
           {/* TAB 2: LEASE RADAR & SATELLITE MAP */}
           {activeTab === 'lease_map' && (
             <div className="space-y-4">
-              <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-2xs space-y-3">
+              <div className="bg-white border border-[#DDD8CF] rounded-xl p-5 shadow-sm space-y-3">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
                   <div>
                     <span className="text-[10px] font-bold uppercase text-amber-700 tracking-wider">
@@ -601,7 +601,7 @@ export default function OperatorPortal({
 
           {/* TAB 3: STATUTORY CLEARANCES & EC/FC HISTORY */}
           {activeTab === 'compliance_history' && (
-            <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-2xs space-y-6">
+            <div className="bg-white border border-[#DDD8CF] rounded-xl p-6 shadow-sm space-y-6">
               <div className="border-b border-slate-200 pb-4">
                 <span className="text-[10px] font-bold uppercase text-amber-700 tracking-wider">
                   Compliance Archive
