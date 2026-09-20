@@ -138,8 +138,7 @@ export interface MineRecord {
 }
 
 export interface CitizenReportRecord {
-  id: string; // e.g. 'CR-882'
-  pin: string; // e.g. '1428'
+  id: string; // e.g. 'CR-882-1428'
   mineId: string;
   mineName: string;
   village: string;

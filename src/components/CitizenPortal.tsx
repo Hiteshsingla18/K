@@ -67,8 +67,7 @@ const CATEGORY_NAMES: Record<string, string> = {
 
 const INITIAL_CITIZEN_REPORTS: CitizenReportRecord[] = [
   {
-    id: 'CR-882',
-    pin: '1428',
+    id: 'CR-882-1428',
     mineId: 'MIN-4492-R',
     mineName: 'Rajmahal Open Cast Project (OCP)',
     village: 'Simlong Village Cluster',
@@ -88,8 +87,7 @@ const INITIAL_CITIZEN_REPORTS: CitizenReportRecord[] = [
     outcomeStatus: 'pending'
   },
   {
-    id: 'CR-914',
-    pin: '3891',
+    id: 'CR-914-3891',
     mineId: 'MIN-4492-R',
     mineName: 'Rajmahal Open Cast Project (OCP)',
     village: 'Taljhari Hamlet',
@@ -109,8 +107,7 @@ const INITIAL_CITIZEN_REPORTS: CitizenReportRecord[] = [
     outcomeStatus: 'active_notice'
   },
   {
-    id: 'CR-942',
-    pin: '5620',
+    id: 'CR-942-5620',
     mineId: 'MIN-4492-R',
     mineName: 'Rajmahal Open Cast Project (OCP)',
     village: 'Simlong North Ridge',
@@ -127,8 +124,7 @@ const INITIAL_CITIZEN_REPORTS: CitizenReportRecord[] = [
     outcomeStatus: 'pending'
   },
   {
-    id: 'CR-799',
-    pin: '2104',
+    id: 'CR-799-2104',
     mineId: 'MIN-4492-R',
     mineName: 'Rajmahal Open Cast Project (OCP)',
     village: 'Bara Bhuin Stream',
@@ -145,8 +141,7 @@ const INITIAL_CITIZEN_REPORTS: CitizenReportRecord[] = [
     outcomeStatus: 'pending'
   },
   {
-    id: 'CR-745',
-    pin: '4412',
+    id: 'CR-745-4412',
     mineId: 'MIN-1082-G',
     mineName: 'Gevra Open Cast Project',
     village: 'Pipra Village',
@@ -181,13 +176,11 @@ export default function CitizenPortal({
   
   // Reports Dataset State (login-free persistence for this session)
   const [allReports, setAllReports] = useState<CitizenReportRecord[]>(INITIAL_CITIZEN_REPORTS);
-  const [activeTrackId, setActiveTrackId] = useState<string>('CR-882');
-  const [activeTrackPin, setActiveTrackPin] = useState<string>('1428');
+  const [activeTrackId, setActiveTrackId] = useState<string>('CR-882-1428');
   const [lastSubmittedReport, setLastSubmittedReport] = useState<CitizenReportRecord | null>(null);
 
   // Quick Tracking Search Bar State
   const [quickSearchId, setQuickSearchId] = useState<string>('');
-  const [quickSearchPin, setQuickSearchPin] = useState<string>('');
 
   // Form State
   const [selectedMineId, setSelectedMineId] = useState<string>('MIN-4492-R');
@@ -212,16 +205,14 @@ export default function CitizenPortal({
     // Generate Report ID (format CR-XXX, continuing existing numbering like CR-882, CR-914, CR-942)
     const existingNums = allReports
       .map(r => {
-        const match = r.id.match(/^CR-(\d+)$/i);
+        const match = r.id.match(/^CR-(\d+)/i);
         return match ? parseInt(match[1], 10) : 0;
       })
       .filter(n => n > 0);
     const maxNum = existingNums.length > 0 ? Math.max(...existingNums) : 942;
     const nextNum = maxNum >= 942 ? maxNum + 11 : 953; // Continues sequence e.g., CR-953
-    const newReportId = `CR-${nextNum}`;
-
-    // Generate 4-digit tracking PIN
     const newPin = Math.floor(1000 + Math.random() * 9000).toString();
+    const newId = `CR-${nextNum}-${newPin}`;
 
     const selectedMine = mines.find(m => m.id === selectedMineId) || mines[0];
     const categoryName = CATEGORY_NAMES[violationCategory] || 'Environmental Observation';
@@ -231,8 +222,7 @@ export default function CitizenPortal({
     const formattedTime = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true }) + ' IST';
 
     const newReportRecord: CitizenReportRecord = {
-      id: newReportId,
-      pin: newPin,
+      id: newId,
       mineId: selectedMine.id,
       mineName: selectedMine.name,
       village: villageName.trim() || 'Simlong Village',
@@ -250,20 +240,21 @@ export default function CitizenPortal({
 
     setAllReports(prev => [newReportRecord, ...prev]);
     setLastSubmittedReport(newReportRecord);
-    setGeneratedRefId(newReportId);
+    setGeneratedRefId(newId);
     setReportSubmitted(true);
-    setActiveTrackId(newReportId);
-    setActiveTrackPin(newPin);
+    setActiveTrackId(newId);
 
-    triggerToast(`Grievance ${newReportId} registered with PIN ${newPin}. Geotag linked to Sentinel-2 correlation queue.`);
+    triggerToast(`Grievance ${newId} registered. Geotag linked to Sentinel-2 correlation queue.`);
   };
 
   const handleQuickTrackSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!quickSearchId.trim()) return;
     setActiveTrackId(quickSearchId.trim().toUpperCase());
-    setActiveTrackPin(quickSearchPin.trim());
     setActiveTab('track_my_report');
+    setTimeout(() => {
+      document.getElementById('citizen-tracker-module')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
   };
 
   // Initialize Citizen Public Map when public_map tab is opened
@@ -459,7 +450,7 @@ export default function CitizenPortal({
             <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider ${
               activeTab === 'track_my_report' ? 'bg-amber-400 text-slate-950' : 'bg-amber-100 text-amber-900 border border-amber-300'
             }`}>
-              PIN Lookup
+              Lookup
             </span>
           </button>
 
@@ -537,11 +528,11 @@ export default function CitizenPortal({
                     Track My Report (No Login Required)
                   </h3>
                   <span className="text-[10px] bg-amber-400 text-slate-950 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                    Instant PIN Lookup
+                    Instant Lookup
                   </span>
                 </div>
                 <p className="text-xs text-slate-300">
-                  Enter your Report ID &amp; 4-digit PIN to check satellite cross-check, evidence corroboration, and Show-Cause Notices.
+                  Enter your unique Tracking ID to check satellite cross-check, evidence corroboration, and Show-Cause Notices.
                 </p>
               </div>
             </div>
@@ -551,16 +542,8 @@ export default function CitizenPortal({
                 type="text"
                 value={quickSearchId}
                 onChange={(e) => setQuickSearchId(e.target.value)}
-                placeholder="Report ID (e.g. CR-882)"
-                className="bg-slate-900/90 border border-slate-600 focus:border-amber-400 text-white placeholder:text-slate-400 px-3 py-2 rounded-lg text-xs font-mono uppercase focus:outline-none w-full sm:w-44"
-              />
-              <input
-                type="text"
-                maxLength={4}
-                value={quickSearchPin}
-                onChange={(e) => setQuickSearchPin(e.target.value.replace(/\D/g, ''))}
-                placeholder="4-digit PIN"
-                className="bg-slate-900/90 border border-slate-600 focus:border-amber-400 text-white placeholder:text-slate-400 px-3 py-2 rounded-lg text-xs font-mono tracking-widest text-center focus:outline-none w-full sm:w-28"
+                placeholder="Report ID (e.g. CR-882-1428)"
+                className="bg-slate-900/90 border border-slate-600 focus:border-amber-400 text-white placeholder:text-slate-400 px-3 py-2 rounded-lg text-xs font-mono uppercase focus:outline-none w-full sm:w-60"
               />
               <button
                 type="submit"
@@ -574,13 +557,15 @@ export default function CitizenPortal({
         )}
 
         {/* ========================================================================= */}
-        {/* TAB 0: TRACK MY REPORT (Login-Free PIN Lookup & 5-Stage Live Timeline)    */}
+        {/* TAB 0: TRACK MY REPORT (Login-Free Lookup & 5-Stage Live Timeline)        */}
         {/* ========================================================================= */}
         {activeTab === 'track_my_report' && (
           <CitizenReportTracker
             reports={allReports}
-            initialReportId={activeTrackId}
-            initialPin={activeTrackPin}
+            initialId={activeTrackId}
+            onTrackNow={(id) => {
+              setActiveTrackId(id);
+            }}
             onOpenReportForm={() => setActiveTab('file_concern')}
           />
         )}
@@ -610,9 +595,8 @@ export default function CitizenPortal({
             {reportSubmitted && lastSubmittedReport ? (
               <CitizenReceiptCard
                 report={lastSubmittedReport}
-                onTrackNow={(id, pin) => {
+                onTrackNow={(id) => {
                   setActiveTrackId(id);
-                  setActiveTrackPin(pin);
                   setActiveTab('track_my_report');
                   setReportSubmitted(false);
                 }}
@@ -938,18 +922,18 @@ export default function CitizenPortal({
                           : 'Verified via Sentinel satellite correlation pipeline'}
                       </span>
                       
-                      <button
+                      <button 
                         onClick={() => {
                           setActiveTrackId(report.id);
-                          setActiveTrackPin(report.pin);
                           setActiveTab('track_my_report');
+                          setTimeout(() => {
+                            document.getElementById('citizen-tracker-module')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          }, 100);
                         }}
-                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0B2545] hover:text-blue-700 bg-slate-100 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 px-3 py-1 rounded-md transition-colors cursor-pointer self-start sm:self-auto"
+                        className="flex items-center gap-1.5 px-3 py-1.5 bg-[#F4F1EB] hover:bg-[#EDE9E2] border border-[#DDD8CF] rounded font-semibold transition-colors cursor-pointer self-start sm:self-auto text-xs"
                       >
-                        <KeyRound className="w-3.5 h-3.5 text-amber-600" />
-                        <span>Track Status &amp; Timeline</span>
-                        <span className="text-[10px] text-slate-500 font-mono">(PIN: {report.pin})</span>
-                        <ChevronRight className="w-3.5 h-3.5" />
+                        <span>Track Full History</span>
+                        <ChevronRight className="w-3.5 h-3.5 text-[#5C6B57]" />
                       </button>
                     </div>
                   </div>

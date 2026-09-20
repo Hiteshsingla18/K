@@ -23,50 +23,47 @@ import { CitizenReportRecord } from '../types';
 
 interface CitizenReportTrackerProps {
   reports: CitizenReportRecord[];
-  initialReportId?: string;
-  initialPin?: string;
+  initialId?: string;
+  onTrackNow?: (id: string) => void;
   onOpenReportForm: () => void;
 }
 
 export default function CitizenReportTracker({
   reports,
-  initialReportId = '',
-  initialPin = '',
+  initialId = '',
+  onTrackNow,
   onOpenReportForm
 }: CitizenReportTrackerProps) {
-  const [reportIdInput, setReportIdInput] = useState<string>(initialReportId);
-  const [pinInput, setPinInput] = useState<string>(initialPin);
-  const [searchedReport, setSearchedReport] = useState<CitizenReportRecord | null>(() => {
-    if (initialReportId && initialPin) {
-      return reports.find(
-        r => r.id.toLowerCase() === initialReportId.toLowerCase().trim() && 
-             r.pin.trim() === initialPin.trim()
-      ) || null;
-    }
-    return null;
-  });
+  const [searchInput, setSearchInput] = useState<string>(initialId);
+  const [searchedReport, setSearchedReport] = useState<CitizenReportRecord | null>(null);
   const [searchError, setSearchError] = useState<string | null>(null);
   const [copiedField, setCopiedField] = useState<string | null>(null);
   const [showScnModal, setShowScnModal] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (initialId) {
+      const match = reports.find(r => 
+        r.id.toUpperCase() === initialId.toUpperCase()
+      );
+      if (match) {
+        setSearchedReport(match);
+      }
+    }
+  }, [initialId, reports]);
 
   const handleTrackSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSearchError(null);
 
-    const cleanId = reportIdInput.trim().toUpperCase();
-    const cleanPin = pinInput.trim();
+    const cleanId = searchInput.trim().toUpperCase();
 
     if (!cleanId) {
       setSearchError('Please enter your Report ID (e.g. CR-882).');
       return;
     }
-    if (!cleanPin) {
-      setSearchError('Please enter your 4-digit tracking PIN (e.g. 1428).');
-      return;
-    }
 
     const match = reports.find(
-      r => r.id.toUpperCase() === cleanId && r.pin === cleanPin
+      r => r.id.toUpperCase() === cleanId
     );
 
     if (match) {
@@ -74,18 +71,18 @@ export default function CitizenReportTracker({
       setSearchError(null);
     } else {
       setSearchedReport(null);
-      setSearchError(`No verified report found matching ID "${cleanId}" and PIN "${cleanPin}". Please check your receipt details or try a demo report below.`);
+      setSearchError(`No verified report found matching ID "${cleanId}". Please check your receipt details or try a demo report below.`);
     }
   };
 
-  const handleQuickDemo = (demoId: string, demoPin: string) => {
-    setReportIdInput(demoId);
-    setPinInput(demoPin);
+  const loadDemo = (demoId: string) => {
+    setSearchInput(demoId);
     setSearchError(null);
-    const match = reports.find(r => r.id === demoId && r.pin === demoPin);
-    if (match) {
-      setSearchedReport(match);
+    const match = reports.find(r => r.id === demoId);
+    if (match && onTrackNow) {
+      onTrackNow(demoId);
     }
+    setSearchedReport(match || null);
   };
 
   const copyToClipboard = (text: string, field: string) => {
@@ -108,7 +105,7 @@ export default function CitizenReportTracker({
               Track Environmental Report Status
             </h2>
             <p className="text-xs text-slate-600 mt-0.5">
-              Enter the unique Report ID (e.g., CR-882) and 4-digit PIN generated on your submission receipt.
+              Enter the unique Report ID (e.g., CR-882) generated on your submission receipt.
             </p>
           </div>
 
@@ -120,26 +117,26 @@ export default function CitizenReportTracker({
             <div className="flex items-center gap-1.5 flex-wrap">
               <button
                 type="button"
-                onClick={() => handleQuickDemo('CR-882', '1428')}
+                onClick={() => loadDemo('CR-882')}
                 className="text-[11px] font-semibold bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 px-2.5 py-1 rounded-md transition-colors cursor-pointer flex items-center gap-1"
                 title="End-to-end flow to SCN outcome"
               >
-                <span>CR-882 (PIN: 1428)</span>
+                <span>CR-882</span>
                 <span className="bg-emerald-700 text-white text-[9px] px-1 rounded">SCN Triggered</span>
               </button>
               <button
                 type="button"
-                onClick={() => handleQuickDemo('CR-914', '3891')}
+                onClick={() => loadDemo('CR-914')}
                 className="text-[11px] font-semibold bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-300 px-2.5 py-1 rounded-md transition-colors cursor-pointer"
               >
-                CR-914 (PIN: 3891)
+                CR-914
               </button>
               <button
                 type="button"
-                onClick={() => handleQuickDemo('CR-942', '5620')}
+                onClick={() => loadDemo('CR-942')}
                 className="text-[11px] font-semibold bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 px-2.5 py-1 rounded-md transition-colors cursor-pointer"
               >
-                CR-942 (PIN: 5620)
+                CR-942
               </button>
             </div>
           </div>
@@ -148,7 +145,7 @@ export default function CitizenReportTracker({
         {/* Search Form */}
         <form onSubmit={handleTrackSubmit} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-12 gap-3">
-            <div className="sm:col-span-5">
+            <div className="sm:col-span-9">
               <label htmlFor="input-report-id" className="block text-xs font-bold text-slate-700 mb-1">
                 Report Reference ID (Format: CR-XXX)
               </label>
@@ -158,27 +155,9 @@ export default function CitizenReportTracker({
                   id="input-report-id"
                   type="text"
                   placeholder="e.g. CR-882"
-                  value={reportIdInput}
-                  onChange={(e) => setReportIdInput(e.target.value.toUpperCase())}
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value.toUpperCase())}
                   className="w-full pl-9 pr-3 py-2.5 border border-slate-300 rounded-lg text-sm font-mono uppercase bg-white text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 font-semibold"
-                />
-              </div>
-            </div>
-
-            <div className="sm:col-span-4">
-              <label htmlFor="input-report-pin" className="block text-xs font-bold text-slate-700 mb-1">
-                4-Digit Security Tracking PIN
-              </label>
-              <div className="relative">
-                <KeyRound className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
-                <input
-                  id="input-report-pin"
-                  type="text"
-                  maxLength={4}
-                  placeholder="e.g. 1428"
-                  value={pinInput}
-                  onChange={(e) => setPinInput(e.target.value.replace(/\D/g, ''))}
-                  className="w-full pl-9 pr-3 py-2.5 border border-slate-300 rounded-lg text-sm font-mono tracking-widest bg-white text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 font-bold"
                 />
               </div>
             </div>
@@ -224,9 +203,6 @@ export default function CitizenReportTracker({
                     {copiedField === 'id' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
                   </button>
                 </div>
-                <span className="text-xs bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-full font-semibold">
-                  PIN: {searchedReport.pin}
-                </span>
                 <span className="text-xs text-slate-500 font-medium">
                   Logged on: {searchedReport.date}
                 </span>

@@ -17,7 +17,7 @@ import { CitizenReportRecord } from '../types';
 
 interface CitizenReceiptCardProps {
   report: CitizenReportRecord;
-  onTrackNow: (reportId: string, pin: string) => void;
+  onTrackNow: (reportId: string) => void;
   onSubmitAnother: () => void;
 }
 
@@ -37,7 +37,6 @@ export default function CitizenReceiptCard({
   const copyFullReceipt = () => {
     const text = `--- GOVT OF INDIA • KHANAN PRAHARI CITIZEN RECEIPT ---
 Report ID: ${report.id}
-Tracking PIN: ${report.pin}
 Mine / Colliery: ${report.mineName}
 Location: ${report.village}
 Category: ${report.category}
@@ -94,15 +93,15 @@ Track at: Citizen Environmental Vigilance Portal
                 Save this to check your report&apos;s status later.
               </strong>
               <p className="text-amber-800 text-[11px]">
-                Take a screenshot or write down your <strong>Report ID</strong> and <strong>4-digit PIN</strong>. You will need both to track statutory investigation progress without logging in.
+                Take a screenshot or write down your <strong>Report ID</strong>. You will need it to track statutory investigation progress without logging in.
               </p>
             </div>
           </div>
 
-          {/* Primary Key Credentials Display (ID + PIN) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {/* Primary Key Credentials Display (ID) */}
+          <div className="flex justify-center">
             {/* Report ID Box */}
-            <div className="bg-slate-50 border-2 border-dashed border-slate-300 rounded-xl p-4 text-center space-y-1 relative group">
+            <div className="bg-slate-50 border-2 border-dashed border-slate-300 rounded-xl p-4 text-center space-y-1 relative group w-full max-w-sm">
               <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">
                 Public Report Reference ID
               </span>
@@ -123,34 +122,6 @@ Track at: Citizen Environmental Vigilance Portal
                   <>
                     <Copy className="w-3.5 h-3.5" />
                     <span>Copy ID</span>
-                  </>
-                )}
-              </button>
-            </div>
-
-            {/* Tracking PIN Box */}
-            <div className="bg-emerald-50/70 border-2 border-dashed border-emerald-300 rounded-xl p-4 text-center space-y-1 relative group">
-              <div className="flex items-center justify-center gap-1 text-[10px] font-bold text-emerald-800 uppercase tracking-wider">
-                <KeyRound className="w-3.5 h-3.5 text-emerald-700" />
-                <span>Private Tracking PIN</span>
-              </div>
-              <div className="font-mono text-2xl font-black text-emerald-950 tracking-widest">
-                {report.pin}
-              </div>
-              <button
-                type="button"
-                onClick={() => copyText(report.pin, 'pin')}
-                className="text-[11px] text-emerald-700 hover:text-emerald-800 font-semibold inline-flex items-center gap-1 mt-1 cursor-pointer"
-              >
-                {copiedField === 'pin' ? (
-                  <>
-                    <Check className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>Copied!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3.5 h-3.5" />
-                    <span>Copy PIN</span>
                   </>
                 )}
               </button>
@@ -207,7 +178,7 @@ Track at: Citizen Environmental Vigilance Portal
             <button
               id="btn-receipt-track-now"
               type="button"
-              onClick={() => onTrackNow(report.id, report.pin)}
+              onClick={() => onTrackNow(report.id)}
               className="w-full bg-[#138808] hover:bg-[#0f6b06] text-white font-bold text-sm py-3.5 px-4 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:shadow-md"
             >
               <span>Track This Report Now</span>
